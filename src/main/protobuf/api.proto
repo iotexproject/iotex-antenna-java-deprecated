@@ -4,8 +4,12 @@
 // permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
 // License 2.0 that can be found in the LICENSE file.
 
+// To compile the proto, run:
+//      protoc -I. -I ./../types --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
-package org.iotexproject.antenna.grpc;
+package iotexapi;
+//option go_package = "github.com/iotexproject/iotex-core/protogen/iotexapi";
+option java_package = "org.iotexproject.antenna.grpc.iotexapi";
 
 import "action.proto";
 import "blockchain.proto";
@@ -52,8 +56,8 @@ service APIService {
   // read state from blockchain
   rpc ReadState(ReadStateRequest) returns (ReadStateResponse) {}
 
-  // get block producers' productivity metrics
-  rpc GetProductivity(GetProductivityRequest) returns (GetProductivityResponse) {}
+  // get epoch metadata
+  rpc GetEpochMeta(GetEpochMetaRequest) returns (GetEpochMetaResponse) {}
 }
 
 message GetAccountRequest {
@@ -61,7 +65,7 @@ message GetAccountRequest {
 }
 
 message GetAccountResponse {
-  org.iotexproject.antenna.grpc.type.AccountMeta accountMeta = 1;
+  iotextypes.AccountMeta accountMeta = 1;
 }
 
 message GetActionsRequest {
@@ -102,8 +106,21 @@ message GetActionsByBlockRequest {
   uint64 count = 3;
 }
 
+message ActionInfo {
+  iotextypes.Action action = 1;
+  string actHash = 2;
+  string blkHash = 3;
+}
+
+message BlockProducerInfo {
+    string address = 1;
+    string votes = 2;
+    bool active = 3;
+    uint64 production = 4;
+}
+
 message GetActionsResponse {
-  repeated org.iotexproject.antenna.grpc.type.Action actions = 1;
+  repeated ActionInfo actionInfo = 1;
 }
 
 message GetBlockMetasRequest {
@@ -123,23 +140,23 @@ message GetBlockMetaByHashRequest {
 }
 
 message GetBlockMetasResponse {
-  repeated org.iotexproject.antenna.grpc.type.BlockMeta blkMetas = 1;
+  repeated iotextypes.BlockMeta blkMetas = 1;
 }
 
 message GetChainMetaRequest {}
 
 message GetChainMetaResponse {
-  org.iotexproject.antenna.grpc.type.ChainMeta chainMeta = 1;
+  iotextypes.ChainMeta chainMeta = 1;
 }
 
 message GetServerMetaRequest  {}
 
 message GetServerMetaResponse  {
-  org.iotexproject.antenna.grpc.type.ServerMeta serverMeta = 1;
+  iotextypes.ServerMeta serverMeta = 1;
 }
 
 message SendActionRequest {
-  org.iotexproject.antenna.grpc.type.Action action = 1;
+  iotextypes.Action action = 1;
 }
 
 message SendActionResponse {}
@@ -149,11 +166,11 @@ message GetReceiptByActionRequest {
 }
 
 message GetReceiptByActionResponse {
-  org.iotexproject.antenna.grpc.type.Receipt receipt = 1;
+  iotextypes.Receipt receipt = 1;
 }
 
 message ReadContractRequest {
-  org.iotexproject.antenna.grpc.type.Action action = 1;
+  iotextypes.Action action = 1;
 }
 
 message ReadContractResponse {
@@ -167,7 +184,7 @@ message SuggestGasPriceResponse {
 }
 
 message EstimateGasForActionRequest {
-  org.iotexproject.antenna.grpc.type.Action action = 1;
+  iotextypes.Action action = 1;
 }
 
 message EstimateGasForActionResponse {
@@ -184,11 +201,12 @@ message ReadStateResponse {
   bytes data = 1;
 }
 
-message GetProductivityRequest {
-  uint64 epochNumber = 1;
+message GetEpochMetaRequest {
+    uint64 epochNumber = 1;
 }
 
-message GetProductivityResponse {
-  uint64 totalBlks = 1;
-  map<string, uint64> blksPerDelegate = 2;
+message GetEpochMetaResponse {
+    iotextypes.EpochData epochData = 1;
+    uint64 totalBlocks = 2;
+    repeated BlockProducerInfo blockProducersInfo = 3;
 }

@@ -4,28 +4,17 @@
 // permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
 // License 2.0 that can be found in the LICENSE file.
 
+// To compile the proto, run:
+//      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
-package org.iotexproject.antenna.grpc.type;
+package iotextypes;
+//option go_package = "github.com/iotexproject/iotex-core/protogen/iotextypes";
+option java_package = "org.iotexproject.antenna.grpc.iotextypes";
 
-// corresponding to prepare and pre-prepare phase in view change protocol
+import "google/protobuf/timestamp.proto";
+
 message Endorsement {
-  enum ConsensusVoteTopic {
-    PROPOSAL = 0;
-    LOCK = 1;
-    COMMIT = 2;
-  }
-  uint64 height = 1;
-  uint32 round = 2;
-  bytes blockHash = 3;
-  ConsensusVoteTopic topic = 4;
-  string endorser = 5;
-  bytes endorserPubKey = 6;
-  bool decision = 7;
-  bytes signature = 8;
-}
-
-message EndorsementSet {
-  bytes blockHash = 1;
-  uint32 round = 2;
-  repeated Endorsement endorsements = 3;
+    google.protobuf.Timestamp timestamp = 1;
+    bytes endorser = 2;
+    bytes signature = 3;
 }

@@ -4,8 +4,12 @@
 // permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
 // License 2.0 that can be found in the LICENSE file.
 
+// To compile the proto, run:
+//      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
-package org.iotexproject.antenna.grpc.type;
+package iotextypes;
+//option go_package = "github.com/iotexproject/iotex-core/protogen/iotextypes";
+option java_package = "org.iotexproject.antenna.grpc.iotextypes";
 
 import "action.proto";
 import "endorsement.proto";
@@ -30,8 +34,8 @@ message BlockHeaderCore {
 
 // footer of a block
 message BlockFooter {
-  int64 CommitTimestamp = 1;
-  EndorsementSet endorsements = 2;
+  repeated Endorsement endorsements = 1;
+  google.protobuf.Timestamp timestamp = 2;
 }
 
 // block consists of header followed by transactions
@@ -50,6 +54,7 @@ message Receipts {
 message EpochData {
   uint64 num = 1;
   uint64 height = 2;
+  uint64 gravityChainStartHeight = 3;
 }
 
 // Blockchain Metadata
@@ -79,4 +84,5 @@ message AccountMeta {
   string balance = 2;
   uint64 nonce = 3;
   uint64 pendingNonce = 4;
+  uint64 numActions = 5;
 }

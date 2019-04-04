@@ -4,8 +4,12 @@
 // permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
 // License 2.0 that can be found in the LICENSE file.
 
+// To compile the proto, run:
+//      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
-package org.iotexproject.antenna.grpc.type;
+package iotextypes;
+//option go_package = "github.com/iotexproject/iotex-core/protogen/iotextypes";
+option java_package = "org.iotexproject.antenna.grpc.iotextypes";
 
 import "google/protobuf/timestamp.proto";
 
@@ -26,9 +30,7 @@ message Candidate {
   string address = 1;
   bytes votes = 2;
   bytes pubKey = 3;
-  uint64 creationHeight = 4;
-  uint64 lastUpdateHeight = 5;
-  string rewardAddress = 6;
+  string rewardAddress = 4;
 }
 
 message CandidateList {
@@ -37,7 +39,7 @@ message CandidateList {
 
 message PutPollResult {
   uint64 height = 1;
-  CandidateList	candidates = 2;
+	CandidateList	candidates = 2;
 }
 
 message Execution {
