@@ -47,33 +47,27 @@ public class Browser {
 		GetAccountRequest req = GetAccountRequest.newBuilder().setAddress(address).build();
 		result = null;
 		final CountDownLatch finishLatch = new CountDownLatch(1);
-
 		asyncStub.getAccount(req, new StreamObserver<GetAccountResponse>() {
 	          public void onNext(GetAccountResponse note) {
-	        	  System.out.println("response? " + note);
 	        	  result = note.getAccountMeta();
 	          }
 	          public void onError(Throwable t) {
-	        	  System.out.println("errore?" + t);
-	        	  
-	        	  //TODO
-	            finishLatch.countDown();
+	        	  //TODO log
 	          }
 
 	          public void onCompleted() {
-	        	  //TODO
-	        	  System.out.println("completed!");
 	            finishLatch.countDown();
 	          }
 	        });
 	    
         try {
-			Thread.sleep(2000 + 500);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			Thread.sleep(2500);
+		} catch (InterruptedException e) {}
 	    return result;
+	}
+	
+	public void close() {
+		channel.shutdownNow();		
 	}
 }
 
