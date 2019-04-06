@@ -12,7 +12,12 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotextypes.Blockchain.AccountMeta;
+import org.pmw.tinylog.Logger;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -42,6 +47,14 @@ public class Browser {
 		GetChainMetaRequest req = GetChainMetaRequest.newBuilder().build();
 	  	return blockingStub.getChainMeta(req);
 	}
+	public GetEpochMetaResponse getEpochMeta(Long epoch) {
+		GetEpochMetaRequest req = GetEpochMetaRequest.newBuilder().setEpochNumber(epoch).build();
+	  	return blockingStub.getEpochMeta(req);
+	}
+	public GetServerMetaResponse getServerMeta() {
+		GetServerMetaRequest req = GetServerMetaRequest.newBuilder().build();
+	  	return blockingStub.getServerMeta(req);
+	}
 	
 	public AccountMeta getAccount(String address) {
 		GetAccountRequest req = GetAccountRequest.newBuilder().setAddress(address).build();
@@ -52,7 +65,7 @@ public class Browser {
 	        	  result = note.getAccountMeta();
 	          }
 	          public void onError(Throwable t) {
-	        	  //TODO log
+	      	    Logger.error(t);
 	          }
 
 	          public void onCompleted() {
