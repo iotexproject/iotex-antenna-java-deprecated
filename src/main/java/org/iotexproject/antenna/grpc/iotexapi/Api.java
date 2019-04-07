@@ -21449,8 +21449,9 @@ public final class Api {
       "Request\032\033.iotexapi.ReadStateResponse\"\000\022O" +
       "\n\014GetEpochMeta\022\035.iotexapi.GetEpochMetaRe" +
       "quest\032\036.iotexapi.GetEpochMetaResponse\"\000B" +
-      "(\n&org.iotexproject.antenna.grpc.iotexap" +
-      "ib\006proto3"
+      "^\n&org.iotexproject.antenna.grpc.iotexap" +
+      "iZ4github.com/iotexproject/iotex-core/pr" +
+      "otogen/iotexapib\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

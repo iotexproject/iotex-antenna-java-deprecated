@@ -2877,9 +2877,10 @@ public final class Consensus {
       "ight\030\001 \001(\004\022,\n\013endorsement\030\002 \001(\0132\027.iotext" +
       "ypes.Endorsement\0222\n\rblockProposal\030d \001(\0132" +
       "\031.iotextypes.BlockProposalH\000\022)\n\004vote\030e \001" +
-      "(\0132\031.iotextypes.ConsensusVoteH\000B\005\n\003msgB*" +
+      "(\0132\031.iotextypes.ConsensusVoteH\000B\005\n\003msgBb" +
       "\n(org.iotexproject.antenna.grpc.iotextyp" +
-      "esb\006proto3"
+      "esZ6github.com/iotexproject/iotex-core/p" +
+      "rotogen/iotextypesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

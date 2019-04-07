@@ -9,7 +9,7 @@
 syntax = "proto3";
 package iotextypes;
 option go_package = "github.com/iotexproject/iotex-core/protogen/iotextypes";
-option java_package = "org.iotexproject.antenna.grpc";
+option java_package = "org.iotexproject.antenna.grpc.iotextypes";
 
 import "action.proto";
 import "endorsement.proto";

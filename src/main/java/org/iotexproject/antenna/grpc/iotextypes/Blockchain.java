@@ -8512,8 +8512,10 @@ public final class Blockchain {
       "ceiptRoot\030\010 \001(\t\022\030\n\020deltaStateDigest\030\t \001(" +
       "\t\"h\n\013AccountMeta\022\017\n\007address\030\001 \001(\t\022\017\n\007bal" +
       "ance\030\002 \001(\t\022\r\n\005nonce\030\003 \001(\004\022\024\n\014pendingNonc" +
-      "e\030\004 \001(\004\022\022\n\nnumActions\030\005 \001(\004B*\n(org.iotex" +
-      "project.antenna.grpc.iotextypesb\006proto3"
+      "e\030\004 \001(\004\022\022\n\nnumActions\030\005 \001(\004Bb\n(org.iotex" +
+      "project.antenna.grpc.iotextypesZ6github." +
+      "com/iotexproject/iotex-core/protogen/iot" +
+      "extypesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

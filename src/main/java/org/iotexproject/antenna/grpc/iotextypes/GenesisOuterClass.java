@@ -6744,8 +6744,9 @@ public final class GenesisOuterClass {
       "undationBonus\030\006 \001(\t\022&\n\036numDelegatesForFo" +
       "undationBonus\030\007 \001(\004\022 \n\030foundationBonusLa" +
       "stEpoch\030\010 \001(\004\022\035\n\025productivityThreshold\030\t" +
-      " \001(\004B*\n(org.iotexproject.antenna.grpc.io" +
-      "textypesb\006proto3"
+      " \001(\004Bb\n(org.iotexproject.antenna.grpc.io" +
+      "textypesZ6github.com/iotexproject/iotex-" +
+      "core/protogen/iotextypesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

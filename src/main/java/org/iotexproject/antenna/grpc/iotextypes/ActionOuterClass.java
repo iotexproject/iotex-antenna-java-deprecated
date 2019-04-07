@@ -27249,8 +27249,9 @@ public final class ActionOuterClass {
       "mount\030\001 \001(\t\022\014\n\004data\030\002 \001(\014\"3\n\013GrantReward" +
       "\022$\n\004type\030\001 \001(\0162\026.iotextypes.RewardType*." +
       "\n\nRewardType\022\017\n\013BlockReward\020\000\022\017\n\013EpochRe" +
-      "ward\020\001B*\n(org.iotexproject.antenna.grpc." +
-      "iotextypesb\006proto3"
+      "ward\020\001Bb\n(org.iotexproject.antenna.grpc." +
+      "iotextypesZ6github.com/iotexproject/iote" +
+      "x-core/protogen/iotextypesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

@@ -2790,8 +2790,9 @@ public final class Rpc {
       "ogle.protobuf.Timestamp*^\n\013MessageType\022\013" +
       "\n\007UNKNOWN\020\000\022\n\n\006ACTION\020\001\022\t\n\005BLOCK\020\002\022\r\n\tCO" +
       "NSENSUS\020\003\022\021\n\rBLOCK_REQUEST\020\004\022\t\n\004TEST\020\221NB" +
-      "(\n&org.iotexproject.antenna.grpc.iotexrp" +
-      "cb\006proto3"
+      "^\n&org.iotexproject.antenna.grpc.iotexrp" +
+      "cZ4github.com/iotexproject/iotex-core/pr" +
+      "otogen/iotexrpcb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

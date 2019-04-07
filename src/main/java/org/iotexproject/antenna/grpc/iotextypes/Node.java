@@ -1136,8 +1136,10 @@ public final class Node {
       "\n\nnode.proto\022\niotextypes\"v\n\nServerMeta\022\026" +
       "\n\016packageVersion\030\001 \001(\t\022\027\n\017packageCommitI" +
       "D\030\002 \001(\t\022\021\n\tgitStatus\030\003 \001(\t\022\021\n\tgoVersion\030" +
-      "\004 \001(\t\022\021\n\tbuildTime\030\005 \001(\tB*\n(org.iotexpro" +
-      "ject.antenna.grpc.iotextypesb\006proto3"
+      "\004 \001(\t\022\021\n\tbuildTime\030\005 \001(\tBb\n(org.iotexpro" +
+      "ject.antenna.grpc.iotextypesZ6github.com" +
+      "/iotexproject/iotex-core/protogen/iotext" +
+      "ypesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

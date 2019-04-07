@@ -9,7 +9,7 @@
 syntax = "proto3";
 package iotexapi;
 option go_package = "github.com/iotexproject/iotex-core/protogen/iotexapi";
-option java_package = "org.iotexproject.antenna.grpc";
+option java_package = "org.iotexproject.antenna.grpc.iotexapi";
 
 import "action.proto";
 import "blockchain.proto";

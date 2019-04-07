@@ -770,8 +770,9 @@ public final class EndorsementOuterClass {
       "protobuf/timestamp.proto\"a\n\013Endorsement\022" +
       "-\n\ttimestamp\030\001 \001(\0132\032.google.protobuf.Tim" +
       "estamp\022\020\n\010endorser\030\002 \001(\014\022\021\n\tsignature\030\003 " +
-      "\001(\014B*\n(org.iotexproject.antenna.grpc.iot" +
-      "extypesb\006proto3"
+      "\001(\014Bb\n(org.iotexproject.antenna.grpc.iot" +
+      "extypesZ6github.com/iotexproject/iotex-c" +
+      "ore/protogen/iotextypesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
