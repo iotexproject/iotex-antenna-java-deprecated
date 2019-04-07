@@ -3,8 +3,6 @@
  */
 package org.iotexproject.antenna.grpc;
 
-import java.util.concurrent.CountDownLatch;
-
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc;
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceBlockingStub;
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceStub;
@@ -21,11 +19,9 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotextypes.Blockchain.AccountMeta;
-import org.pmw.tinylog.Logger;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.stub.StreamObserver;
 
 /**
  * @author fabryprog
@@ -74,27 +70,9 @@ public class Browser {
 		return blockingStub.getBlockMetas(req);
 	}
 
-	public AccountMeta getAccount(String address) {
+	public GetAccountResponse getAccount(final String address) {
 		GetAccountRequest req = GetAccountRequest.newBuilder().setAddress(address).build();
-		result = null;
-		final CountDownLatch finishLatch = new CountDownLatch(1);
-		asyncStub.getAccount(req, new StreamObserver<GetAccountResponse>() {
-	          public void onNext(GetAccountResponse note) {
-	        	  result = note.getAccountMeta();
-	          }
-	          public void onError(Throwable t) {
-	      	    Logger.error(t);
-	          }
-
-	          public void onCompleted() {
-	            finishLatch.countDown();
-	          }
-	        });
-	    
-        try {
-			Thread.sleep(2500);
-		} catch (InterruptedException e) {}
-	    return result;
+		return blockingStub.getAccount(req);
 	}
 	
 	public void close() {

@@ -3,11 +3,11 @@
  */
 package org.iotexproject.antenna.grpc;
 
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
-import org.iotexproject.antenna.grpc.iotextypes.Blockchain.AccountMeta;
 import org.junit.Assert;
 import org.junit.Test;
 import org.pmw.tinylog.Logger;
@@ -27,16 +27,17 @@ public class BrowserTest {
 		final String address = "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw";
 		Browser browser = new Browser(HOST, PORT);
 		try {
-			AccountMeta response = browser.getAccount(address);
+			GetAccountResponse response = browser.getAccount(address);
 		    Logger.info("<<< getAccount() >>>");
 		    Logger.info(response);
 	
 			Assert.assertNotNull(response);
-			Assert.assertEquals(address, response.getAddress());
+			Assert.assertNotNull(response.getAccountMeta());
+			Assert.assertEquals(address, response.getAccountMeta().getAddress());
 			
-			Assert.assertNotNull(response.getBalance());
-			Assert.assertNotNull(response.getNonce());
-			Assert.assertNotNull(response.getPendingNonce());
+			Assert.assertNotNull(response.getAccountMeta().getBalance());
+			Assert.assertNotNull(response.getAccountMeta().getNonce());
+			Assert.assertNotNull(response.getAccountMeta().getPendingNonce());
 		} finally {
 			browser.close();
 		}
