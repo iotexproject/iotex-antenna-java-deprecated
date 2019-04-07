@@ -18,6 +18,8 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.Blockchain.AccountMeta;
 
 import io.grpc.ManagedChannel;
@@ -73,6 +75,11 @@ public class Browser {
 	public GetAccountResponse getAccount(final String address) {
 		GetAccountRequest req = GetAccountRequest.newBuilder().setAddress(address).build();
 		return blockingStub.getAccount(req);
+	}
+	
+	public SuggestGasPriceResponse getSuggestGasPrice() {
+		SuggestGasPriceRequest req = SuggestGasPriceRequest.newBuilder().build();
+		return blockingStub.suggestGasPrice(req);
 	}
 	
 	public void close() {

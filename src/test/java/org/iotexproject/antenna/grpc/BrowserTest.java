@@ -8,6 +8,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.pmw.tinylog.Logger;
@@ -28,7 +29,6 @@ public class BrowserTest {
 		Browser browser = new Browser(HOST, PORT);
 		try {
 			GetAccountResponse response = browser.getAccount(address);
-		    Logger.info("<<< getAccount() >>>");
 		    Logger.info(response);
 	
 			Assert.assertNotNull(response);
@@ -48,7 +48,6 @@ public class BrowserTest {
 		Browser browser = new Browser(HOST, PORT);
 		try {
 			GetChainMetaResponse response = browser.getChainMeta();
-		    Logger.info("<<< getChainMeta() >>>");
 		    Logger.info(response);
 			
 			Assert.assertNotNull(response);
@@ -63,7 +62,6 @@ public class BrowserTest {
 		Browser browser = new Browser(HOST, PORT);
 		try {
 			GetEpochMetaResponse response = browser.getEpochMeta(epoch);
-		    Logger.info("<<< GetEpochMeta() >>>");
 		    Logger.info(response);
 			
 			Assert.assertNotNull(response);
@@ -79,7 +77,6 @@ public class BrowserTest {
 		Browser browser = new Browser(HOST, PORT);
 		try {
 			GetServerMetaResponse response = browser.getServerMeta();
-		    Logger.info("<<< getServerMeta() >>>");
 		    Logger.info(response);
 
 			Assert.assertNotNull(response);
@@ -101,7 +98,6 @@ public class BrowserTest {
 		Browser browser = new Browser(HOST, PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
-		    Logger.info("<<< getBlockMetas() - 1>>>");
 		    Logger.info(response);
 
 			Assert.assertNotNull(response);
@@ -117,7 +113,6 @@ public class BrowserTest {
 		Browser browser = new Browser(HOST, PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 10L);
-		    Logger.info("<<< getBlockMetasByIndexLenghtTen() >>>");
 		    Logger.info(response);
 			Assert.assertNotNull(response);
 			Assert.assertEquals(response.getBlkMetasList().size(), 10);
@@ -132,8 +127,8 @@ public class BrowserTest {
 		Browser browser = new Browser(HOST, PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 0L);
-		    Logger.info("<<< getBlockMetasByIndexLenghtZero() >>>");
 		    Logger.info(response);
+		    
 			Assert.assertNotNull(response);
 			Assert.assertEquals(response.getBlkMetasList().size(), 0);
 		} finally {
@@ -155,10 +150,26 @@ public class BrowserTest {
 			//reopen same stream
 			browser = new Browser(HOST, PORT);
 			response = browser.getBlockMetasByHash(hash);
+		    Logger.info(response);
 			
 			Assert.assertNotNull(response);
 			Assert.assertEquals(response.getBlkMetasList().size(), 1);
 			Assert.assertEquals(response.getBlkMetas(0).getHash(), hash);
+		} finally {
+			browser.close();
+		}
+	}
+	
+	@Test
+	public void getSuggestGasPrice() {
+		//INDEX
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			SuggestGasPriceResponse response = browser.getSuggestGasPrice();
+		    Logger.info(response);
+		    
+			Assert.assertNotNull(response);
+			Assert.assertEquals(response.getGasPrice(), 1L);
 		} finally {
 			browser.close();
 		}

@@ -21,4 +21,4 @@ mvn clean package
 * iotexapi.APIService.ReadContract (wip)
 * iotexapi.APIService.ReadState (wip)
 * iotexapi.APIService.SendAction (wip)
-* iotexapi.APIService.SuggestGasPrice (wip)
+* iotexapi.APIService.SuggestGasPrice
