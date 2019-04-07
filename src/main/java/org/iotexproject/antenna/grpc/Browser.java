@@ -10,6 +10,10 @@ import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceBlockingS
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceStub;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetaByHashRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasByIndexRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaRequest;
@@ -56,6 +60,20 @@ public class Browser {
 	  	return blockingStub.getServerMeta(req);
 	}
 	
+	public GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count) {
+		GetBlockMetasByIndexRequest reqIdx = GetBlockMetasByIndexRequest.newBuilder().setStart(start).setCount(count).build();
+		GetBlockMetasRequest req = GetBlockMetasRequest.newBuilder().setByIndex(reqIdx).build();
+		
+		return blockingStub.getBlockMetas(req);
+	}
+	
+	public GetBlockMetasResponse getBlockMetasByHash(final String hash) {
+		GetBlockMetaByHashRequest reqHash = GetBlockMetaByHashRequest.newBuilder().setBlkHash(hash).build();
+		GetBlockMetasRequest req = GetBlockMetasRequest.newBuilder().setByHash(reqHash).build();
+		
+		return blockingStub.getBlockMetas(req);
+	}
+
 	public AccountMeta getAccount(String address) {
 		GetAccountRequest req = GetAccountRequest.newBuilder().setAddress(address).build();
 		result = null;

@@ -3,6 +3,7 @@
  */
 package org.iotexproject.antenna.grpc;
 
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
@@ -93,4 +94,73 @@ public class BrowserTest {
 		}
 	}
 	
+	@Test
+	public void getBlockMetasByIndexLenghtOne() {
+		//INDEX
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
+		    Logger.info("<<< getBlockMetas() - 1>>>");
+		    Logger.info(response);
+
+			Assert.assertNotNull(response);
+			Assert.assertEquals(response.getBlkMetasList().size(), 1);
+		} finally {
+			browser.close();
+		}
+	}
+
+	@Test
+	public void getBlockMetasByIndexLenghtTen() {
+		//INDEX
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 10L);
+		    Logger.info("<<< getBlockMetasByIndexLenghtTen() >>>");
+		    Logger.info(response);
+			Assert.assertNotNull(response);
+			Assert.assertEquals(response.getBlkMetasList().size(), 10);
+		} finally {
+			browser.close();
+		}
+	}
+
+	@Test
+	public void getBlockMetasByIndexLenghtZero() {
+		//INDEX
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 0L);
+		    Logger.info("<<< getBlockMetasByIndexLenghtZero() >>>");
+		    Logger.info(response);
+			Assert.assertNotNull(response);
+			Assert.assertEquals(response.getBlkMetasList().size(), 0);
+		} finally {
+			browser.close();
+		}
+	}
+
+	@Test
+	public void getBlockMetasByHash() {
+		String hash = null;
+		//Retrieve hash from blockchain
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
+			hash = response.getBlkMetas(0).getHash();
+
+			//force close stream
+			browser.close();
+			//reopen same stream
+			browser = new Browser(HOST, PORT);
+			response = browser.getBlockMetasByHash(hash);
+			
+			Assert.assertNotNull(response);
+			Assert.assertEquals(response.getBlkMetasList().size(), 1);
+			Assert.assertEquals(response.getBlkMetas(0).getHash(), hash);
+		} finally {
+			browser.close();
+		}
+	}
+
 }
