@@ -8,8 +8,8 @@
 //      protoc -I. -I ./../types --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
 package iotexrpc;
-//option go_package = "github.com/iotexproject/iotex-core/protogen/iotexrpc";
-option java_package = "org.iotexproject.antenna.grpc.iotexrpc";
+option go_package = "github.com/iotexproject/iotex-core/protogen/iotexrpc";
+option java_package = "org.iotexproject.antenna.grpc";
 
 import "google/protobuf/timestamp.proto";
 

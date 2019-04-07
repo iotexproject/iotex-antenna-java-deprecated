@@ -8,8 +8,8 @@
 //      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
 package iotextypes;
-//option go_package = "github.com/iotexproject/iotex-core/protogen/iotextypes";
-option java_package = "org.iotexproject.antenna.grpc.iotextypes";
+option go_package = "github.com/iotexproject/iotex-core/protogen/iotextypes";
+option java_package = "org.iotexproject.antenna.grpc";
 
 import "blockchain.proto";
 import "endorsement.proto";
