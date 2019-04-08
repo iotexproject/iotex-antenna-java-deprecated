@@ -8,6 +8,9 @@ import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceBlockingS
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceStub;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByIndexRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetaByHashRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasByIndexRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasRequest;
@@ -80,6 +83,13 @@ public class Browser {
 	public SuggestGasPriceResponse getSuggestGasPrice() {
 		SuggestGasPriceRequest req = SuggestGasPriceRequest.newBuilder().build();
 		return blockingStub.suggestGasPrice(req);
+	}
+	
+	public GetActionsResponse getActionsByIndex(Long start, Long count) {
+		GetActionsByIndexRequest reqIdx = GetActionsByIndexRequest.newBuilder().setStart(start).setCount(count).build();
+		
+		GetActionsRequest req = GetActionsRequest.newBuilder().setByIndex(reqIdx).build();
+		return blockingStub.getActions(req);
 	}
 	
 	public void close() {

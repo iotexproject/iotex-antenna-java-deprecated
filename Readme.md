@@ -12,7 +12,7 @@ mvn clean package
 
 * iotexapi.APIService.EstimateGasForAction (wip)
 * iotexapi.APIService.GetAccount
-* iotexapi.APIService.GetActions (wip)
+* iotexapi.APIService.GetActions (only by idx)
 * iotexapi.APIService.GetBlockMetas
 * iotexapi.APIService.GetChainMeta
 * iotexapi.APIService.GetEpochMeta

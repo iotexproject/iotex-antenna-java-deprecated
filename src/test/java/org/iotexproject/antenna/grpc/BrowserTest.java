@@ -3,7 +3,9 @@
  */
 package org.iotexproject.antenna.grpc;
 
+import org.iotexproject.antenna.grpc.iotexapi.Api.ActionInfo;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
@@ -162,7 +164,6 @@ public class BrowserTest {
 	
 	@Test
 	public void getSuggestGasPrice() {
-		//INDEX
 		Browser browser = new Browser(HOST, PORT);
 		try {
 			SuggestGasPriceResponse response = browser.getSuggestGasPrice();
@@ -174,5 +175,72 @@ public class BrowserTest {
 			browser.close();
 		}
 	}
+	
+	@Test
+	public void readContract() {
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			Long start = 0L;
+			Long count = 30L;
+			GetActionsResponse response = browser.getActionsByIndex(start, count);
+		    Logger.info(response);
+		    
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getActionInfoList());
+			Assert.assertEquals(response.getActionInfoList().size(), count.intValue());
+			for(ActionInfo item : response.getActionInfoList()) {
+				Assert.assertNotNull(item.getActHash());
+				Assert.assertNotNull(item.getBlkHash());
+				Assert.assertNotNull(item.getAction());
+				Assert.assertNotNull(item.getAction().getCore());
+				Assert.assertNotNull(item.getAction().getSenderPubKey());
+				Assert.assertNotNull(item.getAction().getSignature());
+			}
+		} finally {
+			browser.close();
+		}
+	}
 
+	@Test
+	public void getActionsByIndexOne() {
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetActionsResponse response = browser.getActionsByIndex(10L, 1L);
+		    Logger.info(response);
+		    
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getActionInfoList());
+			Assert.assertEquals(response.getActionInfoList().size(), 1);
+		} finally {
+			browser.close();
+		}
+	}
+	@Test
+	public void getActionsByIndexTen() {
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetActionsResponse response = browser.getActionsByIndex(10L, 10L);
+		    Logger.info(response);
+		    
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getActionInfoList());
+			Assert.assertEquals(response.getActionInfoList().size(), 10);
+		} finally {
+			browser.close();
+		}
+	}
+	@Test
+	public void getActionsByIndexZero() {
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetActionsResponse response = browser.getActionsByIndex(10L, 0L);
+		    Logger.info(response);
+		    
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getActionInfoList());
+			Assert.assertEquals(response.getActionInfoList().size(), 0);
+		} finally {
+			browser.close();
+		}
+	}
 }
