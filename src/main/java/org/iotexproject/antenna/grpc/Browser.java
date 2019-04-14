@@ -5,7 +5,6 @@ package org.iotexproject.antenna.grpc;
 
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc;
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceBlockingStub;
-import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceStub;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByIndexRequest;
@@ -23,20 +22,19 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
-import org.iotexproject.antenna.grpc.iotextypes.Blockchain.AccountMeta;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 /**
- * @author fabryprog
+ * Simple GRPC Bridge
+ * 
+ * @author Fabrizio Spataro <fabryprog@gmail.com>
  *
  */
-public class Browser {
+public class Browser implements IoTeXGRPCInterface {
 	private final ManagedChannel channel;
 	private final APIServiceBlockingStub blockingStub;
-	private final APIServiceStub asyncStub;
-	private AccountMeta result;
     
 	public Browser(final String host, final Integer port) {
 		this(ManagedChannelBuilder.forAddress(host, port).usePlaintext());
@@ -45,7 +43,6 @@ public class Browser {
 	public Browser(ManagedChannelBuilder<?> channelBuilder) {
 		channel = channelBuilder.build();
 		blockingStub = APIServiceGrpc.newBlockingStub(channel);
-		asyncStub = APIServiceGrpc.newStub(channel);
 	}
 	
 	public GetChainMetaResponse getChainMeta() {

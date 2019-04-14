@@ -1,14 +1,24 @@
 # IOTEX ANTENNA JAVA
 
-(working progress)
+## Usage
 
-## Generated GRPC Source Code (using maven)
+Into this library it used blocking gRPC API. This means that at most **one** RPC can be in progress at a time from the client. 
+
+So you must use singleton class **IoTeXDispatcher** 
+
+**Do not use Browser class!!!**
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT)
+```
+
+## Generated GRPC JAR (using maven)
 
 ```
 mvn clean package
 ```
 
-## GRPC Method
+## GRPC Method (Working Progress)
 
 * iotexapi.APIService.EstimateGasForAction (wip)
 * iotexapi.APIService.GetAccount

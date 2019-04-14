@@ -16,10 +16,9 @@ import org.junit.Test;
 import org.pmw.tinylog.Logger;
 
 /**
- * @author fabryprog
- *
+ * 
+ * @author Fabrizio Spataro <fabryprog@gmail.com>
  */
-
 public class BrowserTest {
 
 	private static final String HOST = "api.iotex.one";
