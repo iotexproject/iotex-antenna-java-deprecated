@@ -12,7 +12,7 @@ So you must use singleton class **IoTeXDispatcher**
   IoTeXDispatcher.getInstance(HOST, PORT)
 ```
 
-## Generated GRPC JAR (using maven)
+## Generate JAR (using maven)
 
 ```
 mvn clean package
@@ -22,7 +22,7 @@ mvn clean package
 
 * iotexapi.APIService.EstimateGasForAction (wip)
 * iotexapi.APIService.GetAccount
-* iotexapi.APIService.GetActions (only by idx)
+* iotexapi.APIService.GetActions (hash, idx and blockhash)
 * iotexapi.APIService.GetBlockMetas
 * iotexapi.APIService.GetChainMeta
 * iotexapi.APIService.GetEpochMeta

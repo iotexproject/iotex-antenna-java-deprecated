@@ -7,6 +7,8 @@ import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc;
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceBlockingStub;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionByHashRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByBlockRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByIndexRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
@@ -86,6 +88,20 @@ public class Browser implements IoTeXGRPCInterface {
 		GetActionsByIndexRequest reqIdx = GetActionsByIndexRequest.newBuilder().setStart(start).setCount(count).build();
 		
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByIndex(reqIdx).build();
+		return blockingStub.getActions(req);
+	}
+	
+	public GetActionsResponse getActionsByHash(String hash, Boolean checkPending) {
+		GetActionByHashRequest reqHash = GetActionByHashRequest.newBuilder().setActionHash(hash).setCheckPending(checkPending).build();
+		
+		GetActionsRequest req = GetActionsRequest.newBuilder().setByHash(reqHash).build();
+		return blockingStub.getActions(req);
+	}
+	
+	public GetActionsResponse getActionsByBlock(String hash, Long start, Long count) {
+		GetActionsByBlockRequest reqBlock = GetActionsByBlockRequest.newBuilder().setBlkHash(hash).setStart(start).setCount(count).build();
+		
+		GetActionsRequest req = GetActionsRequest.newBuilder().setByBlk(reqBlock).build();
 		return blockingStub.getActions(req);
 	}
 	

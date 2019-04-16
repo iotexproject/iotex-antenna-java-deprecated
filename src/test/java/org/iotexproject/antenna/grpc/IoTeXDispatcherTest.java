@@ -173,4 +173,27 @@ public class IoTeXDispatcherTest {
 		Assert.assertNotNull(response.getActionInfoList());
 		Assert.assertEquals(response.getActionInfoList().size(), 0);
 	}
+	@Test
+	public void getActionsByHash() {
+		GetActionsResponse response = IoTeXDispatcher.getInstance(HOST, PORT).getActionsByHash("65906dc502cc47237bab6c2a3d51c0fa31cce8d5c1608d9bb0e9cc843ba4af3c", false);
+	    Logger.info(response);
+	    
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getActionInfoList());
+		Assert.assertEquals(response.getActionInfoList().size(), 1);
+	}
+	@Test
+	public void getActionsByBlockHash() {
+		GetBlockMetasResponse response = IoTeXDispatcher.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 1L);
+	    Logger.info(response);
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getBlkMetasList());
+		Assert.assertEquals(response.getBlkMetasList().size(), 1);
+		String hash = response.getBlkMetasList().get(0).getHash();
+		GetActionsResponse respAction = IoTeXDispatcher.getInstance(HOST, PORT).getActionsByBlock(hash, 0L, 1L);
+	    
+		Assert.assertNotNull(respAction);
+		Assert.assertNotNull(respAction.getActionInfoList());
+		Assert.assertEquals(respAction.getActionInfoList().size(), 1);
+	}
 }

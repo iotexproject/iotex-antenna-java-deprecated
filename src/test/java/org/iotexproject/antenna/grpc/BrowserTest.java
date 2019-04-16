@@ -242,4 +242,40 @@ public class BrowserTest {
 			browser.close();
 		}
 	}
+	@Test
+	public void getActionsByHash() {
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetActionsResponse response = browser.getActionsByHash("65906dc502cc47237bab6c2a3d51c0fa31cce8d5c1608d9bb0e9cc843ba4af3c", false);
+		    Logger.info(response);
+		    
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getActionInfoList());
+			Assert.assertEquals(response.getActionInfoList().size(), 1);
+		} finally {
+			browser.close();
+		}
+	}
+	@Test
+	public void getActionsByBlockHash() {
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
+		    Logger.info(response);
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getBlkMetasList());
+			Assert.assertEquals(response.getBlkMetasList().size(), 1);
+			String hash = response.getBlkMetasList().get(0).getHash();
+			browser.close();
+			
+			browser = new Browser(HOST, PORT);
+			GetActionsResponse respAction = browser.getActionsByBlock(hash, 0L, 1L);
+		    
+			Assert.assertNotNull(respAction);
+			Assert.assertNotNull(respAction.getActionInfoList());
+			Assert.assertEquals(respAction.getActionInfoList().size(), 1);
+		} finally {
+			browser.close();
+		}
+	}
 }
