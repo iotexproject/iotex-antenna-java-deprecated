@@ -4,6 +4,7 @@
 package org.iotexproject.antenna.grpc;
 
 import org.iotexproject.antenna.grpc.iotexapi.Api.ActionInfo;
+import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
@@ -274,6 +275,37 @@ public class BrowserTest {
 			Assert.assertNotNull(respAction);
 			Assert.assertNotNull(respAction.getActionInfoList());
 			Assert.assertEquals(respAction.getActionInfoList().size(), 1);
+		} finally {
+			browser.close();
+		}
+	}
+	//TODO TEST
+	public void estimateGasForAction() {
+		Browser browser = new Browser(HOST, PORT);
+		try {
+			GetBlockMetasResponse respBlock = browser.getBlockMetasByIndex(10L, 1L);
+			Assert.assertNotNull(respBlock);
+			Assert.assertNotNull(respBlock.getBlkMetasList());
+			Assert.assertEquals(1, respBlock.getBlkMetasList().size());
+			
+			browser.close();
+			browser = new Browser(HOST, PORT);
+			
+			GetActionsResponse respAction = browser.getActionsByBlock(respBlock.getBlkMetasList().get(0).getHash(), 0L, 1L);
+			Assert.assertNotNull(respAction);
+			Assert.assertNotNull(respAction.getActionInfoList());
+			Assert.assertEquals(1, respAction.getActionInfoList().size());
+			
+			browser.close();
+			browser = new Browser(HOST, PORT);
+			
+			EstimateGasForActionResponse response = browser.estimateGasForAction(respAction.getActionInfoList().get(0).getAction());
+			
+		    Logger.info(response);
+		    
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getGas());
+			Assert.assertEquals(10400L, response.getGas());
 		} finally {
 			browser.close();
 		}

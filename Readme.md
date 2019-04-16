@@ -18,17 +18,23 @@ So you must use singleton class **IoTeXDispatcher**
 mvn clean package
 ```
 
+## Run Integration Test (using maven)
+
+```
+mvn clean test
+```
+
 ## GRPC Method (Working Progress)
 
-* iotexapi.APIService.EstimateGasForAction (wip)
+* iotexapi.APIService.EstimateGasForAction (TODO test)
 * iotexapi.APIService.GetAccount
 * iotexapi.APIService.GetActions (hash, idx and blockhash)
 * iotexapi.APIService.GetBlockMetas
 * iotexapi.APIService.GetChainMeta
 * iotexapi.APIService.GetEpochMeta
-* iotexapi.APIService.GetReceiptByAction (wip)
+* iotexapi.APIService.GetReceiptByAction (TODO test)
 * iotexapi.APIService.GetServerMeta
-* iotexapi.APIService.ReadContract (wip)
-* iotexapi.APIService.ReadState (wip)
-* iotexapi.APIService.SendAction (wip)
+* iotexapi.APIService.ReadContract (TODO test)
+* iotexapi.APIService.ReadState (TODO)
+* iotexapi.APIService.SendAction (TODO)
 * iotexapi.APIService.SuggestGasPrice

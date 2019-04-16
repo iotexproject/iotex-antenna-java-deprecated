@@ -5,6 +5,8 @@ package org.iotexproject.antenna.grpc;
 
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc;
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceBlockingStub;
+import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionByHashRequest;
@@ -20,10 +22,19 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
+import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -103,6 +114,24 @@ public class Browser implements IoTeXGRPCInterface {
 		
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByBlk(reqBlock).build();
 		return blockingStub.getActions(req);
+	}
+	
+	public EstimateGasForActionResponse estimateGasForAction(Action action) {
+		EstimateGasForActionRequest req = EstimateGasForActionRequest.newBuilder().setAction(action).build();
+		
+		return blockingStub.estimateGasForAction(req);
+	}
+	
+	public GetReceiptByActionResponse getReceiptByAction(String hash) {
+		GetReceiptByActionRequest req = GetReceiptByActionRequest.newBuilder().setActionHash(hash).build();
+		
+		return blockingStub.getReceiptByAction(req);
+	}
+	
+	public ReadContractResponse readContract(Action action) {
+		ReadContractRequest req = ReadContractRequest.newBuilder().setAction(action).build();
+		
+		return blockingStub.readContract(req);
 	}
 	
 	public void close() {

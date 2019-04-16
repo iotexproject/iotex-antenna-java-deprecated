@@ -4,6 +4,7 @@
 package org.iotexproject.antenna.grpc;
 
 import org.iotexproject.antenna.grpc.iotexapi.Api.ActionInfo;
+import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
@@ -80,7 +81,7 @@ public class IoTeXDispatcherTest {
 	    Logger.info(response);
 
 		Assert.assertNotNull(response);
-		Assert.assertEquals(response.getBlkMetasList().size(), 1);
+		Assert.assertEquals(1, response.getBlkMetasList().size());
 	}
 
 	@Test
@@ -89,7 +90,7 @@ public class IoTeXDispatcherTest {
 		GetBlockMetasResponse response = IoTeXDispatcher.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 10L);
 	    Logger.info(response);
 		Assert.assertNotNull(response);
-		Assert.assertEquals(response.getBlkMetasList().size(), 10);
+		Assert.assertEquals(10, response.getBlkMetasList().size());
 	}
 
 	@Test
@@ -99,7 +100,7 @@ public class IoTeXDispatcherTest {
 	    Logger.info(response);
 	    
 		Assert.assertNotNull(response);
-		Assert.assertEquals(response.getBlkMetasList().size(), 0);
+		Assert.assertEquals(0, response.getBlkMetasList().size());
 	}
 
 	@Test
@@ -113,8 +114,8 @@ public class IoTeXDispatcherTest {
 	    Logger.info(response);
 		
 		Assert.assertNotNull(response);
-		Assert.assertEquals(response.getBlkMetasList().size(), 1);
-		Assert.assertEquals(response.getBlkMetas(0).getHash(), hash);
+		Assert.assertEquals(1, response.getBlkMetasList().size());
+		Assert.assertEquals(hash, response.getBlkMetas(0).getHash());
 	}
 	
 	@Test
@@ -123,7 +124,7 @@ public class IoTeXDispatcherTest {
 	    Logger.info(response);
 	    
 		Assert.assertNotNull(response);
-		Assert.assertEquals(response.getGasPrice(), 1L);
+		Assert.assertEquals(1L, response.getGasPrice());
 	}
 	
 	@Test
@@ -135,7 +136,7 @@ public class IoTeXDispatcherTest {
 	    
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getActionInfoList());
-		Assert.assertEquals(response.getActionInfoList().size(), count.intValue());
+		Assert.assertEquals(count.intValue(), response.getActionInfoList().size());
 		for(ActionInfo item : response.getActionInfoList()) {
 			Assert.assertNotNull(item.getActHash());
 			Assert.assertNotNull(item.getBlkHash());
@@ -153,7 +154,7 @@ public class IoTeXDispatcherTest {
 	    
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getActionInfoList());
-		Assert.assertEquals(response.getActionInfoList().size(), 1);
+		Assert.assertEquals(1, response.getActionInfoList().size());
 	}
 	@Test
 	public void getActionsByIndexTen() {
@@ -162,7 +163,7 @@ public class IoTeXDispatcherTest {
 	    
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getActionInfoList());
-		Assert.assertEquals(response.getActionInfoList().size(), 10);
+		Assert.assertEquals(10, response.getActionInfoList().size());
 	}
 	@Test
 	public void getActionsByIndexZero() {
@@ -171,7 +172,7 @@ public class IoTeXDispatcherTest {
 	    
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getActionInfoList());
-		Assert.assertEquals(response.getActionInfoList().size(), 0);
+		Assert.assertEquals(0, response.getActionInfoList().size());
 	}
 	@Test
 	public void getActionsByHash() {
@@ -180,7 +181,7 @@ public class IoTeXDispatcherTest {
 	    
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getActionInfoList());
-		Assert.assertEquals(response.getActionInfoList().size(), 1);
+		Assert.assertEquals(1, response.getActionInfoList().size());
 	}
 	@Test
 	public void getActionsByBlockHash() {
@@ -188,12 +189,32 @@ public class IoTeXDispatcherTest {
 	    Logger.info(response);
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getBlkMetasList());
-		Assert.assertEquals(response.getBlkMetasList().size(), 1);
+		Assert.assertEquals(1, response.getBlkMetasList().size());
 		String hash = response.getBlkMetasList().get(0).getHash();
 		GetActionsResponse respAction = IoTeXDispatcher.getInstance(HOST, PORT).getActionsByBlock(hash, 0L, 1L);
 	    
 		Assert.assertNotNull(respAction);
 		Assert.assertNotNull(respAction.getActionInfoList());
-		Assert.assertEquals(respAction.getActionInfoList().size(), 1);
+		Assert.assertEquals(1, respAction.getActionInfoList().size());
+	}
+	//TODO TEST
+	public void estimateGasForAction() {
+		GetBlockMetasResponse respBlock = IoTeXDispatcher.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 1L);
+		Assert.assertNotNull(respBlock);
+		Assert.assertNotNull(respBlock.getBlkMetasList());
+		Assert.assertEquals(1, respBlock.getBlkMetasList().size());
+		
+		GetActionsResponse respAction = IoTeXDispatcher.getInstance(HOST, PORT).getActionsByBlock(respBlock.getBlkMetasList().get(0).getHash(), 0L, 1L);
+		Assert.assertNotNull(respAction);
+		Assert.assertNotNull(respAction.getActionInfoList());
+		Assert.assertEquals(1, respAction.getActionInfoList().size());
+		
+		EstimateGasForActionResponse response = IoTeXDispatcher.getInstance(HOST, PORT).estimateGasForAction(respAction.getActionInfoList().get(0).getAction());
+		
+	    Logger.info(response);
+	    
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getGas());
+		Assert.assertEquals(10400L, response.getGas());
 	}
 }
