@@ -12,7 +12,7 @@ So you must use singleton class **IoTeXDispatcher**
   IoTeXDispatcher.getInstance(HOST, PORT)
 ```
 
-The class create syncronize the calls using a semaphore. Use this method to close the grpc connection:
+The class syncronize the calls using a semaphore. Use this method to close the grpc connection:
 
 ```
   IoTeXDispatcher.getInstance(HOST, PORT).close()
