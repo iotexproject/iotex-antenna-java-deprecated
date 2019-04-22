@@ -124,7 +124,7 @@ public class IoTeXDispatcherTest {
 	    Logger.info(response);
 	    
 		Assert.assertNotNull(response);
-		Assert.assertEquals(1L, response.getGasPrice());
+		Assert.assertEquals(1000000000000L, response.getGasPrice());
 	}
 	
 	@Test
@@ -176,7 +176,7 @@ public class IoTeXDispatcherTest {
 	}
 	@Test
 	public void getActionsByHash() {
-		GetActionsResponse response = IoTeXDispatcher.getInstance(HOST, PORT).getActionsByHash("65906dc502cc47237bab6c2a3d51c0fa31cce8d5c1608d9bb0e9cc843ba4af3c", false);
+		GetActionsResponse response = IoTeXDispatcher.getInstance(HOST, PORT).getActionsByHash("eb0bab335c3ab0d43020cbe3aa494933ee473394d75a52fd5112cff6af2a5d92", false);
 	    Logger.info(response);
 	    
 		Assert.assertNotNull(response);

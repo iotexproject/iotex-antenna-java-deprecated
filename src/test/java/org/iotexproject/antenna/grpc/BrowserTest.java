@@ -170,7 +170,7 @@ public class BrowserTest {
 		    Logger.info(response);
 		    
 			Assert.assertNotNull(response);
-			Assert.assertEquals(response.getGasPrice(), 1L);
+			Assert.assertEquals(response.getGasPrice(), 1000000000000L);
 		} finally {
 			browser.close();
 		}
@@ -247,7 +247,7 @@ public class BrowserTest {
 	public void getActionsByHash() {
 		Browser browser = new Browser(HOST, PORT);
 		try {
-			GetActionsResponse response = browser.getActionsByHash("65906dc502cc47237bab6c2a3d51c0fa31cce8d5c1608d9bb0e9cc843ba4af3c", false);
+			GetActionsResponse response = browser.getActionsByHash("eb0bab335c3ab0d43020cbe3aa494933ee473394d75a52fd5112cff6af2a5d92", false);
 		    Logger.info(response);
 		    
 			Assert.assertNotNull(response);

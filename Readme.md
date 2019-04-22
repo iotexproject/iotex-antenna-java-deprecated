@@ -12,6 +12,12 @@ So you must use singleton class **IoTeXDispatcher**
   IoTeXDispatcher.getInstance(HOST, PORT)
 ```
 
+The class create syncronize the calls using a semaphore. Use this method to close the grpc connection:
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).close()
+```
+
 ## Generate JAR (using maven)
 
 ```
@@ -24,17 +30,84 @@ mvn clean package
 mvn clean test
 ```
 
-## GRPC Method (Working Progress)
+## GRPC Methods
+
+### SuggestGasPrice
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getSuggestGasPrice()
+```
+
+### EstimateGasForAction
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).estimateGasForAction(Action action)
+```
+
+### GetAccount
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getAccount(String address)
+```
+
+### GetActions
+
+#### By Hash
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getActionsByHash(String hash, Boolean checkPending)
+```
+
+
+#### By Index
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getActionsByIndex(Long start, Long count)
+```
+
+
+#### By Block Hash
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getActionsByBlock(String hash, Long start, Long count)
+```
+
+### GetBlockMetas
+
+#### By Index
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getBlockMetasByIndex(Long start, Long count)
+```
+
+#### By Hash
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getBlockMetasByHash(String hash)
+```
+
+### GetChainMeta
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getChainMeta()
+```
+
+### GetEpochMeta
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).GetEpochMeta(Long epoch)
+```
+
+### getServerMeta
+
+```
+  IoTeXDispatcher.getInstance(HOST, PORT).getServerMeta()
+```
+
+## TODO
 
 * iotexapi.APIService.EstimateGasForAction (TODO test)
-* iotexapi.APIService.GetAccount
-* iotexapi.APIService.GetActions (hash, idx and blockhash)
-* iotexapi.APIService.GetBlockMetas
-* iotexapi.APIService.GetChainMeta
-* iotexapi.APIService.GetEpochMeta
 * iotexapi.APIService.GetReceiptByAction (TODO test)
-* iotexapi.APIService.GetServerMeta
 * iotexapi.APIService.ReadContract (TODO test)
 * iotexapi.APIService.ReadState (TODO)
 * iotexapi.APIService.SendAction (TODO)
-* iotexapi.APIService.SuggestGasPrice

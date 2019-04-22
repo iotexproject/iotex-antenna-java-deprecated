@@ -6,6 +6,7 @@ package org.iotexproject.antenna.grpc;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
@@ -13,6 +14,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
+import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
 import org.pmw.tinylog.Logger;
 
 /**
@@ -53,7 +55,7 @@ public class IoTeXDispatcher implements IoTeXGRPCInterface {
 		
 		return result;
 	}
-	public GetEpochMetaResponse getEpochMeta(Long epoch) {
+	public synchronized GetEpochMetaResponse getEpochMeta(Long epoch) {
 		GetEpochMetaResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -67,7 +69,7 @@ public class IoTeXDispatcher implements IoTeXGRPCInterface {
 		
 		return result;
 	}
-	public GetServerMetaResponse getServerMeta() {
+	public synchronized GetServerMetaResponse getServerMeta() {
 		GetServerMetaResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -82,7 +84,7 @@ public class IoTeXDispatcher implements IoTeXGRPCInterface {
 		return result;
 	}
 	
-	public GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count) {
+	public synchronized GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count) {
 		GetBlockMetasResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -97,7 +99,7 @@ public class IoTeXDispatcher implements IoTeXGRPCInterface {
 		return result;
 	}
 	
-	public GetBlockMetasResponse getBlockMetasByHash(final String hash) {
+	public synchronized GetBlockMetasResponse getBlockMetasByHash(final String hash) {
 		GetBlockMetasResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -112,7 +114,7 @@ public class IoTeXDispatcher implements IoTeXGRPCInterface {
 		return result;
 	}
 
-	public GetAccountResponse getAccount(final String address) {
+	public synchronized GetAccountResponse getAccount(final String address) {
 		GetAccountResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -127,7 +129,7 @@ public class IoTeXDispatcher implements IoTeXGRPCInterface {
 		return result;
 	}
 	
-	public SuggestGasPriceResponse getSuggestGasPrice() {
+	public synchronized SuggestGasPriceResponse getSuggestGasPrice() {
 		SuggestGasPriceResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -142,7 +144,7 @@ public class IoTeXDispatcher implements IoTeXGRPCInterface {
 		return result;
 	}
 	
-	public GetActionsResponse getActionsByIndex(Long start, Long count) {
+	public synchronized GetActionsResponse getActionsByIndex(Long start, Long count) {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -157,8 +159,55 @@ public class IoTeXDispatcher implements IoTeXGRPCInterface {
 		return result;
 	}
 	
-	public void close() {
-		instance.close();		
+	public synchronized GetActionsResponse getActionsByHash(String hash, Boolean checkPending) {
+		GetActionsResponse result = null;
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+			
+			result = instance.getActionsByHash(hash, checkPending);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+		} finally {
+			semaphore.release();
+		}
+		
+		return result;
+	}
+	
+	public synchronized GetActionsResponse getActionsByBlock(String hash, Long start, Long count) {
+		GetActionsResponse result = null;
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+			
+			result = instance.getActionsByBlock(hash, start, count);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+		} finally {
+			semaphore.release();
+		}
+		
+		return result;
+	}
+	
+	public synchronized EstimateGasForActionResponse estimateGasForAction(Action action) {
+		EstimateGasForActionResponse result = null;
+		
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+			
+			result = instance.estimateGasForAction(action);
+		}catch (InterruptedException e) {
+			Logger.error(e);
+		} finally {
+			semaphore.release();
+		}
+		return result;
+	}
+	
+	public synchronized void close() {
+		instance.close();
+		
+		instance = null;
 	}
 }
 

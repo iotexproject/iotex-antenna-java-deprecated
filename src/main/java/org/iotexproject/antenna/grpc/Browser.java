@@ -95,14 +95,14 @@ public class Browser implements IoTeXGRPCInterface {
 		return blockingStub.suggestGasPrice(req);
 	}
 	
-	public GetActionsResponse getActionsByIndex(Long start, Long count) {
+	public GetActionsResponse getActionsByIndex(final Long start, final Long count) {
 		GetActionsByIndexRequest reqIdx = GetActionsByIndexRequest.newBuilder().setStart(start).setCount(count).build();
 		
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByIndex(reqIdx).build();
 		return blockingStub.getActions(req);
 	}
 	
-	public GetActionsResponse getActionsByHash(String hash, Boolean checkPending) {
+	public GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending) {
 		GetActionByHashRequest reqHash = GetActionByHashRequest.newBuilder().setActionHash(hash).setCheckPending(checkPending).build();
 		
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByHash(reqHash).build();
