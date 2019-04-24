@@ -23117,14 +23117,14 @@ public final class ActionOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>bytes returnValue = 1;</code>
-     */
-    com.google.protobuf.ByteString getReturnValue();
-
-    /**
-     * <code>uint64 status = 2;</code>
+     * <code>uint64 status = 1;</code>
      */
     long getStatus();
+
+    /**
+     * <code>uint64 blkHeight = 2;</code>
+     */
+    long getBlkHeight();
 
     /**
      * <code>bytes actHash = 3;</code>
@@ -23183,7 +23183,6 @@ public final class ActionOuterClass {
       super(builder);
     }
     private Receipt() {
-      returnValue_ = com.google.protobuf.ByteString.EMPTY;
       actHash_ = com.google.protobuf.ByteString.EMPTY;
       contractAddress_ = "";
       logs_ = java.util.Collections.emptyList();
@@ -23213,14 +23212,14 @@ public final class ActionOuterClass {
             case 0:
               done = true;
               break;
-            case 10: {
+            case 8: {
 
-              returnValue_ = input.readBytes();
+              status_ = input.readUInt64();
               break;
             }
             case 16: {
 
-              status_ = input.readUInt64();
+              blkHeight_ = input.readUInt64();
               break;
             }
             case 26: {
@@ -23284,22 +23283,22 @@ public final class ActionOuterClass {
     }
 
     private int bitField0_;
-    public static final int RETURNVALUE_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString returnValue_;
-    /**
-     * <code>bytes returnValue = 1;</code>
-     */
-    public com.google.protobuf.ByteString getReturnValue() {
-      return returnValue_;
-    }
-
-    public static final int STATUS_FIELD_NUMBER = 2;
+    public static final int STATUS_FIELD_NUMBER = 1;
     private long status_;
     /**
-     * <code>uint64 status = 2;</code>
+     * <code>uint64 status = 1;</code>
      */
     public long getStatus() {
       return status_;
+    }
+
+    public static final int BLKHEIGHT_FIELD_NUMBER = 2;
+    private long blkHeight_;
+    /**
+     * <code>uint64 blkHeight = 2;</code>
+     */
+    public long getBlkHeight() {
+      return blkHeight_;
     }
 
     public static final int ACTHASH_FIELD_NUMBER = 3;
@@ -23403,11 +23402,11 @@ public final class ActionOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!returnValue_.isEmpty()) {
-        output.writeBytes(1, returnValue_);
-      }
       if (status_ != 0L) {
-        output.writeUInt64(2, status_);
+        output.writeUInt64(1, status_);
+      }
+      if (blkHeight_ != 0L) {
+        output.writeUInt64(2, blkHeight_);
       }
       if (!actHash_.isEmpty()) {
         output.writeBytes(3, actHash_);
@@ -23430,13 +23429,13 @@ public final class ActionOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (!returnValue_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, returnValue_);
-      }
       if (status_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(2, status_);
+          .computeUInt64Size(1, status_);
+      }
+      if (blkHeight_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, blkHeight_);
       }
       if (!actHash_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
@@ -23468,10 +23467,10 @@ public final class ActionOuterClass {
       }
       org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt other = (org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt) obj;
 
-      if (!getReturnValue()
-          .equals(other.getReturnValue())) return false;
       if (getStatus()
           != other.getStatus()) return false;
+      if (getBlkHeight()
+          != other.getBlkHeight()) return false;
       if (!getActHash()
           .equals(other.getActHash())) return false;
       if (getGasConsumed()
@@ -23491,11 +23490,12 @@ public final class ActionOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + RETURNVALUE_FIELD_NUMBER;
-      hash = (53 * hash) + getReturnValue().hashCode();
       hash = (37 * hash) + STATUS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getStatus());
+      hash = (37 * hash) + BLKHEIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getBlkHeight());
       hash = (37 * hash) + ACTHASH_FIELD_NUMBER;
       hash = (53 * hash) + getActHash().hashCode();
       hash = (37 * hash) + GASCONSUMED_FIELD_NUMBER;
@@ -23641,9 +23641,9 @@ public final class ActionOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        returnValue_ = com.google.protobuf.ByteString.EMPTY;
-
         status_ = 0L;
+
+        blkHeight_ = 0L;
 
         actHash_ = com.google.protobuf.ByteString.EMPTY;
 
@@ -23685,8 +23685,8 @@ public final class ActionOuterClass {
         org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt result = new org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        result.returnValue_ = returnValue_;
         result.status_ = status_;
+        result.blkHeight_ = blkHeight_;
         result.actHash_ = actHash_;
         result.gasConsumed_ = gasConsumed_;
         result.contractAddress_ = contractAddress_;
@@ -23748,11 +23748,11 @@ public final class ActionOuterClass {
 
       public Builder mergeFrom(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt other) {
         if (other == org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance()) return this;
-        if (other.getReturnValue() != com.google.protobuf.ByteString.EMPTY) {
-          setReturnValue(other.getReturnValue());
-        }
         if (other.getStatus() != 0L) {
           setStatus(other.getStatus());
+        }
+        if (other.getBlkHeight() != 0L) {
+          setBlkHeight(other.getBlkHeight());
         }
         if (other.getActHash() != com.google.protobuf.ByteString.EMPTY) {
           setActHash(other.getActHash());
@@ -23820,44 +23820,15 @@ public final class ActionOuterClass {
       }
       private int bitField0_;
 
-      private com.google.protobuf.ByteString returnValue_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes returnValue = 1;</code>
-       */
-      public com.google.protobuf.ByteString getReturnValue() {
-        return returnValue_;
-      }
-      /**
-       * <code>bytes returnValue = 1;</code>
-       */
-      public Builder setReturnValue(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        returnValue_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes returnValue = 1;</code>
-       */
-      public Builder clearReturnValue() {
-        
-        returnValue_ = getDefaultInstance().getReturnValue();
-        onChanged();
-        return this;
-      }
-
       private long status_ ;
       /**
-       * <code>uint64 status = 2;</code>
+       * <code>uint64 status = 1;</code>
        */
       public long getStatus() {
         return status_;
       }
       /**
-       * <code>uint64 status = 2;</code>
+       * <code>uint64 status = 1;</code>
        */
       public Builder setStatus(long value) {
         
@@ -23866,11 +23837,37 @@ public final class ActionOuterClass {
         return this;
       }
       /**
-       * <code>uint64 status = 2;</code>
+       * <code>uint64 status = 1;</code>
        */
       public Builder clearStatus() {
         
         status_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long blkHeight_ ;
+      /**
+       * <code>uint64 blkHeight = 2;</code>
+       */
+      public long getBlkHeight() {
+        return blkHeight_;
+      }
+      /**
+       * <code>uint64 blkHeight = 2;</code>
+       */
+      public Builder setBlkHeight(long value) {
+        
+        blkHeight_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 blkHeight = 2;</code>
+       */
+      public Builder clearBlkHeight() {
+        
+        blkHeight_ = 0L;
         onChanged();
         return this;
       }
@@ -24296,14 +24293,14 @@ public final class ActionOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string address = 1;</code>
+     * <code>string contractAddress = 1;</code>
      */
-    java.lang.String getAddress();
+    java.lang.String getContractAddress();
     /**
-     * <code>string address = 1;</code>
+     * <code>string contractAddress = 1;</code>
      */
     com.google.protobuf.ByteString
-        getAddressBytes();
+        getContractAddressBytes();
 
     /**
      * <code>repeated bytes topics = 2;</code>
@@ -24324,14 +24321,14 @@ public final class ActionOuterClass {
     com.google.protobuf.ByteString getData();
 
     /**
-     * <code>uint64 blockNumber = 4;</code>
+     * <code>uint64 blkHeight = 4;</code>
      */
-    long getBlockNumber();
+    long getBlkHeight();
 
     /**
-     * <code>bytes txnHash = 5;</code>
+     * <code>bytes actHash = 5;</code>
      */
-    com.google.protobuf.ByteString getTxnHash();
+    com.google.protobuf.ByteString getActHash();
 
     /**
      * <code>uint32 index = 6;</code>
@@ -24351,10 +24348,10 @@ public final class ActionOuterClass {
       super(builder);
     }
     private Log() {
-      address_ = "";
+      contractAddress_ = "";
       topics_ = java.util.Collections.emptyList();
       data_ = com.google.protobuf.ByteString.EMPTY;
-      txnHash_ = com.google.protobuf.ByteString.EMPTY;
+      actHash_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -24384,7 +24381,7 @@ public final class ActionOuterClass {
             case 10: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              address_ = s;
+              contractAddress_ = s;
               break;
             }
             case 18: {
@@ -24402,12 +24399,12 @@ public final class ActionOuterClass {
             }
             case 32: {
 
-              blockNumber_ = input.readUInt64();
+              blkHeight_ = input.readUInt64();
               break;
             }
             case 42: {
 
-              txnHash_ = input.readBytes();
+              actHash_ = input.readBytes();
               break;
             }
             case 48: {
@@ -24451,34 +24448,34 @@ public final class ActionOuterClass {
     }
 
     private int bitField0_;
-    public static final int ADDRESS_FIELD_NUMBER = 1;
-    private volatile java.lang.Object address_;
+    public static final int CONTRACTADDRESS_FIELD_NUMBER = 1;
+    private volatile java.lang.Object contractAddress_;
     /**
-     * <code>string address = 1;</code>
+     * <code>string contractAddress = 1;</code>
      */
-    public java.lang.String getAddress() {
-      java.lang.Object ref = address_;
+    public java.lang.String getContractAddress() {
+      java.lang.Object ref = contractAddress_;
       if (ref instanceof java.lang.String) {
         return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        address_ = s;
+        contractAddress_ = s;
         return s;
       }
     }
     /**
-     * <code>string address = 1;</code>
+     * <code>string contractAddress = 1;</code>
      */
     public com.google.protobuf.ByteString
-        getAddressBytes() {
-      java.lang.Object ref = address_;
+        getContractAddressBytes() {
+      java.lang.Object ref = contractAddress_;
       if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        address_ = b;
+        contractAddress_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
@@ -24516,22 +24513,22 @@ public final class ActionOuterClass {
       return data_;
     }
 
-    public static final int BLOCKNUMBER_FIELD_NUMBER = 4;
-    private long blockNumber_;
+    public static final int BLKHEIGHT_FIELD_NUMBER = 4;
+    private long blkHeight_;
     /**
-     * <code>uint64 blockNumber = 4;</code>
+     * <code>uint64 blkHeight = 4;</code>
      */
-    public long getBlockNumber() {
-      return blockNumber_;
+    public long getBlkHeight() {
+      return blkHeight_;
     }
 
-    public static final int TXNHASH_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString txnHash_;
+    public static final int ACTHASH_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString actHash_;
     /**
-     * <code>bytes txnHash = 5;</code>
+     * <code>bytes actHash = 5;</code>
      */
-    public com.google.protobuf.ByteString getTxnHash() {
-      return txnHash_;
+    public com.google.protobuf.ByteString getActHash() {
+      return actHash_;
     }
 
     public static final int INDEX_FIELD_NUMBER = 6;
@@ -24557,8 +24554,8 @@ public final class ActionOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getAddressBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, address_);
+      if (!getContractAddressBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, contractAddress_);
       }
       for (int i = 0; i < topics_.size(); i++) {
         output.writeBytes(2, topics_.get(i));
@@ -24566,11 +24563,11 @@ public final class ActionOuterClass {
       if (!data_.isEmpty()) {
         output.writeBytes(3, data_);
       }
-      if (blockNumber_ != 0L) {
-        output.writeUInt64(4, blockNumber_);
+      if (blkHeight_ != 0L) {
+        output.writeUInt64(4, blkHeight_);
       }
-      if (!txnHash_.isEmpty()) {
-        output.writeBytes(5, txnHash_);
+      if (!actHash_.isEmpty()) {
+        output.writeBytes(5, actHash_);
       }
       if (index_ != 0) {
         output.writeUInt32(6, index_);
@@ -24584,8 +24581,8 @@ public final class ActionOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (!getAddressBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, address_);
+      if (!getContractAddressBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, contractAddress_);
       }
       {
         int dataSize = 0;
@@ -24600,13 +24597,13 @@ public final class ActionOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, data_);
       }
-      if (blockNumber_ != 0L) {
+      if (blkHeight_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt64Size(4, blockNumber_);
+          .computeUInt64Size(4, blkHeight_);
       }
-      if (!txnHash_.isEmpty()) {
+      if (!actHash_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, txnHash_);
+          .computeBytesSize(5, actHash_);
       }
       if (index_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -24627,16 +24624,16 @@ public final class ActionOuterClass {
       }
       org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Log other = (org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Log) obj;
 
-      if (!getAddress()
-          .equals(other.getAddress())) return false;
+      if (!getContractAddress()
+          .equals(other.getContractAddress())) return false;
       if (!getTopicsList()
           .equals(other.getTopicsList())) return false;
       if (!getData()
           .equals(other.getData())) return false;
-      if (getBlockNumber()
-          != other.getBlockNumber()) return false;
-      if (!getTxnHash()
-          .equals(other.getTxnHash())) return false;
+      if (getBlkHeight()
+          != other.getBlkHeight()) return false;
+      if (!getActHash()
+          .equals(other.getActHash())) return false;
       if (getIndex()
           != other.getIndex()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
@@ -24650,19 +24647,19 @@ public final class ActionOuterClass {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + ADDRESS_FIELD_NUMBER;
-      hash = (53 * hash) + getAddress().hashCode();
+      hash = (37 * hash) + CONTRACTADDRESS_FIELD_NUMBER;
+      hash = (53 * hash) + getContractAddress().hashCode();
       if (getTopicsCount() > 0) {
         hash = (37 * hash) + TOPICS_FIELD_NUMBER;
         hash = (53 * hash) + getTopicsList().hashCode();
       }
       hash = (37 * hash) + DATA_FIELD_NUMBER;
       hash = (53 * hash) + getData().hashCode();
-      hash = (37 * hash) + BLOCKNUMBER_FIELD_NUMBER;
+      hash = (37 * hash) + BLKHEIGHT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getBlockNumber());
-      hash = (37 * hash) + TXNHASH_FIELD_NUMBER;
-      hash = (53 * hash) + getTxnHash().hashCode();
+          getBlkHeight());
+      hash = (37 * hash) + ACTHASH_FIELD_NUMBER;
+      hash = (53 * hash) + getActHash().hashCode();
       hash = (37 * hash) + INDEX_FIELD_NUMBER;
       hash = (53 * hash) + getIndex();
       hash = (29 * hash) + unknownFields.hashCode();
@@ -24798,15 +24795,15 @@ public final class ActionOuterClass {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        address_ = "";
+        contractAddress_ = "";
 
         topics_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
         data_ = com.google.protobuf.ByteString.EMPTY;
 
-        blockNumber_ = 0L;
+        blkHeight_ = 0L;
 
-        txnHash_ = com.google.protobuf.ByteString.EMPTY;
+        actHash_ = com.google.protobuf.ByteString.EMPTY;
 
         index_ = 0;
 
@@ -24838,15 +24835,15 @@ public final class ActionOuterClass {
         org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Log result = new org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Log(this);
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
-        result.address_ = address_;
+        result.contractAddress_ = contractAddress_;
         if (((bitField0_ & 0x00000002) != 0)) {
           topics_ = java.util.Collections.unmodifiableList(topics_);
           bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.topics_ = topics_;
         result.data_ = data_;
-        result.blockNumber_ = blockNumber_;
-        result.txnHash_ = txnHash_;
+        result.blkHeight_ = blkHeight_;
+        result.actHash_ = actHash_;
         result.index_ = index_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
@@ -24897,8 +24894,8 @@ public final class ActionOuterClass {
 
       public Builder mergeFrom(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Log other) {
         if (other == org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Log.getDefaultInstance()) return this;
-        if (!other.getAddress().isEmpty()) {
-          address_ = other.address_;
+        if (!other.getContractAddress().isEmpty()) {
+          contractAddress_ = other.contractAddress_;
           onChanged();
         }
         if (!other.topics_.isEmpty()) {
@@ -24914,11 +24911,11 @@ public final class ActionOuterClass {
         if (other.getData() != com.google.protobuf.ByteString.EMPTY) {
           setData(other.getData());
         }
-        if (other.getBlockNumber() != 0L) {
-          setBlockNumber(other.getBlockNumber());
+        if (other.getBlkHeight() != 0L) {
+          setBlkHeight(other.getBlkHeight());
         }
-        if (other.getTxnHash() != com.google.protobuf.ByteString.EMPTY) {
-          setTxnHash(other.getTxnHash());
+        if (other.getActHash() != com.google.protobuf.ByteString.EMPTY) {
+          setActHash(other.getActHash());
         }
         if (other.getIndex() != 0) {
           setIndex(other.getIndex());
@@ -24953,71 +24950,71 @@ public final class ActionOuterClass {
       }
       private int bitField0_;
 
-      private java.lang.Object address_ = "";
+      private java.lang.Object contractAddress_ = "";
       /**
-       * <code>string address = 1;</code>
+       * <code>string contractAddress = 1;</code>
        */
-      public java.lang.String getAddress() {
-        java.lang.Object ref = address_;
+      public java.lang.String getContractAddress() {
+        java.lang.Object ref = contractAddress_;
         if (!(ref instanceof java.lang.String)) {
           com.google.protobuf.ByteString bs =
               (com.google.protobuf.ByteString) ref;
           java.lang.String s = bs.toStringUtf8();
-          address_ = s;
+          contractAddress_ = s;
           return s;
         } else {
           return (java.lang.String) ref;
         }
       }
       /**
-       * <code>string address = 1;</code>
+       * <code>string contractAddress = 1;</code>
        */
       public com.google.protobuf.ByteString
-          getAddressBytes() {
-        java.lang.Object ref = address_;
+          getContractAddressBytes() {
+        java.lang.Object ref = contractAddress_;
         if (ref instanceof String) {
           com.google.protobuf.ByteString b = 
               com.google.protobuf.ByteString.copyFromUtf8(
                   (java.lang.String) ref);
-          address_ = b;
+          contractAddress_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
       /**
-       * <code>string address = 1;</code>
+       * <code>string contractAddress = 1;</code>
        */
-      public Builder setAddress(
+      public Builder setContractAddress(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        address_ = value;
+        contractAddress_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>string address = 1;</code>
+       * <code>string contractAddress = 1;</code>
        */
-      public Builder clearAddress() {
+      public Builder clearContractAddress() {
         
-        address_ = getDefaultInstance().getAddress();
+        contractAddress_ = getDefaultInstance().getContractAddress();
         onChanged();
         return this;
       }
       /**
-       * <code>string address = 1;</code>
+       * <code>string contractAddress = 1;</code>
        */
-      public Builder setAddressBytes(
+      public Builder setContractAddressBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
         
-        address_ = value;
+        contractAddress_ = value;
         onChanged();
         return this;
       }
@@ -25124,57 +25121,57 @@ public final class ActionOuterClass {
         return this;
       }
 
-      private long blockNumber_ ;
+      private long blkHeight_ ;
       /**
-       * <code>uint64 blockNumber = 4;</code>
+       * <code>uint64 blkHeight = 4;</code>
        */
-      public long getBlockNumber() {
-        return blockNumber_;
+      public long getBlkHeight() {
+        return blkHeight_;
       }
       /**
-       * <code>uint64 blockNumber = 4;</code>
+       * <code>uint64 blkHeight = 4;</code>
        */
-      public Builder setBlockNumber(long value) {
+      public Builder setBlkHeight(long value) {
         
-        blockNumber_ = value;
+        blkHeight_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint64 blockNumber = 4;</code>
+       * <code>uint64 blkHeight = 4;</code>
        */
-      public Builder clearBlockNumber() {
+      public Builder clearBlkHeight() {
         
-        blockNumber_ = 0L;
+        blkHeight_ = 0L;
         onChanged();
         return this;
       }
 
-      private com.google.protobuf.ByteString txnHash_ = com.google.protobuf.ByteString.EMPTY;
+      private com.google.protobuf.ByteString actHash_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>bytes txnHash = 5;</code>
+       * <code>bytes actHash = 5;</code>
        */
-      public com.google.protobuf.ByteString getTxnHash() {
-        return txnHash_;
+      public com.google.protobuf.ByteString getActHash() {
+        return actHash_;
       }
       /**
-       * <code>bytes txnHash = 5;</code>
+       * <code>bytes actHash = 5;</code>
        */
-      public Builder setTxnHash(com.google.protobuf.ByteString value) {
+      public Builder setActHash(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   
-        txnHash_ = value;
+        actHash_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>bytes txnHash = 5;</code>
+       * <code>bytes actHash = 5;</code>
        */
-      public Builder clearTxnHash() {
+      public Builder clearActHash() {
         
-        txnHash_ = getDefaultInstance().getTxnHash();
+        actHash_ = getDefaultInstance().getActHash();
         onChanged();
         return this;
       }
@@ -26499,6 +26496,11 @@ public final class ActionOuterClass {
      * <code>.iotextypes.RewardType type = 1;</code>
      */
     org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.RewardType getType();
+
+    /**
+     * <code>uint64 height = 2;</code>
+     */
+    long getHeight();
   }
   /**
    * Protobuf type {@code iotextypes.GrantReward}
@@ -26544,6 +26546,11 @@ public final class ActionOuterClass {
               int rawValue = input.readEnum();
 
               type_ = rawValue;
+              break;
+            }
+            case 16: {
+
+              height_ = input.readUInt64();
               break;
             }
             default: {
@@ -26595,6 +26602,15 @@ public final class ActionOuterClass {
       return result == null ? org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.RewardType.UNRECOGNIZED : result;
     }
 
+    public static final int HEIGHT_FIELD_NUMBER = 2;
+    private long height_;
+    /**
+     * <code>uint64 height = 2;</code>
+     */
+    public long getHeight() {
+      return height_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -26612,6 +26628,9 @@ public final class ActionOuterClass {
       if (type_ != org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.RewardType.BlockReward.getNumber()) {
         output.writeEnum(1, type_);
       }
+      if (height_ != 0L) {
+        output.writeUInt64(2, height_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -26624,6 +26643,10 @@ public final class ActionOuterClass {
       if (type_ != org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.RewardType.BlockReward.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, type_);
+      }
+      if (height_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(2, height_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -26641,6 +26664,8 @@ public final class ActionOuterClass {
       org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.GrantReward other = (org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.GrantReward) obj;
 
       if (type_ != other.type_) return false;
+      if (getHeight()
+          != other.getHeight()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -26654,6 +26679,9 @@ public final class ActionOuterClass {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TYPE_FIELD_NUMBER;
       hash = (53 * hash) + type_;
+      hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getHeight());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -26789,6 +26817,8 @@ public final class ActionOuterClass {
         super.clear();
         type_ = 0;
 
+        height_ = 0L;
+
         return this;
       }
 
@@ -26816,6 +26846,7 @@ public final class ActionOuterClass {
       public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.GrantReward buildPartial() {
         org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.GrantReward result = new org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.GrantReward(this);
         result.type_ = type_;
+        result.height_ = height_;
         onBuilt();
         return result;
       }
@@ -26866,6 +26897,9 @@ public final class ActionOuterClass {
         if (other == org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.GrantReward.getDefaultInstance()) return this;
         if (other.type_ != 0) {
           setTypeValue(other.getTypeValue());
+        }
+        if (other.getHeight() != 0L) {
+          setHeight(other.getHeight());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -26937,6 +26971,32 @@ public final class ActionOuterClass {
       public Builder clearType() {
         
         type_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long height_ ;
+      /**
+       * <code>uint64 height = 2;</code>
+       */
+      public long getHeight() {
+        return height_;
+      }
+      /**
+       * <code>uint64 height = 2;</code>
+       */
+      public Builder setHeight(long value) {
+        
+        height_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 height = 2;</code>
+       */
+      public Builder clearHeight() {
+        
+        height_ = 0L;
         onChanged();
         return this;
       }
@@ -27237,21 +27297,22 @@ public final class ActionOuterClass {
       "ollResult\0302 \001(\0132\031.iotextypes.PutPollResu" +
       "ltH\000B\010\n\006action\"W\n\006Action\022$\n\004core\030\001 \001(\0132\026" +
       ".iotextypes.ActionCore\022\024\n\014senderPubKey\030\002" +
-      " \001(\014\022\021\n\tsignature\030\003 \001(\014\"\214\001\n\007Receipt\022\023\n\013r" +
-      "eturnValue\030\001 \001(\014\022\016\n\006status\030\002 \001(\004\022\017\n\007actH" +
-      "ash\030\003 \001(\014\022\023\n\013gasConsumed\030\004 \001(\004\022\027\n\017contra" +
-      "ctAddress\030\005 \001(\t\022\035\n\004logs\030\006 \003(\0132\017.iotextyp" +
-      "es.Log\"i\n\003Log\022\017\n\007address\030\001 \001(\t\022\016\n\006topics" +
-      "\030\002 \003(\014\022\014\n\004data\030\003 \001(\014\022\023\n\013blockNumber\030\004 \001(" +
-      "\004\022\017\n\007txnHash\030\005 \001(\014\022\r\n\005index\030\006 \001(\r\"6\n\026Dep" +
-      "ositToRewardingFund\022\016\n\006amount\030\001 \001(\t\022\014\n\004d" +
-      "ata\030\002 \001(\014\"6\n\026ClaimFromRewardingFund\022\016\n\006a" +
-      "mount\030\001 \001(\t\022\014\n\004data\030\002 \001(\014\"3\n\013GrantReward" +
-      "\022$\n\004type\030\001 \001(\0162\026.iotextypes.RewardType*." +
-      "\n\nRewardType\022\017\n\013BlockReward\020\000\022\017\n\013EpochRe" +
-      "ward\020\001Bb\n(org.iotexproject.antenna.grpc." +
-      "iotextypesZ6github.com/iotexproject/iote" +
-      "x-core/protogen/iotextypesb\006proto3"
+      " \001(\014\022\021\n\tsignature\030\003 \001(\014\"\212\001\n\007Receipt\022\016\n\006s" +
+      "tatus\030\001 \001(\004\022\021\n\tblkHeight\030\002 \001(\004\022\017\n\007actHas" +
+      "h\030\003 \001(\014\022\023\n\013gasConsumed\030\004 \001(\004\022\027\n\017contract" +
+      "Address\030\005 \001(\t\022\035\n\004logs\030\006 \003(\0132\017.iotextypes" +
+      ".Log\"o\n\003Log\022\027\n\017contractAddress\030\001 \001(\t\022\016\n\006" +
+      "topics\030\002 \003(\014\022\014\n\004data\030\003 \001(\014\022\021\n\tblkHeight\030" +
+      "\004 \001(\004\022\017\n\007actHash\030\005 \001(\014\022\r\n\005index\030\006 \001(\r\"6\n" +
+      "\026DepositToRewardingFund\022\016\n\006amount\030\001 \001(\t\022" +
+      "\014\n\004data\030\002 \001(\014\"6\n\026ClaimFromRewardingFund\022" +
+      "\016\n\006amount\030\001 \001(\t\022\014\n\004data\030\002 \001(\014\"C\n\013GrantRe" +
+      "ward\022$\n\004type\030\001 \001(\0162\026.iotextypes.RewardTy" +
+      "pe\022\016\n\006height\030\002 \001(\004*.\n\nRewardType\022\017\n\013Bloc" +
+      "kReward\020\000\022\017\n\013EpochReward\020\001Bb\n(org.iotexp" +
+      "roject.antenna.grpc.iotextypesZ6github.c" +
+      "om/iotexproject/iotex-core/protogen/iote" +
+      "xtypesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -27421,13 +27482,13 @@ public final class ActionOuterClass {
     internal_static_iotextypes_Receipt_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_Receipt_descriptor,
-        new java.lang.String[] { "ReturnValue", "Status", "ActHash", "GasConsumed", "ContractAddress", "Logs", });
+        new java.lang.String[] { "Status", "BlkHeight", "ActHash", "GasConsumed", "ContractAddress", "Logs", });
     internal_static_iotextypes_Log_descriptor =
       getDescriptor().getMessageTypes().get(25);
     internal_static_iotextypes_Log_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_Log_descriptor,
-        new java.lang.String[] { "Address", "Topics", "Data", "BlockNumber", "TxnHash", "Index", });
+        new java.lang.String[] { "ContractAddress", "Topics", "Data", "BlkHeight", "ActHash", "Index", });
     internal_static_iotextypes_DepositToRewardingFund_descriptor =
       getDescriptor().getMessageTypes().get(26);
     internal_static_iotextypes_DepositToRewardingFund_fieldAccessorTable = new
@@ -27445,7 +27506,7 @@ public final class ActionOuterClass {
     internal_static_iotextypes_GrantReward_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_GrantReward_descriptor,
-        new java.lang.String[] { "Type", });
+        new java.lang.String[] { "Type", "Height", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 

@@ -5945,6 +5945,19 @@ public final class Api {
      */
     com.google.protobuf.ByteString
         getBlkHashBytes();
+
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+     */
+    boolean hasTimestamp();
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+     */
+    com.google.protobuf.Timestamp getTimestamp();
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+     */
+    com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
   }
   /**
    * Protobuf type {@code iotexapi.ActionInfo}
@@ -6010,6 +6023,19 @@ public final class Api {
               java.lang.String s = input.readStringRequireUtf8();
 
               blkHash_ = s;
+              break;
+            }
+            case 34: {
+              com.google.protobuf.Timestamp.Builder subBuilder = null;
+              if (timestamp_ != null) {
+                subBuilder = timestamp_.toBuilder();
+              }
+              timestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(timestamp_);
+                timestamp_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -6133,6 +6159,27 @@ public final class Api {
       }
     }
 
+    public static final int TIMESTAMP_FIELD_NUMBER = 4;
+    private com.google.protobuf.Timestamp timestamp_;
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+     */
+    public boolean hasTimestamp() {
+      return timestamp_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+     */
+    public com.google.protobuf.Timestamp getTimestamp() {
+      return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+      return getTimestamp();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -6156,6 +6203,9 @@ public final class Api {
       if (!getBlkHashBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, blkHash_);
       }
+      if (timestamp_ != null) {
+        output.writeMessage(4, getTimestamp());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -6174,6 +6224,10 @@ public final class Api {
       }
       if (!getBlkHashBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, blkHash_);
+      }
+      if (timestamp_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, getTimestamp());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -6199,6 +6253,11 @@ public final class Api {
           .equals(other.getActHash())) return false;
       if (!getBlkHash()
           .equals(other.getBlkHash())) return false;
+      if (hasTimestamp() != other.hasTimestamp()) return false;
+      if (hasTimestamp()) {
+        if (!getTimestamp()
+            .equals(other.getTimestamp())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -6218,6 +6277,10 @@ public final class Api {
       hash = (53 * hash) + getActHash().hashCode();
       hash = (37 * hash) + BLKHASH_FIELD_NUMBER;
       hash = (53 * hash) + getBlkHash().hashCode();
+      if (hasTimestamp()) {
+        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+        hash = (53 * hash) + getTimestamp().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -6361,6 +6424,12 @@ public final class Api {
 
         blkHash_ = "";
 
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
         return this;
       }
 
@@ -6394,6 +6463,11 @@ public final class Api {
         }
         result.actHash_ = actHash_;
         result.blkHash_ = blkHash_;
+        if (timestampBuilder_ == null) {
+          result.timestamp_ = timestamp_;
+        } else {
+          result.timestamp_ = timestampBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -6452,6 +6526,9 @@ public final class Api {
         if (!other.getBlkHash().isEmpty()) {
           blkHash_ = other.blkHash_;
           onChanged();
+        }
+        if (other.hasTimestamp()) {
+          mergeTimestamp(other.getTimestamp());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -6736,6 +6813,123 @@ public final class Api {
         onChanged();
         return this;
       }
+
+      private com.google.protobuf.Timestamp timestamp_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      public boolean hasTimestamp() {
+        return timestampBuilder_ != null || timestamp_ != null;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      public com.google.protobuf.Timestamp getTimestamp() {
+        if (timestampBuilder_ == null) {
+          return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        } else {
+          return timestampBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      public Builder setTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          timestamp_ = value;
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      public Builder setTimestamp(
+          com.google.protobuf.Timestamp.Builder builderForValue) {
+        if (timestampBuilder_ == null) {
+          timestamp_ = builderForValue.build();
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (timestamp_ != null) {
+            timestamp_ =
+              com.google.protobuf.Timestamp.newBuilder(timestamp_).mergeFrom(value).buildPartial();
+          } else {
+            timestamp_ = value;
+          }
+          onChanged();
+        } else {
+          timestampBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      public Builder clearTimestamp() {
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+          onChanged();
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
+        
+        onChanged();
+        return getTimestampFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+        if (timestampBuilder_ != null) {
+          return timestampBuilder_.getMessageOrBuilder();
+        } else {
+          return timestamp_ == null ?
+              com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+          getTimestampFieldBuilder() {
+        if (timestampBuilder_ == null) {
+          timestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                  getTimestamp(),
+                  getParentForChildren(),
+                  isClean());
+          timestamp_ = null;
+        }
+        return timestampBuilder_;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -6784,6 +6978,749 @@ public final class Api {
 
     @java.lang.Override
     public org.iotexproject.antenna.grpc.iotexapi.Api.ActionInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ReceiptInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:iotexapi.ReceiptInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.iotextypes.Receipt receipt = 1;</code>
+     */
+    boolean hasReceipt();
+    /**
+     * <code>.iotextypes.Receipt receipt = 1;</code>
+     */
+    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt();
+    /**
+     * <code>.iotextypes.Receipt receipt = 1;</code>
+     */
+    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder();
+
+    /**
+     * <code>string blkHash = 2;</code>
+     */
+    java.lang.String getBlkHash();
+    /**
+     * <code>string blkHash = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getBlkHashBytes();
+  }
+  /**
+   * Protobuf type {@code iotexapi.ReceiptInfo}
+   */
+  public  static final class ReceiptInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:iotexapi.ReceiptInfo)
+      ReceiptInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ReceiptInfo.newBuilder() to construct.
+    private ReceiptInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ReceiptInfo() {
+      blkHash_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ReceiptInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder subBuilder = null;
+              if (receipt_ != null) {
+                subBuilder = receipt_.toBuilder();
+              }
+              receipt_ = input.readMessage(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(receipt_);
+                receipt_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              blkHash_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.iotexproject.antenna.grpc.iotexapi.Api.internal_static_iotexapi_ReceiptInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.iotexproject.antenna.grpc.iotexapi.Api.internal_static_iotexapi_ReceiptInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.class, org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.Builder.class);
+    }
+
+    public static final int RECEIPT_FIELD_NUMBER = 1;
+    private org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt receipt_;
+    /**
+     * <code>.iotextypes.Receipt receipt = 1;</code>
+     */
+    public boolean hasReceipt() {
+      return receipt_ != null;
+    }
+    /**
+     * <code>.iotextypes.Receipt receipt = 1;</code>
+     */
+    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt() {
+      return receipt_ == null ? org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+    }
+    /**
+     * <code>.iotextypes.Receipt receipt = 1;</code>
+     */
+    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder() {
+      return getReceipt();
+    }
+
+    public static final int BLKHASH_FIELD_NUMBER = 2;
+    private volatile java.lang.Object blkHash_;
+    /**
+     * <code>string blkHash = 2;</code>
+     */
+    public java.lang.String getBlkHash() {
+      java.lang.Object ref = blkHash_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        blkHash_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string blkHash = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBlkHashBytes() {
+      java.lang.Object ref = blkHash_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        blkHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (receipt_ != null) {
+        output.writeMessage(1, getReceipt());
+      }
+      if (!getBlkHashBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, blkHash_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (receipt_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, getReceipt());
+      }
+      if (!getBlkHashBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, blkHash_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo)) {
+        return super.equals(obj);
+      }
+      org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo other = (org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo) obj;
+
+      if (hasReceipt() != other.hasReceipt()) return false;
+      if (hasReceipt()) {
+        if (!getReceipt()
+            .equals(other.getReceipt())) return false;
+      }
+      if (!getBlkHash()
+          .equals(other.getBlkHash())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (hasReceipt()) {
+        hash = (37 * hash) + RECEIPT_FIELD_NUMBER;
+        hash = (53 * hash) + getReceipt().hashCode();
+      }
+      hash = (37 * hash) + BLKHASH_FIELD_NUMBER;
+      hash = (53 * hash) + getBlkHash().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code iotexapi.ReceiptInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:iotexapi.ReceiptInfo)
+        org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.iotexproject.antenna.grpc.iotexapi.Api.internal_static_iotexapi_ReceiptInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.iotexproject.antenna.grpc.iotexapi.Api.internal_static_iotexapi_ReceiptInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.class, org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.Builder.class);
+      }
+
+      // Construct using org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (receiptBuilder_ == null) {
+          receipt_ = null;
+        } else {
+          receipt_ = null;
+          receiptBuilder_ = null;
+        }
+        blkHash_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.iotexproject.antenna.grpc.iotexapi.Api.internal_static_iotexapi_ReceiptInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo getDefaultInstanceForType() {
+        return org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo build() {
+        org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo buildPartial() {
+        org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo result = new org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo(this);
+        if (receiptBuilder_ == null) {
+          result.receipt_ = receipt_;
+        } else {
+          result.receipt_ = receiptBuilder_.build();
+        }
+        result.blkHash_ = blkHash_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo) {
+          return mergeFrom((org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo other) {
+        if (other == org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.getDefaultInstance()) return this;
+        if (other.hasReceipt()) {
+          mergeReceipt(other.getReceipt());
+        }
+        if (!other.getBlkHash().isEmpty()) {
+          blkHash_ = other.blkHash_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt receipt_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder> receiptBuilder_;
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      public boolean hasReceipt() {
+        return receiptBuilder_ != null || receipt_ != null;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt() {
+        if (receiptBuilder_ == null) {
+          return receipt_ == null ? org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+        } else {
+          return receiptBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      public Builder setReceipt(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt value) {
+        if (receiptBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          receipt_ = value;
+          onChanged();
+        } else {
+          receiptBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      public Builder setReceipt(
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder builderForValue) {
+        if (receiptBuilder_ == null) {
+          receipt_ = builderForValue.build();
+          onChanged();
+        } else {
+          receiptBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      public Builder mergeReceipt(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt value) {
+        if (receiptBuilder_ == null) {
+          if (receipt_ != null) {
+            receipt_ =
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.newBuilder(receipt_).mergeFrom(value).buildPartial();
+          } else {
+            receipt_ = value;
+          }
+          onChanged();
+        } else {
+          receiptBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      public Builder clearReceipt() {
+        if (receiptBuilder_ == null) {
+          receipt_ = null;
+          onChanged();
+        } else {
+          receipt_ = null;
+          receiptBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder getReceiptBuilder() {
+        
+        onChanged();
+        return getReceiptFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder() {
+        if (receiptBuilder_ != null) {
+          return receiptBuilder_.getMessageOrBuilder();
+        } else {
+          return receipt_ == null ?
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+        }
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 1;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder> 
+          getReceiptFieldBuilder() {
+        if (receiptBuilder_ == null) {
+          receiptBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder>(
+                  getReceipt(),
+                  getParentForChildren(),
+                  isClean());
+          receipt_ = null;
+        }
+        return receiptBuilder_;
+      }
+
+      private java.lang.Object blkHash_ = "";
+      /**
+       * <code>string blkHash = 2;</code>
+       */
+      public java.lang.String getBlkHash() {
+        java.lang.Object ref = blkHash_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          blkHash_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string blkHash = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBlkHashBytes() {
+        java.lang.Object ref = blkHash_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          blkHash_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string blkHash = 2;</code>
+       */
+      public Builder setBlkHash(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        blkHash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string blkHash = 2;</code>
+       */
+      public Builder clearBlkHash() {
+        
+        blkHash_ = getDefaultInstance().getBlkHash();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string blkHash = 2;</code>
+       */
+      public Builder setBlkHashBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        blkHash_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:iotexapi.ReceiptInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:iotexapi.ReceiptInfo)
+    private static final org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo();
+    }
+
+    public static org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ReceiptInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ReceiptInfo>() {
+      @java.lang.Override
+      public ReceiptInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ReceiptInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ReceiptInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ReceiptInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -13807,6 +14744,16 @@ public final class Api {
   public interface SendActionResponseOrBuilder extends
       // @@protoc_insertion_point(interface_extends:iotexapi.SendActionResponse)
       com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string actionHash = 1;</code>
+     */
+    java.lang.String getActionHash();
+    /**
+     * <code>string actionHash = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getActionHashBytes();
   }
   /**
    * Protobuf type {@code iotexapi.SendActionResponse}
@@ -13821,6 +14768,7 @@ public final class Api {
       super(builder);
     }
     private SendActionResponse() {
+      actionHash_ = "";
     }
 
     @java.lang.Override
@@ -13836,6 +14784,7 @@ public final class Api {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
+      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -13846,6 +14795,12 @@ public final class Api {
             case 0:
               done = true;
               break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              actionHash_ = s;
+              break;
+            }
             default: {
               if (!parseUnknownField(
                   input, unknownFields, extensionRegistry, tag)) {
@@ -13878,6 +14833,40 @@ public final class Api {
               org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse.class, org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse.Builder.class);
     }
 
+    public static final int ACTIONHASH_FIELD_NUMBER = 1;
+    private volatile java.lang.Object actionHash_;
+    /**
+     * <code>string actionHash = 1;</code>
+     */
+    public java.lang.String getActionHash() {
+      java.lang.Object ref = actionHash_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        actionHash_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string actionHash = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getActionHashBytes() {
+      java.lang.Object ref = actionHash_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        actionHash_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -13892,6 +14881,9 @@ public final class Api {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
+      if (!getActionHashBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, actionHash_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -13901,6 +14893,9 @@ public final class Api {
       if (size != -1) return size;
 
       size = 0;
+      if (!getActionHashBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, actionHash_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -13916,6 +14911,8 @@ public final class Api {
       }
       org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse other = (org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse) obj;
 
+      if (!getActionHash()
+          .equals(other.getActionHash())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -13927,6 +14924,8 @@ public final class Api {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ACTIONHASH_FIELD_NUMBER;
+      hash = (53 * hash) + getActionHash().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -14060,6 +15059,8 @@ public final class Api {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        actionHash_ = "";
+
         return this;
       }
 
@@ -14086,6 +15087,7 @@ public final class Api {
       @java.lang.Override
       public org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse buildPartial() {
         org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse result = new org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse(this);
+        result.actionHash_ = actionHash_;
         onBuilt();
         return result;
       }
@@ -14134,6 +15136,10 @@ public final class Api {
 
       public Builder mergeFrom(org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse other) {
         if (other == org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse.getDefaultInstance()) return this;
+        if (!other.getActionHash().isEmpty()) {
+          actionHash_ = other.actionHash_;
+          onChanged();
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -14160,6 +15166,75 @@ public final class Api {
             mergeFrom(parsedMessage);
           }
         }
+        return this;
+      }
+
+      private java.lang.Object actionHash_ = "";
+      /**
+       * <code>string actionHash = 1;</code>
+       */
+      public java.lang.String getActionHash() {
+        java.lang.Object ref = actionHash_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          actionHash_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string actionHash = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getActionHashBytes() {
+        java.lang.Object ref = actionHash_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          actionHash_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string actionHash = 1;</code>
+       */
+      public Builder setActionHash(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        actionHash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string actionHash = 1;</code>
+       */
+      public Builder clearActionHash() {
+        
+        actionHash_ = getDefaultInstance().getActionHash();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string actionHash = 1;</code>
+       */
+      public Builder setActionHashBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        actionHash_ = value;
+        onChanged();
         return this;
       }
       @java.lang.Override
@@ -14769,17 +15844,17 @@ public final class Api {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>.iotextypes.Receipt receipt = 1;</code>
+     * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
      */
-    boolean hasReceipt();
+    boolean hasReceiptInfo();
     /**
-     * <code>.iotextypes.Receipt receipt = 1;</code>
+     * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
      */
-    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt();
+    org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo getReceiptInfo();
     /**
-     * <code>.iotextypes.Receipt receipt = 1;</code>
+     * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
      */
-    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder();
+    org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfoOrBuilder getReceiptInfoOrBuilder();
   }
   /**
    * Protobuf type {@code iotexapi.GetReceiptByActionResponse}
@@ -14821,14 +15896,14 @@ public final class Api {
               done = true;
               break;
             case 10: {
-              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder subBuilder = null;
-              if (receipt_ != null) {
-                subBuilder = receipt_.toBuilder();
+              org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.Builder subBuilder = null;
+              if (receiptInfo_ != null) {
+                subBuilder = receiptInfo_.toBuilder();
               }
-              receipt_ = input.readMessage(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.parser(), extensionRegistry);
+              receiptInfo_ = input.readMessage(org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(receipt_);
-                receipt_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(receiptInfo_);
+                receiptInfo_ = subBuilder.buildPartial();
               }
 
               break;
@@ -14865,25 +15940,25 @@ public final class Api {
               org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse.class, org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse.Builder.class);
     }
 
-    public static final int RECEIPT_FIELD_NUMBER = 1;
-    private org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt receipt_;
+    public static final int RECEIPTINFO_FIELD_NUMBER = 1;
+    private org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo receiptInfo_;
     /**
-     * <code>.iotextypes.Receipt receipt = 1;</code>
+     * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
      */
-    public boolean hasReceipt() {
-      return receipt_ != null;
+    public boolean hasReceiptInfo() {
+      return receiptInfo_ != null;
     }
     /**
-     * <code>.iotextypes.Receipt receipt = 1;</code>
+     * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
      */
-    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt() {
-      return receipt_ == null ? org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+    public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo getReceiptInfo() {
+      return receiptInfo_ == null ? org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.getDefaultInstance() : receiptInfo_;
     }
     /**
-     * <code>.iotextypes.Receipt receipt = 1;</code>
+     * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
      */
-    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder() {
-      return getReceipt();
+    public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfoOrBuilder getReceiptInfoOrBuilder() {
+      return getReceiptInfo();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -14900,8 +15975,8 @@ public final class Api {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (receipt_ != null) {
-        output.writeMessage(1, getReceipt());
+      if (receiptInfo_ != null) {
+        output.writeMessage(1, getReceiptInfo());
       }
       unknownFields.writeTo(output);
     }
@@ -14912,9 +15987,9 @@ public final class Api {
       if (size != -1) return size;
 
       size = 0;
-      if (receipt_ != null) {
+      if (receiptInfo_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(1, getReceipt());
+          .computeMessageSize(1, getReceiptInfo());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -14931,10 +16006,10 @@ public final class Api {
       }
       org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse other = (org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse) obj;
 
-      if (hasReceipt() != other.hasReceipt()) return false;
-      if (hasReceipt()) {
-        if (!getReceipt()
-            .equals(other.getReceipt())) return false;
+      if (hasReceiptInfo() != other.hasReceiptInfo()) return false;
+      if (hasReceiptInfo()) {
+        if (!getReceiptInfo()
+            .equals(other.getReceiptInfo())) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -14947,9 +16022,9 @@ public final class Api {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
-      if (hasReceipt()) {
-        hash = (37 * hash) + RECEIPT_FIELD_NUMBER;
-        hash = (53 * hash) + getReceipt().hashCode();
+      if (hasReceiptInfo()) {
+        hash = (37 * hash) + RECEIPTINFO_FIELD_NUMBER;
+        hash = (53 * hash) + getReceiptInfo().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -15084,11 +16159,11 @@ public final class Api {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (receiptBuilder_ == null) {
-          receipt_ = null;
+        if (receiptInfoBuilder_ == null) {
+          receiptInfo_ = null;
         } else {
-          receipt_ = null;
-          receiptBuilder_ = null;
+          receiptInfo_ = null;
+          receiptInfoBuilder_ = null;
         }
         return this;
       }
@@ -15116,10 +16191,10 @@ public final class Api {
       @java.lang.Override
       public org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse buildPartial() {
         org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse result = new org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse(this);
-        if (receiptBuilder_ == null) {
-          result.receipt_ = receipt_;
+        if (receiptInfoBuilder_ == null) {
+          result.receiptInfo_ = receiptInfo_;
         } else {
-          result.receipt_ = receiptBuilder_.build();
+          result.receiptInfo_ = receiptInfoBuilder_.build();
         }
         onBuilt();
         return result;
@@ -15169,8 +16244,8 @@ public final class Api {
 
       public Builder mergeFrom(org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse other) {
         if (other == org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse.getDefaultInstance()) return this;
-        if (other.hasReceipt()) {
-          mergeReceipt(other.getReceipt());
+        if (other.hasReceiptInfo()) {
+          mergeReceiptInfo(other.getReceiptInfo());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -15201,121 +16276,121 @@ public final class Api {
         return this;
       }
 
-      private org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt receipt_;
+      private org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo receiptInfo_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder> receiptBuilder_;
+          org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo, org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.Builder, org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfoOrBuilder> receiptInfoBuilder_;
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
-      public boolean hasReceipt() {
-        return receiptBuilder_ != null || receipt_ != null;
+      public boolean hasReceiptInfo() {
+        return receiptInfoBuilder_ != null || receiptInfo_ != null;
       }
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
-      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt() {
-        if (receiptBuilder_ == null) {
-          return receipt_ == null ? org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+      public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo getReceiptInfo() {
+        if (receiptInfoBuilder_ == null) {
+          return receiptInfo_ == null ? org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.getDefaultInstance() : receiptInfo_;
         } else {
-          return receiptBuilder_.getMessage();
+          return receiptInfoBuilder_.getMessage();
         }
       }
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
-      public Builder setReceipt(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt value) {
-        if (receiptBuilder_ == null) {
+      public Builder setReceiptInfo(org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo value) {
+        if (receiptInfoBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          receipt_ = value;
+          receiptInfo_ = value;
           onChanged();
         } else {
-          receiptBuilder_.setMessage(value);
+          receiptInfoBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
-      public Builder setReceipt(
-          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder builderForValue) {
-        if (receiptBuilder_ == null) {
-          receipt_ = builderForValue.build();
+      public Builder setReceiptInfo(
+          org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.Builder builderForValue) {
+        if (receiptInfoBuilder_ == null) {
+          receiptInfo_ = builderForValue.build();
           onChanged();
         } else {
-          receiptBuilder_.setMessage(builderForValue.build());
+          receiptInfoBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
-      public Builder mergeReceipt(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt value) {
-        if (receiptBuilder_ == null) {
-          if (receipt_ != null) {
-            receipt_ =
-              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.newBuilder(receipt_).mergeFrom(value).buildPartial();
+      public Builder mergeReceiptInfo(org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo value) {
+        if (receiptInfoBuilder_ == null) {
+          if (receiptInfo_ != null) {
+            receiptInfo_ =
+              org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.newBuilder(receiptInfo_).mergeFrom(value).buildPartial();
           } else {
-            receipt_ = value;
+            receiptInfo_ = value;
           }
           onChanged();
         } else {
-          receiptBuilder_.mergeFrom(value);
+          receiptInfoBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
-      public Builder clearReceipt() {
-        if (receiptBuilder_ == null) {
-          receipt_ = null;
+      public Builder clearReceiptInfo() {
+        if (receiptInfoBuilder_ == null) {
+          receiptInfo_ = null;
           onChanged();
         } else {
-          receipt_ = null;
-          receiptBuilder_ = null;
+          receiptInfo_ = null;
+          receiptInfoBuilder_ = null;
         }
 
         return this;
       }
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
-      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder getReceiptBuilder() {
+      public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.Builder getReceiptInfoBuilder() {
         
         onChanged();
-        return getReceiptFieldBuilder().getBuilder();
+        return getReceiptInfoFieldBuilder().getBuilder();
       }
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
-      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder() {
-        if (receiptBuilder_ != null) {
-          return receiptBuilder_.getMessageOrBuilder();
+      public org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfoOrBuilder getReceiptInfoOrBuilder() {
+        if (receiptInfoBuilder_ != null) {
+          return receiptInfoBuilder_.getMessageOrBuilder();
         } else {
-          return receipt_ == null ?
-              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+          return receiptInfo_ == null ?
+              org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.getDefaultInstance() : receiptInfo_;
         }
       }
       /**
-       * <code>.iotextypes.Receipt receipt = 1;</code>
+       * <code>.iotexapi.ReceiptInfo receiptInfo = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder> 
-          getReceiptFieldBuilder() {
-        if (receiptBuilder_ == null) {
-          receiptBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder>(
-                  getReceipt(),
+          org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo, org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.Builder, org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfoOrBuilder> 
+          getReceiptInfoFieldBuilder() {
+        if (receiptInfoBuilder_ == null) {
+          receiptInfoBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo, org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfo.Builder, org.iotexproject.antenna.grpc.iotexapi.Api.ReceiptInfoOrBuilder>(
+                  getReceiptInfo(),
                   getParentForChildren(),
                   isClean());
-          receipt_ = null;
+          receiptInfo_ = null;
         }
-        return receiptBuilder_;
+        return receiptInfoBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -15989,6 +17064,19 @@ public final class Api {
      */
     com.google.protobuf.ByteString
         getDataBytes();
+
+    /**
+     * <code>.iotextypes.Receipt receipt = 2;</code>
+     */
+    boolean hasReceipt();
+    /**
+     * <code>.iotextypes.Receipt receipt = 2;</code>
+     */
+    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt();
+    /**
+     * <code>.iotextypes.Receipt receipt = 2;</code>
+     */
+    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder();
   }
   /**
    * Protobuf type {@code iotexapi.ReadContractResponse}
@@ -16034,6 +17122,19 @@ public final class Api {
               java.lang.String s = input.readStringRequireUtf8();
 
               data_ = s;
+              break;
+            }
+            case 18: {
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder subBuilder = null;
+              if (receipt_ != null) {
+                subBuilder = receipt_.toBuilder();
+              }
+              receipt_ = input.readMessage(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(receipt_);
+                receipt_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             default: {
@@ -16102,6 +17203,27 @@ public final class Api {
       }
     }
 
+    public static final int RECEIPT_FIELD_NUMBER = 2;
+    private org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt receipt_;
+    /**
+     * <code>.iotextypes.Receipt receipt = 2;</code>
+     */
+    public boolean hasReceipt() {
+      return receipt_ != null;
+    }
+    /**
+     * <code>.iotextypes.Receipt receipt = 2;</code>
+     */
+    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt() {
+      return receipt_ == null ? org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+    }
+    /**
+     * <code>.iotextypes.Receipt receipt = 2;</code>
+     */
+    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder() {
+      return getReceipt();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -16119,6 +17241,9 @@ public final class Api {
       if (!getDataBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, data_);
       }
+      if (receipt_ != null) {
+        output.writeMessage(2, getReceipt());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -16130,6 +17255,10 @@ public final class Api {
       size = 0;
       if (!getDataBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, data_);
+      }
+      if (receipt_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getReceipt());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -16148,6 +17277,11 @@ public final class Api {
 
       if (!getData()
           .equals(other.getData())) return false;
+      if (hasReceipt() != other.hasReceipt()) return false;
+      if (hasReceipt()) {
+        if (!getReceipt()
+            .equals(other.getReceipt())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -16161,6 +17295,10 @@ public final class Api {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + DATA_FIELD_NUMBER;
       hash = (53 * hash) + getData().hashCode();
+      if (hasReceipt()) {
+        hash = (37 * hash) + RECEIPT_FIELD_NUMBER;
+        hash = (53 * hash) + getReceipt().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -16296,6 +17434,12 @@ public final class Api {
         super.clear();
         data_ = "";
 
+        if (receiptBuilder_ == null) {
+          receipt_ = null;
+        } else {
+          receipt_ = null;
+          receiptBuilder_ = null;
+        }
         return this;
       }
 
@@ -16323,6 +17467,11 @@ public final class Api {
       public org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse buildPartial() {
         org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse result = new org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse(this);
         result.data_ = data_;
+        if (receiptBuilder_ == null) {
+          result.receipt_ = receipt_;
+        } else {
+          result.receipt_ = receiptBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -16374,6 +17523,9 @@ public final class Api {
         if (!other.getData().isEmpty()) {
           data_ = other.data_;
           onChanged();
+        }
+        if (other.hasReceipt()) {
+          mergeReceipt(other.getReceipt());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -16471,6 +17623,123 @@ public final class Api {
         data_ = value;
         onChanged();
         return this;
+      }
+
+      private org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt receipt_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder> receiptBuilder_;
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      public boolean hasReceipt() {
+        return receiptBuilder_ != null || receipt_ != null;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt getReceipt() {
+        if (receiptBuilder_ == null) {
+          return receipt_ == null ? org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+        } else {
+          return receiptBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      public Builder setReceipt(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt value) {
+        if (receiptBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          receipt_ = value;
+          onChanged();
+        } else {
+          receiptBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      public Builder setReceipt(
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder builderForValue) {
+        if (receiptBuilder_ == null) {
+          receipt_ = builderForValue.build();
+          onChanged();
+        } else {
+          receiptBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      public Builder mergeReceipt(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt value) {
+        if (receiptBuilder_ == null) {
+          if (receipt_ != null) {
+            receipt_ =
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.newBuilder(receipt_).mergeFrom(value).buildPartial();
+          } else {
+            receipt_ = value;
+          }
+          onChanged();
+        } else {
+          receiptBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      public Builder clearReceipt() {
+        if (receiptBuilder_ == null) {
+          receipt_ = null;
+          onChanged();
+        } else {
+          receipt_ = null;
+          receiptBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder getReceiptBuilder() {
+        
+        onChanged();
+        return getReceiptFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder getReceiptOrBuilder() {
+        if (receiptBuilder_ != null) {
+          return receiptBuilder_.getMessageOrBuilder();
+        } else {
+          return receipt_ == null ?
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.getDefaultInstance() : receipt_;
+        }
+      }
+      /**
+       * <code>.iotextypes.Receipt receipt = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder> 
+          getReceiptFieldBuilder() {
+        if (receiptBuilder_ == null) {
+          receiptBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Receipt.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ReceiptOrBuilder>(
+                  getReceipt(),
+                  getParentForChildren(),
+                  isClean());
+          receipt_ = null;
+        }
+        return receiptBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -21236,6 +22505,11 @@ public final class Api {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_iotexapi_ActionInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_iotexapi_ReceiptInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_iotexapi_ReceiptInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_iotexapi_BlockProducerInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -21365,93 +22639,98 @@ public final class Api {
   static {
     java.lang.String[] descriptorData = {
       "\n\tapi.proto\022\010iotexapi\032\014action.proto\032\020blo" +
-      "ckchain.proto\032\nnode.proto\"$\n\021GetAccountR" +
-      "equest\022\017\n\007address\030\001 \001(\t\"B\n\022GetAccountRes" +
-      "ponse\022,\n\013accountMeta\030\001 \001(\0132\027.iotextypes." +
-      "AccountMeta\"\303\002\n\021GetActionsRequest\0225\n\007byI" +
-      "ndex\030\001 \001(\0132\".iotexapi.GetActionsByIndexR" +
-      "equestH\000\0222\n\006byHash\030\002 \001(\0132 .iotexapi.GetA" +
-      "ctionByHashRequestH\000\0226\n\006byAddr\030\003 \001(\0132$.i" +
-      "otexapi.GetActionsByAddressRequestH\000\022L\n\021" +
-      "unconfirmedByAddr\030\004 \001(\0132/.iotexapi.GetUn" +
-      "confirmedActionsByAddressRequestH\000\0223\n\005by" +
-      "Blk\030\005 \001(\0132\".iotexapi.GetActionsByBlockRe" +
-      "questH\000B\010\n\006lookup\"8\n\030GetActionsByIndexRe" +
-      "quest\022\r\n\005start\030\001 \001(\004\022\r\n\005count\030\002 \001(\004\"B\n\026G" +
-      "etActionByHashRequest\022\022\n\nactionHash\030\001 \001(" +
-      "\t\022\024\n\014checkPending\030\002 \001(\010\"K\n\032GetActionsByA" +
-      "ddressRequest\022\017\n\007address\030\001 \001(\t\022\r\n\005start\030" +
-      "\002 \001(\004\022\r\n\005count\030\003 \001(\004\"V\n%GetUnconfirmedAc" +
-      "tionsByAddressRequest\022\017\n\007address\030\001 \001(\t\022\r" +
-      "\n\005start\030\002 \001(\004\022\r\n\005count\030\003 \001(\004\"I\n\030GetActio" +
-      "nsByBlockRequest\022\017\n\007blkHash\030\001 \001(\t\022\r\n\005sta" +
-      "rt\030\002 \001(\004\022\r\n\005count\030\003 \001(\004\"R\n\nActionInfo\022\"\n" +
-      "\006action\030\001 \001(\0132\022.iotextypes.Action\022\017\n\007act" +
-      "Hash\030\002 \001(\t\022\017\n\007blkHash\030\003 \001(\t\"W\n\021BlockProd" +
-      "ucerInfo\022\017\n\007address\030\001 \001(\t\022\r\n\005votes\030\002 \001(\t" +
-      "\022\016\n\006active\030\003 \001(\010\022\022\n\nproduction\030\004 \001(\004\">\n\022" +
-      "GetActionsResponse\022(\n\nactionInfo\030\001 \003(\0132\024" +
-      ".iotexapi.ActionInfo\"\221\001\n\024GetBlockMetasRe" +
-      "quest\0228\n\007byIndex\030\001 \001(\0132%.iotexapi.GetBlo" +
-      "ckMetasByIndexRequestH\000\0225\n\006byHash\030\002 \001(\0132" +
-      "#.iotexapi.GetBlockMetaByHashRequestH\000B\010" +
-      "\n\006lookup\";\n\033GetBlockMetasByIndexRequest\022" +
-      "\r\n\005start\030\001 \001(\004\022\r\n\005count\030\002 \001(\004\",\n\031GetBloc" +
-      "kMetaByHashRequest\022\017\n\007blkHash\030\001 \001(\t\"@\n\025G" +
-      "etBlockMetasResponse\022\'\n\010blkMetas\030\001 \003(\0132\025" +
-      ".iotextypes.BlockMeta\"\025\n\023GetChainMetaReq" +
-      "uest\"@\n\024GetChainMetaResponse\022(\n\tchainMet" +
-      "a\030\001 \001(\0132\025.iotextypes.ChainMeta\"\026\n\024GetSer" +
-      "verMetaRequest\"C\n\025GetServerMetaResponse\022" +
-      "*\n\nserverMeta\030\001 \001(\0132\026.iotextypes.ServerM" +
-      "eta\"7\n\021SendActionRequest\022\"\n\006action\030\001 \001(\013" +
-      "2\022.iotextypes.Action\"\024\n\022SendActionRespon" +
-      "se\"/\n\031GetReceiptByActionRequest\022\022\n\nactio" +
-      "nHash\030\001 \001(\t\"B\n\032GetReceiptByActionRespons" +
-      "e\022$\n\007receipt\030\001 \001(\0132\023.iotextypes.Receipt\"" +
-      "9\n\023ReadContractRequest\022\"\n\006action\030\001 \001(\0132\022" +
-      ".iotextypes.Action\"$\n\024ReadContractRespon" +
-      "se\022\014\n\004data\030\001 \001(\t\"\030\n\026SuggestGasPriceReque" +
-      "st\"+\n\027SuggestGasPriceResponse\022\020\n\010gasPric" +
-      "e\030\001 \001(\004\"A\n\033EstimateGasForActionRequest\022\"" +
-      "\n\006action\030\001 \001(\0132\022.iotextypes.Action\"+\n\034Es" +
-      "timateGasForActionResponse\022\013\n\003gas\030\001 \001(\004\"" +
-      "M\n\020ReadStateRequest\022\022\n\nprotocolID\030\001 \001(\014\022" +
-      "\022\n\nmethodName\030\002 \001(\014\022\021\n\targuments\030\003 \003(\014\"!" +
-      "\n\021ReadStateResponse\022\014\n\004data\030\001 \001(\014\"*\n\023Get" +
-      "EpochMetaRequest\022\023\n\013epochNumber\030\001 \001(\004\"\216\001" +
-      "\n\024GetEpochMetaResponse\022(\n\tepochData\030\001 \001(" +
-      "\0132\025.iotextypes.EpochData\022\023\n\013totalBlocks\030" +
-      "\002 \001(\004\0227\n\022blockProducersInfo\030\003 \003(\0132\033.iote" +
-      "xapi.BlockProducerInfo2\366\007\n\nAPIService\022I\n" +
-      "\nGetAccount\022\033.iotexapi.GetAccountRequest" +
-      "\032\034.iotexapi.GetAccountResponse\"\000\022I\n\nGetA" +
-      "ctions\022\033.iotexapi.GetActionsRequest\032\034.io" +
-      "texapi.GetActionsResponse\"\000\022R\n\rGetBlockM" +
-      "etas\022\036.iotexapi.GetBlockMetasRequest\032\037.i" +
-      "otexapi.GetBlockMetasResponse\"\000\022O\n\014GetCh" +
-      "ainMeta\022\035.iotexapi.GetChainMetaRequest\032\036" +
-      ".iotexapi.GetChainMetaResponse\"\000\022R\n\rGetS" +
-      "erverMeta\022\036.iotexapi.GetServerMetaReques" +
-      "t\032\037.iotexapi.GetServerMetaResponse\"\000\022I\n\n" +
-      "SendAction\022\033.iotexapi.SendActionRequest\032" +
-      "\034.iotexapi.SendActionResponse\"\000\022a\n\022GetRe" +
-      "ceiptByAction\022#.iotexapi.GetReceiptByAct" +
-      "ionRequest\032$.iotexapi.GetReceiptByAction" +
-      "Response\"\000\022O\n\014ReadContract\022\035.iotexapi.Re" +
-      "adContractRequest\032\036.iotexapi.ReadContrac" +
-      "tResponse\"\000\022X\n\017SuggestGasPrice\022 .iotexap" +
-      "i.SuggestGasPriceRequest\032!.iotexapi.Sugg" +
-      "estGasPriceResponse\"\000\022g\n\024EstimateGasForA" +
-      "ction\022%.iotexapi.EstimateGasForActionReq" +
-      "uest\032&.iotexapi.EstimateGasForActionResp" +
-      "onse\"\000\022F\n\tReadState\022\032.iotexapi.ReadState" +
-      "Request\032\033.iotexapi.ReadStateResponse\"\000\022O" +
-      "\n\014GetEpochMeta\022\035.iotexapi.GetEpochMetaRe" +
-      "quest\032\036.iotexapi.GetEpochMetaResponse\"\000B" +
-      "^\n&org.iotexproject.antenna.grpc.iotexap" +
-      "iZ4github.com/iotexproject/iotex-core/pr" +
-      "otogen/iotexapib\006proto3"
+      "ckchain.proto\032\nnode.proto\032\037google/protob" +
+      "uf/timestamp.proto\"$\n\021GetAccountRequest\022" +
+      "\017\n\007address\030\001 \001(\t\"B\n\022GetAccountResponse\022," +
+      "\n\013accountMeta\030\001 \001(\0132\027.iotextypes.Account" +
+      "Meta\"\303\002\n\021GetActionsRequest\0225\n\007byIndex\030\001 " +
+      "\001(\0132\".iotexapi.GetActionsByIndexRequestH" +
+      "\000\0222\n\006byHash\030\002 \001(\0132 .iotexapi.GetActionBy" +
+      "HashRequestH\000\0226\n\006byAddr\030\003 \001(\0132$.iotexapi" +
+      ".GetActionsByAddressRequestH\000\022L\n\021unconfi" +
+      "rmedByAddr\030\004 \001(\0132/.iotexapi.GetUnconfirm" +
+      "edActionsByAddressRequestH\000\0223\n\005byBlk\030\005 \001" +
+      "(\0132\".iotexapi.GetActionsByBlockRequestH\000" +
+      "B\010\n\006lookup\"8\n\030GetActionsByIndexRequest\022\r" +
+      "\n\005start\030\001 \001(\004\022\r\n\005count\030\002 \001(\004\"B\n\026GetActio" +
+      "nByHashRequest\022\022\n\nactionHash\030\001 \001(\t\022\024\n\014ch" +
+      "eckPending\030\002 \001(\010\"K\n\032GetActionsByAddressR" +
+      "equest\022\017\n\007address\030\001 \001(\t\022\r\n\005start\030\002 \001(\004\022\r" +
+      "\n\005count\030\003 \001(\004\"V\n%GetUnconfirmedActionsBy" +
+      "AddressRequest\022\017\n\007address\030\001 \001(\t\022\r\n\005start" +
+      "\030\002 \001(\004\022\r\n\005count\030\003 \001(\004\"I\n\030GetActionsByBlo" +
+      "ckRequest\022\017\n\007blkHash\030\001 \001(\t\022\r\n\005start\030\002 \001(" +
+      "\004\022\r\n\005count\030\003 \001(\004\"\201\001\n\nActionInfo\022\"\n\006actio" +
+      "n\030\001 \001(\0132\022.iotextypes.Action\022\017\n\007actHash\030\002" +
+      " \001(\t\022\017\n\007blkHash\030\003 \001(\t\022-\n\ttimestamp\030\004 \001(\013" +
+      "2\032.google.protobuf.Timestamp\"D\n\013ReceiptI" +
+      "nfo\022$\n\007receipt\030\001 \001(\0132\023.iotextypes.Receip" +
+      "t\022\017\n\007blkHash\030\002 \001(\t\"W\n\021BlockProducerInfo\022" +
+      "\017\n\007address\030\001 \001(\t\022\r\n\005votes\030\002 \001(\t\022\016\n\006activ" +
+      "e\030\003 \001(\010\022\022\n\nproduction\030\004 \001(\004\">\n\022GetAction" +
+      "sResponse\022(\n\nactionInfo\030\001 \003(\0132\024.iotexapi" +
+      ".ActionInfo\"\221\001\n\024GetBlockMetasRequest\0228\n\007" +
+      "byIndex\030\001 \001(\0132%.iotexapi.GetBlockMetasBy" +
+      "IndexRequestH\000\0225\n\006byHash\030\002 \001(\0132#.iotexap" +
+      "i.GetBlockMetaByHashRequestH\000B\010\n\006lookup\"" +
+      ";\n\033GetBlockMetasByIndexRequest\022\r\n\005start\030" +
+      "\001 \001(\004\022\r\n\005count\030\002 \001(\004\",\n\031GetBlockMetaByHa" +
+      "shRequest\022\017\n\007blkHash\030\001 \001(\t\"@\n\025GetBlockMe" +
+      "tasResponse\022\'\n\010blkMetas\030\001 \003(\0132\025.iotextyp" +
+      "es.BlockMeta\"\025\n\023GetChainMetaRequest\"@\n\024G" +
+      "etChainMetaResponse\022(\n\tchainMeta\030\001 \001(\0132\025" +
+      ".iotextypes.ChainMeta\"\026\n\024GetServerMetaRe" +
+      "quest\"C\n\025GetServerMetaResponse\022*\n\nserver" +
+      "Meta\030\001 \001(\0132\026.iotextypes.ServerMeta\"7\n\021Se" +
+      "ndActionRequest\022\"\n\006action\030\001 \001(\0132\022.iotext" +
+      "ypes.Action\"(\n\022SendActionResponse\022\022\n\nact" +
+      "ionHash\030\001 \001(\t\"/\n\031GetReceiptByActionReque" +
+      "st\022\022\n\nactionHash\030\001 \001(\t\"H\n\032GetReceiptByAc" +
+      "tionResponse\022*\n\013receiptInfo\030\001 \001(\0132\025.iote" +
+      "xapi.ReceiptInfo\"9\n\023ReadContractRequest\022" +
+      "\"\n\006action\030\001 \001(\0132\022.iotextypes.Action\"J\n\024R" +
+      "eadContractResponse\022\014\n\004data\030\001 \001(\t\022$\n\007rec" +
+      "eipt\030\002 \001(\0132\023.iotextypes.Receipt\"\030\n\026Sugge" +
+      "stGasPriceRequest\"+\n\027SuggestGasPriceResp" +
+      "onse\022\020\n\010gasPrice\030\001 \001(\004\"A\n\033EstimateGasFor" +
+      "ActionRequest\022\"\n\006action\030\001 \001(\0132\022.iotextyp" +
+      "es.Action\"+\n\034EstimateGasForActionRespons" +
+      "e\022\013\n\003gas\030\001 \001(\004\"M\n\020ReadStateRequest\022\022\n\npr" +
+      "otocolID\030\001 \001(\014\022\022\n\nmethodName\030\002 \001(\014\022\021\n\tar" +
+      "guments\030\003 \003(\014\"!\n\021ReadStateResponse\022\014\n\004da" +
+      "ta\030\001 \001(\014\"*\n\023GetEpochMetaRequest\022\023\n\013epoch" +
+      "Number\030\001 \001(\004\"\216\001\n\024GetEpochMetaResponse\022(\n" +
+      "\tepochData\030\001 \001(\0132\025.iotextypes.EpochData\022" +
+      "\023\n\013totalBlocks\030\002 \001(\004\0227\n\022blockProducersIn" +
+      "fo\030\003 \003(\0132\033.iotexapi.BlockProducerInfo2\366\007" +
+      "\n\nAPIService\022I\n\nGetAccount\022\033.iotexapi.Ge" +
+      "tAccountRequest\032\034.iotexapi.GetAccountRes" +
+      "ponse\"\000\022I\n\nGetActions\022\033.iotexapi.GetActi" +
+      "onsRequest\032\034.iotexapi.GetActionsResponse" +
+      "\"\000\022R\n\rGetBlockMetas\022\036.iotexapi.GetBlockM" +
+      "etasRequest\032\037.iotexapi.GetBlockMetasResp" +
+      "onse\"\000\022O\n\014GetChainMeta\022\035.iotexapi.GetCha" +
+      "inMetaRequest\032\036.iotexapi.GetChainMetaRes" +
+      "ponse\"\000\022R\n\rGetServerMeta\022\036.iotexapi.GetS" +
+      "erverMetaRequest\032\037.iotexapi.GetServerMet" +
+      "aResponse\"\000\022I\n\nSendAction\022\033.iotexapi.Sen" +
+      "dActionRequest\032\034.iotexapi.SendActionResp" +
+      "onse\"\000\022a\n\022GetReceiptByAction\022#.iotexapi." +
+      "GetReceiptByActionRequest\032$.iotexapi.Get" +
+      "ReceiptByActionResponse\"\000\022O\n\014ReadContrac" +
+      "t\022\035.iotexapi.ReadContractRequest\032\036.iotex" +
+      "api.ReadContractResponse\"\000\022X\n\017SuggestGas" +
+      "Price\022 .iotexapi.SuggestGasPriceRequest\032" +
+      "!.iotexapi.SuggestGasPriceResponse\"\000\022g\n\024" +
+      "EstimateGasForAction\022%.iotexapi.Estimate" +
+      "GasForActionRequest\032&.iotexapi.EstimateG" +
+      "asForActionResponse\"\000\022F\n\tReadState\022\032.iot" +
+      "exapi.ReadStateRequest\032\033.iotexapi.ReadSt" +
+      "ateResponse\"\000\022O\n\014GetEpochMeta\022\035.iotexapi" +
+      ".GetEpochMetaRequest\032\036.iotexapi.GetEpoch" +
+      "MetaResponse\"\000B^\n&org.iotexproject.anten" +
+      "na.grpc.iotexapiZ4github.com/iotexprojec" +
+      "t/iotex-core/protogen/iotexapib\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -21467,6 +22746,7 @@ public final class Api {
           org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.getDescriptor(),
           org.iotexproject.antenna.grpc.iotextypes.Blockchain.getDescriptor(),
           org.iotexproject.antenna.grpc.iotextypes.Node.getDescriptor(),
+          com.google.protobuf.TimestampProto.getDescriptor(),
         }, assigner);
     internal_static_iotexapi_GetAccountRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -21521,147 +22801,153 @@ public final class Api {
     internal_static_iotexapi_ActionInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_ActionInfo_descriptor,
-        new java.lang.String[] { "Action", "ActHash", "BlkHash", });
-    internal_static_iotexapi_BlockProducerInfo_descriptor =
+        new java.lang.String[] { "Action", "ActHash", "BlkHash", "Timestamp", });
+    internal_static_iotexapi_ReceiptInfo_descriptor =
       getDescriptor().getMessageTypes().get(9);
+    internal_static_iotexapi_ReceiptInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_iotexapi_ReceiptInfo_descriptor,
+        new java.lang.String[] { "Receipt", "BlkHash", });
+    internal_static_iotexapi_BlockProducerInfo_descriptor =
+      getDescriptor().getMessageTypes().get(10);
     internal_static_iotexapi_BlockProducerInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_BlockProducerInfo_descriptor,
         new java.lang.String[] { "Address", "Votes", "Active", "Production", });
     internal_static_iotexapi_GetActionsResponse_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_iotexapi_GetActionsResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetActionsResponse_descriptor,
         new java.lang.String[] { "ActionInfo", });
     internal_static_iotexapi_GetBlockMetasRequest_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_iotexapi_GetBlockMetasRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetBlockMetasRequest_descriptor,
         new java.lang.String[] { "ByIndex", "ByHash", "Lookup", });
     internal_static_iotexapi_GetBlockMetasByIndexRequest_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(13);
     internal_static_iotexapi_GetBlockMetasByIndexRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetBlockMetasByIndexRequest_descriptor,
         new java.lang.String[] { "Start", "Count", });
     internal_static_iotexapi_GetBlockMetaByHashRequest_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(14);
     internal_static_iotexapi_GetBlockMetaByHashRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetBlockMetaByHashRequest_descriptor,
         new java.lang.String[] { "BlkHash", });
     internal_static_iotexapi_GetBlockMetasResponse_descriptor =
-      getDescriptor().getMessageTypes().get(14);
+      getDescriptor().getMessageTypes().get(15);
     internal_static_iotexapi_GetBlockMetasResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetBlockMetasResponse_descriptor,
         new java.lang.String[] { "BlkMetas", });
     internal_static_iotexapi_GetChainMetaRequest_descriptor =
-      getDescriptor().getMessageTypes().get(15);
+      getDescriptor().getMessageTypes().get(16);
     internal_static_iotexapi_GetChainMetaRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetChainMetaRequest_descriptor,
         new java.lang.String[] { });
     internal_static_iotexapi_GetChainMetaResponse_descriptor =
-      getDescriptor().getMessageTypes().get(16);
+      getDescriptor().getMessageTypes().get(17);
     internal_static_iotexapi_GetChainMetaResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetChainMetaResponse_descriptor,
         new java.lang.String[] { "ChainMeta", });
     internal_static_iotexapi_GetServerMetaRequest_descriptor =
-      getDescriptor().getMessageTypes().get(17);
+      getDescriptor().getMessageTypes().get(18);
     internal_static_iotexapi_GetServerMetaRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetServerMetaRequest_descriptor,
         new java.lang.String[] { });
     internal_static_iotexapi_GetServerMetaResponse_descriptor =
-      getDescriptor().getMessageTypes().get(18);
+      getDescriptor().getMessageTypes().get(19);
     internal_static_iotexapi_GetServerMetaResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetServerMetaResponse_descriptor,
         new java.lang.String[] { "ServerMeta", });
     internal_static_iotexapi_SendActionRequest_descriptor =
-      getDescriptor().getMessageTypes().get(19);
+      getDescriptor().getMessageTypes().get(20);
     internal_static_iotexapi_SendActionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_SendActionRequest_descriptor,
         new java.lang.String[] { "Action", });
     internal_static_iotexapi_SendActionResponse_descriptor =
-      getDescriptor().getMessageTypes().get(20);
+      getDescriptor().getMessageTypes().get(21);
     internal_static_iotexapi_SendActionResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_SendActionResponse_descriptor,
-        new java.lang.String[] { });
+        new java.lang.String[] { "ActionHash", });
     internal_static_iotexapi_GetReceiptByActionRequest_descriptor =
-      getDescriptor().getMessageTypes().get(21);
+      getDescriptor().getMessageTypes().get(22);
     internal_static_iotexapi_GetReceiptByActionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetReceiptByActionRequest_descriptor,
         new java.lang.String[] { "ActionHash", });
     internal_static_iotexapi_GetReceiptByActionResponse_descriptor =
-      getDescriptor().getMessageTypes().get(22);
+      getDescriptor().getMessageTypes().get(23);
     internal_static_iotexapi_GetReceiptByActionResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetReceiptByActionResponse_descriptor,
-        new java.lang.String[] { "Receipt", });
+        new java.lang.String[] { "ReceiptInfo", });
     internal_static_iotexapi_ReadContractRequest_descriptor =
-      getDescriptor().getMessageTypes().get(23);
+      getDescriptor().getMessageTypes().get(24);
     internal_static_iotexapi_ReadContractRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_ReadContractRequest_descriptor,
         new java.lang.String[] { "Action", });
     internal_static_iotexapi_ReadContractResponse_descriptor =
-      getDescriptor().getMessageTypes().get(24);
+      getDescriptor().getMessageTypes().get(25);
     internal_static_iotexapi_ReadContractResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_ReadContractResponse_descriptor,
-        new java.lang.String[] { "Data", });
+        new java.lang.String[] { "Data", "Receipt", });
     internal_static_iotexapi_SuggestGasPriceRequest_descriptor =
-      getDescriptor().getMessageTypes().get(25);
+      getDescriptor().getMessageTypes().get(26);
     internal_static_iotexapi_SuggestGasPriceRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_SuggestGasPriceRequest_descriptor,
         new java.lang.String[] { });
     internal_static_iotexapi_SuggestGasPriceResponse_descriptor =
-      getDescriptor().getMessageTypes().get(26);
+      getDescriptor().getMessageTypes().get(27);
     internal_static_iotexapi_SuggestGasPriceResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_SuggestGasPriceResponse_descriptor,
         new java.lang.String[] { "GasPrice", });
     internal_static_iotexapi_EstimateGasForActionRequest_descriptor =
-      getDescriptor().getMessageTypes().get(27);
+      getDescriptor().getMessageTypes().get(28);
     internal_static_iotexapi_EstimateGasForActionRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_EstimateGasForActionRequest_descriptor,
         new java.lang.String[] { "Action", });
     internal_static_iotexapi_EstimateGasForActionResponse_descriptor =
-      getDescriptor().getMessageTypes().get(28);
+      getDescriptor().getMessageTypes().get(29);
     internal_static_iotexapi_EstimateGasForActionResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_EstimateGasForActionResponse_descriptor,
         new java.lang.String[] { "Gas", });
     internal_static_iotexapi_ReadStateRequest_descriptor =
-      getDescriptor().getMessageTypes().get(29);
+      getDescriptor().getMessageTypes().get(30);
     internal_static_iotexapi_ReadStateRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_ReadStateRequest_descriptor,
         new java.lang.String[] { "ProtocolID", "MethodName", "Arguments", });
     internal_static_iotexapi_ReadStateResponse_descriptor =
-      getDescriptor().getMessageTypes().get(30);
+      getDescriptor().getMessageTypes().get(31);
     internal_static_iotexapi_ReadStateResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_ReadStateResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_iotexapi_GetEpochMetaRequest_descriptor =
-      getDescriptor().getMessageTypes().get(31);
+      getDescriptor().getMessageTypes().get(32);
     internal_static_iotexapi_GetEpochMetaRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetEpochMetaRequest_descriptor,
         new java.lang.String[] { "EpochNumber", });
     internal_static_iotexapi_GetEpochMetaResponse_descriptor =
-      getDescriptor().getMessageTypes().get(32);
+      getDescriptor().getMessageTypes().get(33);
     internal_static_iotexapi_GetEpochMetaResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotexapi_GetEpochMetaResponse_descriptor,
@@ -21669,6 +22955,7 @@ public final class Api {
     org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.getDescriptor();
     org.iotexproject.antenna.grpc.iotextypes.Blockchain.getDescriptor();
     org.iotexproject.antenna.grpc.iotextypes.Node.getDescriptor();
+    com.google.protobuf.TimestampProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -79,7 +79,7 @@
 							<protocArtifact>com.google.protobuf:protoc:3.7.0</protocArtifact>
 							<includeMavenTypes>direct</includeMavenTypes>
 							<inputDirectories>
-								<include>src/main/protobuf</include>
+								<include>src/main/proto</include>
 							</inputDirectories>
 							<outputTargets>
 								<outputTarget>

@@ -2741,6 +2741,795 @@ public final class Blockchain {
 
   }
 
+  public interface BlockBodyOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:iotextypes.BlockBody)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> 
+        getActionsList();
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action getActions(int index);
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    int getActionsCount();
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    java.util.List<? extends org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> 
+        getActionsOrBuilderList();
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder getActionsOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   * body of a block
+   * </pre>
+   *
+   * Protobuf type {@code iotextypes.BlockBody}
+   */
+  public  static final class BlockBody extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:iotextypes.BlockBody)
+      BlockBodyOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use BlockBody.newBuilder() to construct.
+    private BlockBody(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private BlockBody() {
+      actions_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private BlockBody(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
+                actions_ = new java.util.ArrayList<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              actions_.add(
+                  input.readMessage(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.parser(), extensionRegistry));
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
+          actions_ = java.util.Collections.unmodifiableList(actions_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return org.iotexproject.antenna.grpc.iotextypes.Blockchain.internal_static_iotextypes_BlockBody_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return org.iotexproject.antenna.grpc.iotextypes.Blockchain.internal_static_iotextypes_BlockBody_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.class, org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.Builder.class);
+    }
+
+    public static final int ACTIONS_FIELD_NUMBER = 1;
+    private java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> actions_;
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    public java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> getActionsList() {
+      return actions_;
+    }
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    public java.util.List<? extends org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> 
+        getActionsOrBuilderList() {
+      return actions_;
+    }
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    public int getActionsCount() {
+      return actions_.size();
+    }
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action getActions(int index) {
+      return actions_.get(index);
+    }
+    /**
+     * <code>repeated .iotextypes.Action actions = 1;</code>
+     */
+    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder getActionsOrBuilder(
+        int index) {
+      return actions_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < actions_.size(); i++) {
+        output.writeMessage(1, actions_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < actions_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, actions_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody)) {
+        return super.equals(obj);
+      }
+      org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody other = (org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody) obj;
+
+      if (!getActionsList()
+          .equals(other.getActionsList())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getActionsCount() > 0) {
+        hash = (37 * hash) + ACTIONS_FIELD_NUMBER;
+        hash = (53 * hash) + getActionsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * body of a block
+     * </pre>
+     *
+     * Protobuf type {@code iotextypes.BlockBody}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:iotextypes.BlockBody)
+        org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBodyOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return org.iotexproject.antenna.grpc.iotextypes.Blockchain.internal_static_iotextypes_BlockBody_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return org.iotexproject.antenna.grpc.iotextypes.Blockchain.internal_static_iotextypes_BlockBody_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.class, org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.Builder.class);
+      }
+
+      // Construct using org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getActionsFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        if (actionsBuilder_ == null) {
+          actions_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          actionsBuilder_.clear();
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return org.iotexproject.antenna.grpc.iotextypes.Blockchain.internal_static_iotextypes_BlockBody_descriptor;
+      }
+
+      @java.lang.Override
+      public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody getDefaultInstanceForType() {
+        return org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody build() {
+        org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody buildPartial() {
+        org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody result = new org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody(this);
+        int from_bitField0_ = bitField0_;
+        if (actionsBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            actions_ = java.util.Collections.unmodifiableList(actions_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.actions_ = actions_;
+        } else {
+          result.actions_ = actionsBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody) {
+          return mergeFrom((org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody other) {
+        if (other == org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.getDefaultInstance()) return this;
+        if (actionsBuilder_ == null) {
+          if (!other.actions_.isEmpty()) {
+            if (actions_.isEmpty()) {
+              actions_ = other.actions_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureActionsIsMutable();
+              actions_.addAll(other.actions_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.actions_.isEmpty()) {
+            if (actionsBuilder_.isEmpty()) {
+              actionsBuilder_.dispose();
+              actionsBuilder_ = null;
+              actions_ = other.actions_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              actionsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getActionsFieldBuilder() : null;
+            } else {
+              actionsBuilder_.addAllMessages(other.actions_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> actions_ =
+        java.util.Collections.emptyList();
+      private void ensureActionsIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          actions_ = new java.util.ArrayList<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action>(actions_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> actionsBuilder_;
+
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> getActionsList() {
+        if (actionsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(actions_);
+        } else {
+          return actionsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public int getActionsCount() {
+        if (actionsBuilder_ == null) {
+          return actions_.size();
+        } else {
+          return actionsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action getActions(int index) {
+        if (actionsBuilder_ == null) {
+          return actions_.get(index);
+        } else {
+          return actionsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder setActions(
+          int index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action value) {
+        if (actionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureActionsIsMutable();
+          actions_.set(index, value);
+          onChanged();
+        } else {
+          actionsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder setActions(
+          int index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder builderForValue) {
+        if (actionsBuilder_ == null) {
+          ensureActionsIsMutable();
+          actions_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          actionsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder addActions(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action value) {
+        if (actionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureActionsIsMutable();
+          actions_.add(value);
+          onChanged();
+        } else {
+          actionsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder addActions(
+          int index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action value) {
+        if (actionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureActionsIsMutable();
+          actions_.add(index, value);
+          onChanged();
+        } else {
+          actionsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder addActions(
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder builderForValue) {
+        if (actionsBuilder_ == null) {
+          ensureActionsIsMutable();
+          actions_.add(builderForValue.build());
+          onChanged();
+        } else {
+          actionsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder addActions(
+          int index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder builderForValue) {
+        if (actionsBuilder_ == null) {
+          ensureActionsIsMutable();
+          actions_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          actionsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder addAllActions(
+          java.lang.Iterable<? extends org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> values) {
+        if (actionsBuilder_ == null) {
+          ensureActionsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, actions_);
+          onChanged();
+        } else {
+          actionsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder clearActions() {
+        if (actionsBuilder_ == null) {
+          actions_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          actionsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public Builder removeActions(int index) {
+        if (actionsBuilder_ == null) {
+          ensureActionsIsMutable();
+          actions_.remove(index);
+          onChanged();
+        } else {
+          actionsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder getActionsBuilder(
+          int index) {
+        return getActionsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder getActionsOrBuilder(
+          int index) {
+        if (actionsBuilder_ == null) {
+          return actions_.get(index);  } else {
+          return actionsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public java.util.List<? extends org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> 
+           getActionsOrBuilderList() {
+        if (actionsBuilder_ != null) {
+          return actionsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(actions_);
+        }
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder addActionsBuilder() {
+        return getActionsFieldBuilder().addBuilder(
+            org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder addActionsBuilder(
+          int index) {
+        return getActionsFieldBuilder().addBuilder(
+            index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .iotextypes.Action actions = 1;</code>
+       */
+      public java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder> 
+           getActionsBuilderList() {
+        return getActionsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> 
+          getActionsFieldBuilder() {
+        if (actionsBuilder_ == null) {
+          actionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder>(
+                  actions_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          actions_ = null;
+        }
+        return actionsBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:iotextypes.BlockBody)
+    }
+
+    // @@protoc_insertion_point(class_scope:iotextypes.BlockBody)
+    private static final org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody();
+    }
+
+    public static org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<BlockBody>
+        PARSER = new com.google.protobuf.AbstractParser<BlockBody>() {
+      @java.lang.Override
+      public BlockBody parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new BlockBody(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<BlockBody> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<BlockBody> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface BlockOrBuilder extends
       // @@protoc_insertion_point(interface_extends:iotextypes.Block)
       com.google.protobuf.MessageOrBuilder {
@@ -2759,28 +3548,17 @@ public final class Blockchain {
     org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockHeaderOrBuilder getHeaderOrBuilder();
 
     /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
+     * <code>.iotextypes.BlockBody body = 2;</code>
      */
-    java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> 
-        getActionsList();
+    boolean hasBody();
     /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
+     * <code>.iotextypes.BlockBody body = 2;</code>
      */
-    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action getActions(int index);
+    org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody getBody();
     /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
+     * <code>.iotextypes.BlockBody body = 2;</code>
      */
-    int getActionsCount();
-    /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
-     */
-    java.util.List<? extends org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> 
-        getActionsOrBuilderList();
-    /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
-     */
-    org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder getActionsOrBuilder(
-        int index);
+    org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBodyOrBuilder getBodyOrBuilder();
 
     /**
      * <code>.iotextypes.BlockFooter footer = 3;</code>
@@ -2813,7 +3591,6 @@ public final class Blockchain {
       super(builder);
     }
     private Block() {
-      actions_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -2854,12 +3631,16 @@ public final class Blockchain {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
-                actions_ = new java.util.ArrayList<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action>();
-                mutable_bitField0_ |= 0x00000002;
+              org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.Builder subBuilder = null;
+              if (body_ != null) {
+                subBuilder = body_.toBuilder();
               }
-              actions_.add(
-                  input.readMessage(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.parser(), extensionRegistry));
+              body_ = input.readMessage(org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(body_);
+                body_ = subBuilder.buildPartial();
+              }
+
               break;
             }
             case 26: {
@@ -2890,9 +3671,6 @@ public final class Blockchain {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
-          actions_ = java.util.Collections.unmodifiableList(actions_);
-        }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
       }
@@ -2910,7 +3688,6 @@ public final class Blockchain {
               org.iotexproject.antenna.grpc.iotextypes.Blockchain.Block.class, org.iotexproject.antenna.grpc.iotextypes.Blockchain.Block.Builder.class);
     }
 
-    private int bitField0_;
     public static final int HEADER_FIELD_NUMBER = 1;
     private org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockHeader header_;
     /**
@@ -2932,39 +3709,25 @@ public final class Blockchain {
       return getHeader();
     }
 
-    public static final int ACTIONS_FIELD_NUMBER = 2;
-    private java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> actions_;
+    public static final int BODY_FIELD_NUMBER = 2;
+    private org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody body_;
     /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
+     * <code>.iotextypes.BlockBody body = 2;</code>
      */
-    public java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> getActionsList() {
-      return actions_;
+    public boolean hasBody() {
+      return body_ != null;
     }
     /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
+     * <code>.iotextypes.BlockBody body = 2;</code>
      */
-    public java.util.List<? extends org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> 
-        getActionsOrBuilderList() {
-      return actions_;
+    public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody getBody() {
+      return body_ == null ? org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.getDefaultInstance() : body_;
     }
     /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
+     * <code>.iotextypes.BlockBody body = 2;</code>
      */
-    public int getActionsCount() {
-      return actions_.size();
-    }
-    /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
-     */
-    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action getActions(int index) {
-      return actions_.get(index);
-    }
-    /**
-     * <code>repeated .iotextypes.Action actions = 2;</code>
-     */
-    public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder getActionsOrBuilder(
-        int index) {
-      return actions_.get(index);
+    public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBodyOrBuilder getBodyOrBuilder() {
+      return getBody();
     }
 
     public static final int FOOTER_FIELD_NUMBER = 3;
@@ -3005,8 +3768,8 @@ public final class Blockchain {
       if (header_ != null) {
         output.writeMessage(1, getHeader());
       }
-      for (int i = 0; i < actions_.size(); i++) {
-        output.writeMessage(2, actions_.get(i));
+      if (body_ != null) {
+        output.writeMessage(2, getBody());
       }
       if (footer_ != null) {
         output.writeMessage(3, getFooter());
@@ -3024,9 +3787,9 @@ public final class Blockchain {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, getHeader());
       }
-      for (int i = 0; i < actions_.size(); i++) {
+      if (body_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, actions_.get(i));
+          .computeMessageSize(2, getBody());
       }
       if (footer_ != null) {
         size += com.google.protobuf.CodedOutputStream
@@ -3052,8 +3815,11 @@ public final class Blockchain {
         if (!getHeader()
             .equals(other.getHeader())) return false;
       }
-      if (!getActionsList()
-          .equals(other.getActionsList())) return false;
+      if (hasBody() != other.hasBody()) return false;
+      if (hasBody()) {
+        if (!getBody()
+            .equals(other.getBody())) return false;
+      }
       if (hasFooter() != other.hasFooter()) return false;
       if (hasFooter()) {
         if (!getFooter()
@@ -3074,9 +3840,9 @@ public final class Blockchain {
         hash = (37 * hash) + HEADER_FIELD_NUMBER;
         hash = (53 * hash) + getHeader().hashCode();
       }
-      if (getActionsCount() > 0) {
-        hash = (37 * hash) + ACTIONS_FIELD_NUMBER;
-        hash = (53 * hash) + getActionsList().hashCode();
+      if (hasBody()) {
+        hash = (37 * hash) + BODY_FIELD_NUMBER;
+        hash = (53 * hash) + getBody().hashCode();
       }
       if (hasFooter()) {
         hash = (37 * hash) + FOOTER_FIELD_NUMBER;
@@ -3215,7 +3981,6 @@ public final class Blockchain {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
-          getActionsFieldBuilder();
         }
       }
       @java.lang.Override
@@ -3227,11 +3992,11 @@ public final class Blockchain {
           header_ = null;
           headerBuilder_ = null;
         }
-        if (actionsBuilder_ == null) {
-          actions_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+        if (bodyBuilder_ == null) {
+          body_ = null;
         } else {
-          actionsBuilder_.clear();
+          body_ = null;
+          bodyBuilder_ = null;
         }
         if (footerBuilder_ == null) {
           footer_ = null;
@@ -3265,28 +4030,21 @@ public final class Blockchain {
       @java.lang.Override
       public org.iotexproject.antenna.grpc.iotextypes.Blockchain.Block buildPartial() {
         org.iotexproject.antenna.grpc.iotextypes.Blockchain.Block result = new org.iotexproject.antenna.grpc.iotextypes.Blockchain.Block(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (headerBuilder_ == null) {
           result.header_ = header_;
         } else {
           result.header_ = headerBuilder_.build();
         }
-        if (actionsBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) != 0)) {
-            actions_ = java.util.Collections.unmodifiableList(actions_);
-            bitField0_ = (bitField0_ & ~0x00000002);
-          }
-          result.actions_ = actions_;
+        if (bodyBuilder_ == null) {
+          result.body_ = body_;
         } else {
-          result.actions_ = actionsBuilder_.build();
+          result.body_ = bodyBuilder_.build();
         }
         if (footerBuilder_ == null) {
           result.footer_ = footer_;
         } else {
           result.footer_ = footerBuilder_.build();
         }
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -3338,31 +4096,8 @@ public final class Blockchain {
         if (other.hasHeader()) {
           mergeHeader(other.getHeader());
         }
-        if (actionsBuilder_ == null) {
-          if (!other.actions_.isEmpty()) {
-            if (actions_.isEmpty()) {
-              actions_ = other.actions_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-            } else {
-              ensureActionsIsMutable();
-              actions_.addAll(other.actions_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.actions_.isEmpty()) {
-            if (actionsBuilder_.isEmpty()) {
-              actionsBuilder_.dispose();
-              actionsBuilder_ = null;
-              actions_ = other.actions_;
-              bitField0_ = (bitField0_ & ~0x00000002);
-              actionsBuilder_ = 
-                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
-                   getActionsFieldBuilder() : null;
-            } else {
-              actionsBuilder_.addAllMessages(other.actions_);
-            }
-          }
+        if (other.hasBody()) {
+          mergeBody(other.getBody());
         }
         if (other.hasFooter()) {
           mergeFooter(other.getFooter());
@@ -3395,7 +4130,6 @@ public final class Blockchain {
         }
         return this;
       }
-      private int bitField0_;
 
       private org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockHeader header_;
       private com.google.protobuf.SingleFieldBuilderV3<
@@ -3514,244 +4248,121 @@ public final class Blockchain {
         return headerBuilder_;
       }
 
-      private java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> actions_ =
-        java.util.Collections.emptyList();
-      private void ensureActionsIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
-          actions_ = new java.util.ArrayList<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action>(actions_);
-          bitField0_ |= 0x00000002;
-         }
+      private org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody body_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody, org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.Builder, org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBodyOrBuilder> bodyBuilder_;
+      /**
+       * <code>.iotextypes.BlockBody body = 2;</code>
+       */
+      public boolean hasBody() {
+        return bodyBuilder_ != null || body_ != null;
       }
+      /**
+       * <code>.iotextypes.BlockBody body = 2;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody getBody() {
+        if (bodyBuilder_ == null) {
+          return body_ == null ? org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.getDefaultInstance() : body_;
+        } else {
+          return bodyBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.iotextypes.BlockBody body = 2;</code>
+       */
+      public Builder setBody(org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody value) {
+        if (bodyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          body_ = value;
+          onChanged();
+        } else {
+          bodyBuilder_.setMessage(value);
+        }
 
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> actionsBuilder_;
+        return this;
+      }
+      /**
+       * <code>.iotextypes.BlockBody body = 2;</code>
+       */
+      public Builder setBody(
+          org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.Builder builderForValue) {
+        if (bodyBuilder_ == null) {
+          body_ = builderForValue.build();
+          onChanged();
+        } else {
+          bodyBuilder_.setMessage(builderForValue.build());
+        }
 
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> getActionsList() {
-        if (actionsBuilder_ == null) {
-          return java.util.Collections.unmodifiableList(actions_);
-        } else {
-          return actionsBuilder_.getMessageList();
-        }
+        return this;
       }
       /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
+       * <code>.iotextypes.BlockBody body = 2;</code>
        */
-      public int getActionsCount() {
-        if (actionsBuilder_ == null) {
-          return actions_.size();
-        } else {
-          return actionsBuilder_.getCount();
-        }
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action getActions(int index) {
-        if (actionsBuilder_ == null) {
-          return actions_.get(index);
-        } else {
-          return actionsBuilder_.getMessage(index);
-        }
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public Builder setActions(
-          int index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action value) {
-        if (actionsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
+      public Builder mergeBody(org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody value) {
+        if (bodyBuilder_ == null) {
+          if (body_ != null) {
+            body_ =
+              org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.newBuilder(body_).mergeFrom(value).buildPartial();
+          } else {
+            body_ = value;
           }
-          ensureActionsIsMutable();
-          actions_.set(index, value);
           onChanged();
         } else {
-          actionsBuilder_.setMessage(index, value);
+          bodyBuilder_.mergeFrom(value);
         }
+
         return this;
       }
       /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
+       * <code>.iotextypes.BlockBody body = 2;</code>
        */
-      public Builder setActions(
-          int index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder builderForValue) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          actions_.set(index, builderForValue.build());
+      public Builder clearBody() {
+        if (bodyBuilder_ == null) {
+          body_ = null;
           onChanged();
         } else {
-          actionsBuilder_.setMessage(index, builderForValue.build());
+          body_ = null;
+          bodyBuilder_ = null;
         }
+
         return this;
       }
       /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
+       * <code>.iotextypes.BlockBody body = 2;</code>
        */
-      public Builder addActions(org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action value) {
-        if (actionsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureActionsIsMutable();
-          actions_.add(value);
-          onChanged();
+      public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.Builder getBodyBuilder() {
+        
+        onChanged();
+        return getBodyFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.iotextypes.BlockBody body = 2;</code>
+       */
+      public org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBodyOrBuilder getBodyOrBuilder() {
+        if (bodyBuilder_ != null) {
+          return bodyBuilder_.getMessageOrBuilder();
         } else {
-          actionsBuilder_.addMessage(value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public Builder addActions(
-          int index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action value) {
-        if (actionsBuilder_ == null) {
-          if (value == null) {
-            throw new NullPointerException();
-          }
-          ensureActionsIsMutable();
-          actions_.add(index, value);
-          onChanged();
-        } else {
-          actionsBuilder_.addMessage(index, value);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public Builder addActions(
-          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder builderForValue) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          actions_.add(builderForValue.build());
-          onChanged();
-        } else {
-          actionsBuilder_.addMessage(builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public Builder addActions(
-          int index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder builderForValue) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          actions_.add(index, builderForValue.build());
-          onChanged();
-        } else {
-          actionsBuilder_.addMessage(index, builderForValue.build());
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public Builder addAllActions(
-          java.lang.Iterable<? extends org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action> values) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          com.google.protobuf.AbstractMessageLite.Builder.addAll(
-              values, actions_);
-          onChanged();
-        } else {
-          actionsBuilder_.addAllMessages(values);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public Builder clearActions() {
-        if (actionsBuilder_ == null) {
-          actions_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
-          onChanged();
-        } else {
-          actionsBuilder_.clear();
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public Builder removeActions(int index) {
-        if (actionsBuilder_ == null) {
-          ensureActionsIsMutable();
-          actions_.remove(index);
-          onChanged();
-        } else {
-          actionsBuilder_.remove(index);
-        }
-        return this;
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder getActionsBuilder(
-          int index) {
-        return getActionsFieldBuilder().getBuilder(index);
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder getActionsOrBuilder(
-          int index) {
-        if (actionsBuilder_ == null) {
-          return actions_.get(index);  } else {
-          return actionsBuilder_.getMessageOrBuilder(index);
+          return body_ == null ?
+              org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.getDefaultInstance() : body_;
         }
       }
       /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
+       * <code>.iotextypes.BlockBody body = 2;</code>
        */
-      public java.util.List<? extends org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> 
-           getActionsOrBuilderList() {
-        if (actionsBuilder_ != null) {
-          return actionsBuilder_.getMessageOrBuilderList();
-        } else {
-          return java.util.Collections.unmodifiableList(actions_);
-        }
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder addActionsBuilder() {
-        return getActionsFieldBuilder().addBuilder(
-            org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder addActionsBuilder(
-          int index) {
-        return getActionsFieldBuilder().addBuilder(
-            index, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.getDefaultInstance());
-      }
-      /**
-       * <code>repeated .iotextypes.Action actions = 2;</code>
-       */
-      public java.util.List<org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder> 
-           getActionsBuilderList() {
-        return getActionsFieldBuilder().getBuilderList();
-      }
-      private com.google.protobuf.RepeatedFieldBuilderV3<
-          org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder> 
-          getActionsFieldBuilder() {
-        if (actionsBuilder_ == null) {
-          actionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action.Builder, org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.ActionOrBuilder>(
-                  actions_,
-                  ((bitField0_ & 0x00000002) != 0),
+      private com.google.protobuf.SingleFieldBuilderV3<
+          org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody, org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.Builder, org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBodyOrBuilder> 
+          getBodyFieldBuilder() {
+        if (bodyBuilder_ == null) {
+          bodyBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody, org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBody.Builder, org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockBodyOrBuilder>(
+                  getBody(),
                   getParentForChildren(),
                   isClean());
-          actions_ = null;
+          body_ = null;
         }
-        return actionsBuilder_;
+        return bodyBuilder_;
       }
 
       private org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockFooter footer_;
@@ -6136,9 +6747,17 @@ public final class Blockchain {
     long getHeight();
 
     /**
-     * <code>int64 timestamp = 3;</code>
+     * <code>.google.protobuf.Timestamp timestamp = 3;</code>
      */
-    long getTimestamp();
+    boolean hasTimestamp();
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+     */
+    com.google.protobuf.Timestamp getTimestamp();
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+     */
+    com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder();
 
     /**
      * <code>int64 numActions = 4;</code>
@@ -6255,9 +6874,17 @@ public final class Blockchain {
               height_ = input.readUInt64();
               break;
             }
-            case 24: {
+            case 26: {
+              com.google.protobuf.Timestamp.Builder subBuilder = null;
+              if (timestamp_ != null) {
+                subBuilder = timestamp_.toBuilder();
+              }
+              timestamp_ = input.readMessage(com.google.protobuf.Timestamp.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(timestamp_);
+                timestamp_ = subBuilder.buildPartial();
+              }
 
-              timestamp_ = input.readInt64();
               break;
             }
             case 32: {
@@ -6371,12 +6998,24 @@ public final class Blockchain {
     }
 
     public static final int TIMESTAMP_FIELD_NUMBER = 3;
-    private long timestamp_;
+    private com.google.protobuf.Timestamp timestamp_;
     /**
-     * <code>int64 timestamp = 3;</code>
+     * <code>.google.protobuf.Timestamp timestamp = 3;</code>
      */
-    public long getTimestamp() {
-      return timestamp_;
+    public boolean hasTimestamp() {
+      return timestamp_ != null;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+     */
+    public com.google.protobuf.Timestamp getTimestamp() {
+      return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+    }
+    /**
+     * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+     */
+    public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+      return getTimestamp();
     }
 
     public static final int NUMACTIONS_FIELD_NUMBER = 4;
@@ -6578,8 +7217,8 @@ public final class Blockchain {
       if (height_ != 0L) {
         output.writeUInt64(2, height_);
       }
-      if (timestamp_ != 0L) {
-        output.writeInt64(3, timestamp_);
+      if (timestamp_ != null) {
+        output.writeMessage(3, getTimestamp());
       }
       if (numActions_ != 0L) {
         output.writeInt64(4, numActions_);
@@ -6615,9 +7254,9 @@ public final class Blockchain {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(2, height_);
       }
-      if (timestamp_ != 0L) {
+      if (timestamp_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, timestamp_);
+          .computeMessageSize(3, getTimestamp());
       }
       if (numActions_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
@@ -6657,8 +7296,11 @@ public final class Blockchain {
           .equals(other.getHash())) return false;
       if (getHeight()
           != other.getHeight()) return false;
-      if (getTimestamp()
-          != other.getTimestamp()) return false;
+      if (hasTimestamp() != other.hasTimestamp()) return false;
+      if (hasTimestamp()) {
+        if (!getTimestamp()
+            .equals(other.getTimestamp())) return false;
+      }
       if (getNumActions()
           != other.getNumActions()) return false;
       if (!getProducerAddress()
@@ -6687,9 +7329,10 @@ public final class Blockchain {
       hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getHeight());
-      hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getTimestamp());
+      if (hasTimestamp()) {
+        hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+        hash = (53 * hash) + getTimestamp().hashCode();
+      }
       hash = (37 * hash) + NUMACTIONS_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getNumActions());
@@ -6844,8 +7487,12 @@ public final class Blockchain {
 
         height_ = 0L;
 
-        timestamp_ = 0L;
-
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
         numActions_ = 0L;
 
         producerAddress_ = "";
@@ -6886,7 +7533,11 @@ public final class Blockchain {
         org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockMeta result = new org.iotexproject.antenna.grpc.iotextypes.Blockchain.BlockMeta(this);
         result.hash_ = hash_;
         result.height_ = height_;
-        result.timestamp_ = timestamp_;
+        if (timestampBuilder_ == null) {
+          result.timestamp_ = timestamp_;
+        } else {
+          result.timestamp_ = timestampBuilder_.build();
+        }
         result.numActions_ = numActions_;
         result.producerAddress_ = producerAddress_;
         result.transferAmount_ = transferAmount_;
@@ -6948,8 +7599,8 @@ public final class Blockchain {
         if (other.getHeight() != 0L) {
           setHeight(other.getHeight());
         }
-        if (other.getTimestamp() != 0L) {
-          setTimestamp(other.getTimestamp());
+        if (other.hasTimestamp()) {
+          mergeTimestamp(other.getTimestamp());
         }
         if (other.getNumActions() != 0L) {
           setNumActions(other.getNumActions());
@@ -7098,30 +7749,121 @@ public final class Blockchain {
         return this;
       }
 
-      private long timestamp_ ;
+      private com.google.protobuf.Timestamp timestamp_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> timestampBuilder_;
       /**
-       * <code>int64 timestamp = 3;</code>
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
        */
-      public long getTimestamp() {
-        return timestamp_;
+      public boolean hasTimestamp() {
+        return timestampBuilder_ != null || timestamp_ != null;
       }
       /**
-       * <code>int64 timestamp = 3;</code>
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
        */
-      public Builder setTimestamp(long value) {
-        
-        timestamp_ = value;
-        onChanged();
+      public com.google.protobuf.Timestamp getTimestamp() {
+        if (timestampBuilder_ == null) {
+          return timestamp_ == null ? com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        } else {
+          return timestampBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+       */
+      public Builder setTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          timestamp_ = value;
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(value);
+        }
+
         return this;
       }
       /**
-       * <code>int64 timestamp = 3;</code>
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+       */
+      public Builder setTimestamp(
+          com.google.protobuf.Timestamp.Builder builderForValue) {
+        if (timestampBuilder_ == null) {
+          timestamp_ = builderForValue.build();
+          onChanged();
+        } else {
+          timestampBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+       */
+      public Builder mergeTimestamp(com.google.protobuf.Timestamp value) {
+        if (timestampBuilder_ == null) {
+          if (timestamp_ != null) {
+            timestamp_ =
+              com.google.protobuf.Timestamp.newBuilder(timestamp_).mergeFrom(value).buildPartial();
+          } else {
+            timestamp_ = value;
+          }
+          onChanged();
+        } else {
+          timestampBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
        */
       public Builder clearTimestamp() {
-        
-        timestamp_ = 0L;
-        onChanged();
+        if (timestampBuilder_ == null) {
+          timestamp_ = null;
+          onChanged();
+        } else {
+          timestamp_ = null;
+          timestampBuilder_ = null;
+        }
+
         return this;
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+       */
+      public com.google.protobuf.Timestamp.Builder getTimestampBuilder() {
+        
+        onChanged();
+        return getTimestampFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+       */
+      public com.google.protobuf.TimestampOrBuilder getTimestampOrBuilder() {
+        if (timestampBuilder_ != null) {
+          return timestampBuilder_.getMessageOrBuilder();
+        } else {
+          return timestamp_ == null ?
+              com.google.protobuf.Timestamp.getDefaultInstance() : timestamp_;
+        }
+      }
+      /**
+       * <code>.google.protobuf.Timestamp timestamp = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder> 
+          getTimestampFieldBuilder() {
+        if (timestampBuilder_ == null) {
+          timestampBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.google.protobuf.Timestamp, com.google.protobuf.Timestamp.Builder, com.google.protobuf.TimestampOrBuilder>(
+                  getTimestamp(),
+                  getParentForChildren(),
+                  isClean());
+          timestamp_ = null;
+        }
+        return timestampBuilder_;
       }
 
       private long numActions_ ;
@@ -8446,6 +9188,11 @@ public final class Blockchain {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_iotextypes_BlockFooter_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_iotextypes_BlockBody_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_iotextypes_BlockBody_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_iotextypes_Block_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -8496,26 +9243,28 @@ public final class Blockchain {
       "(\014\022\023\n\013receiptRoot\030\007 \001(\014\"k\n\013BlockFooter\022-" +
       "\n\014endorsements\030\001 \003(\0132\027.iotextypes.Endors" +
       "ement\022-\n\ttimestamp\030\002 \001(\0132\032.google.protob" +
-      "uf.Timestamp\"~\n\005Block\022\'\n\006header\030\001 \001(\0132\027." +
-      "iotextypes.BlockHeader\022#\n\007actions\030\002 \003(\0132" +
-      "\022.iotextypes.Action\022\'\n\006footer\030\003 \001(\0132\027.io" +
-      "textypes.BlockFooter\"1\n\010Receipts\022%\n\010rece" +
-      "ipts\030\001 \003(\0132\023.iotextypes.Receipt\"I\n\tEpoch" +
-      "Data\022\013\n\003num\030\001 \001(\004\022\016\n\006height\030\002 \001(\004\022\037\n\027gra" +
-      "vityChainStartHeight\030\003 \001(\004\"b\n\tChainMeta\022" +
-      "\016\n\006height\030\001 \001(\004\022\022\n\nnumActions\030\002 \001(\003\022\013\n\003t" +
-      "ps\030\003 \001(\003\022$\n\005epoch\030\004 \001(\0132\025.iotextypes.Epo" +
-      "chData\"\300\001\n\tBlockMeta\022\014\n\004hash\030\001 \001(\t\022\016\n\006he" +
-      "ight\030\002 \001(\004\022\021\n\ttimestamp\030\003 \001(\003\022\022\n\nnumActi" +
-      "ons\030\004 \001(\003\022\027\n\017producerAddress\030\005 \001(\t\022\026\n\016tr" +
-      "ansferAmount\030\006 \001(\t\022\016\n\006txRoot\030\007 \001(\t\022\023\n\013re" +
-      "ceiptRoot\030\010 \001(\t\022\030\n\020deltaStateDigest\030\t \001(" +
-      "\t\"h\n\013AccountMeta\022\017\n\007address\030\001 \001(\t\022\017\n\007bal" +
-      "ance\030\002 \001(\t\022\r\n\005nonce\030\003 \001(\004\022\024\n\014pendingNonc" +
-      "e\030\004 \001(\004\022\022\n\nnumActions\030\005 \001(\004Bb\n(org.iotex" +
-      "project.antenna.grpc.iotextypesZ6github." +
-      "com/iotexproject/iotex-core/protogen/iot" +
-      "extypesb\006proto3"
+      "uf.Timestamp\"0\n\tBlockBody\022#\n\007actions\030\001 \003" +
+      "(\0132\022.iotextypes.Action\"~\n\005Block\022\'\n\006heade" +
+      "r\030\001 \001(\0132\027.iotextypes.BlockHeader\022#\n\004body" +
+      "\030\002 \001(\0132\025.iotextypes.BlockBody\022\'\n\006footer\030" +
+      "\003 \001(\0132\027.iotextypes.BlockFooter\"1\n\010Receip" +
+      "ts\022%\n\010receipts\030\001 \003(\0132\023.iotextypes.Receip" +
+      "t\"I\n\tEpochData\022\013\n\003num\030\001 \001(\004\022\016\n\006height\030\002 " +
+      "\001(\004\022\037\n\027gravityChainStartHeight\030\003 \001(\004\"b\n\t" +
+      "ChainMeta\022\016\n\006height\030\001 \001(\004\022\022\n\nnumActions\030" +
+      "\002 \001(\003\022\013\n\003tps\030\003 \001(\003\022$\n\005epoch\030\004 \001(\0132\025.iote" +
+      "xtypes.EpochData\"\334\001\n\tBlockMeta\022\014\n\004hash\030\001" +
+      " \001(\t\022\016\n\006height\030\002 \001(\004\022-\n\ttimestamp\030\003 \001(\0132" +
+      "\032.google.protobuf.Timestamp\022\022\n\nnumAction" +
+      "s\030\004 \001(\003\022\027\n\017producerAddress\030\005 \001(\t\022\026\n\016tran" +
+      "sferAmount\030\006 \001(\t\022\016\n\006txRoot\030\007 \001(\t\022\023\n\013rece" +
+      "iptRoot\030\010 \001(\t\022\030\n\020deltaStateDigest\030\t \001(\t\"" +
+      "h\n\013AccountMeta\022\017\n\007address\030\001 \001(\t\022\017\n\007balan" +
+      "ce\030\002 \001(\t\022\r\n\005nonce\030\003 \001(\004\022\024\n\014pendingNonce\030" +
+      "\004 \001(\004\022\022\n\nnumActions\030\005 \001(\004Bb\n(org.iotexpr" +
+      "oject.antenna.grpc.iotextypesZ6github.co" +
+      "m/iotexproject/iotex-core/protogen/iotex" +
+      "typesb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8550,38 +9299,44 @@ public final class Blockchain {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_BlockFooter_descriptor,
         new java.lang.String[] { "Endorsements", "Timestamp", });
-    internal_static_iotextypes_Block_descriptor =
+    internal_static_iotextypes_BlockBody_descriptor =
       getDescriptor().getMessageTypes().get(3);
+    internal_static_iotextypes_BlockBody_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_iotextypes_BlockBody_descriptor,
+        new java.lang.String[] { "Actions", });
+    internal_static_iotextypes_Block_descriptor =
+      getDescriptor().getMessageTypes().get(4);
     internal_static_iotextypes_Block_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_Block_descriptor,
-        new java.lang.String[] { "Header", "Actions", "Footer", });
+        new java.lang.String[] { "Header", "Body", "Footer", });
     internal_static_iotextypes_Receipts_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_iotextypes_Receipts_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_Receipts_descriptor,
         new java.lang.String[] { "Receipts", });
     internal_static_iotextypes_EpochData_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_iotextypes_EpochData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_EpochData_descriptor,
         new java.lang.String[] { "Num", "Height", "GravityChainStartHeight", });
     internal_static_iotextypes_ChainMeta_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_iotextypes_ChainMeta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_ChainMeta_descriptor,
         new java.lang.String[] { "Height", "NumActions", "Tps", "Epoch", });
     internal_static_iotextypes_BlockMeta_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_iotextypes_BlockMeta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_BlockMeta_descriptor,
         new java.lang.String[] { "Hash", "Height", "Timestamp", "NumActions", "ProducerAddress", "TransferAmount", "TxRoot", "ReceiptRoot", "DeltaStateDigest", });
     internal_static_iotextypes_AccountMeta_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_iotextypes_AccountMeta_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_iotextypes_AccountMeta_descriptor,
