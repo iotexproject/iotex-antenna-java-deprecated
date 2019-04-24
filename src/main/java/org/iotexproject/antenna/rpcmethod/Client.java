@@ -6,212 +6,274 @@ package org.iotexproject.antenna.rpcmethod;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
+import org.iotexproject.antenna.exceptions.RPCException;
 import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
 import org.pmw.tinylog.Logger;
 
 /**
- *  Copyright (c) 2019 IoTeX
- *  This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
- *  warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
- *  permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
- *  License 2.0 that can be found in the LICENSE file.
+ * Copyright (c) 2019 IoTeX This is an alpha (internal) release and is not
+ * suitable for production. This source code is provided 'as is' and no
+ * warranties are given as to title or non-infringement, merchantability or
+ * fitness for purpose and, to the extent permitted by law, all liability for
+ * your use of the code is disclaimed. This source code is governed by Apache
+ * License 2.0 that can be found in the LICENSE file.
  * 
  * @author Fabrizio Spataro <fabryprog@gmail.com>
  *
  */
 public class Client implements IoTeXGRPCInterface {
 	private final static Integer REQUEST_TIMEOUT_SEC = 5;
-	
+
 	private static ClientImpl instance;
 	private static Semaphore semaphore;
-	
+
 	public synchronized static ClientImpl getInstance(final String host, final Integer port) {
-		if(instance == null) {
+		if (instance == null) {
 			assert host != null;
 			assert port != null;
-			
+
 			instance = new ClientImpl(host, port);
-			
+
 			semaphore = new Semaphore(1);
 		}
 		return instance;
 	}
-	
-	public synchronized GetChainMetaResponse getChainMeta() {
+
+	@Override
+	public synchronized GetChainMetaResponse getChainMeta() throws RPCException {
 		GetChainMetaResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getChainMeta();
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	public synchronized GetEpochMetaResponse getEpochMeta(Long epoch) {
+
+	@Override
+	public synchronized GetEpochMetaResponse getEpochMeta(Long epoch) throws RPCException {
 		GetEpochMetaResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getEpochMeta(epoch);
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	public synchronized GetServerMetaResponse getServerMeta() {
+
+	@Override
+	public synchronized GetServerMetaResponse getServerMeta() throws RPCException {
 		GetServerMetaResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getServerMeta();
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	
-	public synchronized GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count) {
+
+	@Override
+	public synchronized GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count) throws RPCException {
 		GetBlockMetasResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getBlockMetasByIndex(start, count);
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	
-	public synchronized GetBlockMetasResponse getBlockMetasByHash(final String hash) {
+
+	@Override
+	public synchronized GetBlockMetasResponse getBlockMetasByHash(final String hash) throws RPCException {
 		GetBlockMetasResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getBlockMetasByHash(hash);
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
 
-	public synchronized GetAccountResponse getAccount(final String address) {
+	@Override
+	public synchronized GetAccountResponse getAccount(final String address) throws RPCException {
 		GetAccountResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getAccount(address);
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	
-	public synchronized SuggestGasPriceResponse getSuggestGasPrice() {
+
+	@Override
+	public synchronized SuggestGasPriceResponse getSuggestGasPrice() throws RPCException {
 		SuggestGasPriceResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getSuggestGasPrice();
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	
-	public synchronized GetActionsResponse getActionsByIndex(Long start, Long count) {
+
+	@Override
+	public synchronized GetActionsResponse getActionsByIndex(Long start, Long count) throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getActionsByIndex(start, count);
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	
-	public synchronized GetActionsResponse getActionsByHash(String hash, Boolean checkPending) {
+
+	@Override
+	public synchronized GetActionsResponse getActionsByHash(String hash, Boolean checkPending) throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getActionsByHash(hash, checkPending);
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	
-	public synchronized GetActionsResponse getActionsByBlock(String hash, Long start, Long count) {
+
+	@Override
+	public synchronized GetActionsResponse getActionsByBlock(String hash, Long start, Long count) throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.getActionsByBlock(hash, start, count);
 		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
-		
+
 		return result;
 	}
-	
-	public synchronized EstimateGasForActionResponse estimateGasForAction(Action action) {
+
+	@Override
+	public synchronized EstimateGasForActionResponse estimateGasForAction(Action action) throws RPCException {
 		EstimateGasForActionResponse result = null;
-		
+
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
-			
+
 			result = instance.estimateGasForAction(action);
-		}catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			Logger.error(e);
+			throw new RPCException(e);
 		} finally {
 			semaphore.release();
 		}
 		return result;
 	}
-	
+
+	@Override
+	public synchronized ReadContractResponse readContract(Action action) throws RPCException {
+		ReadContractResponse result = null;
+
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+
+			result = instance.readContract(action);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+			throw new RPCException(e);
+		} finally {
+			semaphore.release();
+		}
+		return result;
+	}
+
+	@Override
+	public synchronized GetReceiptByActionResponse getReceiptByAction(String hash) throws RPCException {
+		GetReceiptByActionResponse result = null;
+
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+
+			result = instance.getReceiptByAction(hash);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+			throw new RPCException(e);
+		} finally {
+			semaphore.release();
+		}
+		return result;
+	}
+
 	public synchronized void close() {
-		instance.close();
-		
-		instance = null;
+		if (instance != null) {
+			instance.close();
+			instance = null;
+		}
 	}
 }
-
