@@ -4,18 +4,16 @@
 
 Into this library it used blocking gRPC API. This means that at most **one** RPC can be in progress at a time from the client. 
 
-So you must use singleton class **IoTeXDispatcher** 
-
-**Do not use Browser class!!!**
+So you must use singleton class **Client** 
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT)
+  Client.getInstance(HOST, PORT)
 ```
 
 The class syncronize the calls using a semaphore. Use this method to close the grpc connection:
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).close()
+  Client.getInstance(HOST, PORT).close()
 ```
 
 ## Generate JAR (using maven)
@@ -35,19 +33,19 @@ mvn clean test
 ### SuggestGasPrice
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getSuggestGasPrice()
+  Client.getInstance(HOST, PORT).getSuggestGasPrice()
 ```
 
 ### EstimateGasForAction
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).estimateGasForAction(Action action)
+  Client.getInstance(HOST, PORT).estimateGasForAction(Action action)
 ```
 
 ### GetAccount
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getAccount(String address)
+  Client.getInstance(HOST, PORT).getAccount(String address)
 ```
 
 ### GetActions
@@ -55,21 +53,21 @@ mvn clean test
 #### By Hash
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getActionsByHash(String hash, Boolean checkPending)
+  Client.getInstance(HOST, PORT).getActionsByHash(String hash, Boolean checkPending)
 ```
 
 
 #### By Index
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getActionsByIndex(Long start, Long count)
+  Client.getInstance(HOST, PORT).getActionsByIndex(Long start, Long count)
 ```
 
 
 #### By Block Hash
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getActionsByBlock(String hash, Long start, Long count)
+  Client.getInstance(HOST, PORT).getActionsByBlock(String hash, Long start, Long count)
 ```
 
 ### GetBlockMetas
@@ -77,31 +75,31 @@ mvn clean test
 #### By Index
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getBlockMetasByIndex(Long start, Long count)
+  Client.getInstance(HOST, PORT).getBlockMetasByIndex(Long start, Long count)
 ```
 
 #### By Hash
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getBlockMetasByHash(String hash)
+  Client.getInstance(HOST, PORT).getBlockMetasByHash(String hash)
 ```
 
 ### GetChainMeta
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getChainMeta()
+  Client.getInstance(HOST, PORT).getChainMeta()
 ```
 
 ### GetEpochMeta
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).GetEpochMeta(Long epoch)
+  Client.getInstance(HOST, PORT).GetEpochMeta(Long epoch)
 ```
 
 ### getServerMeta
 
 ```
-  IoTeXDispatcher.getInstance(HOST, PORT).getServerMeta()
+  Client.getInstance(HOST, PORT).getServerMeta()
 ```
 
 ## TODO

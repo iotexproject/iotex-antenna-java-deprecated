@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.iotexproject.antenna.grpc;
+package org.iotexproject.antenna.rpcmethod;
 
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc;
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc.APIServiceBlockingStub;
@@ -45,15 +45,15 @@ import io.grpc.ManagedChannelBuilder;
  * @author Fabrizio Spataro <fabryprog@gmail.com>
  *
  */
-public class Browser implements IoTeXGRPCInterface {
+public class ClientImpl implements IoTeXGRPCInterface {
 	private final ManagedChannel channel;
 	private final APIServiceBlockingStub blockingStub;
     
-	public Browser(final String host, final Integer port) {
+	public ClientImpl(final String host, final Integer port) {
 		this(ManagedChannelBuilder.forAddress(host, port).usePlaintext());
 	}
 
-	public Browser(ManagedChannelBuilder<?> channelBuilder) {
+	public ClientImpl(ManagedChannelBuilder<?> channelBuilder) {
 		channel = channelBuilder.build();
 		blockingStub = APIServiceGrpc.newBlockingStub(channel);
 	}

@@ -1,4 +1,4 @@
-package org.iotexproject.antenna.grpc;
+package org.iotexproject.antenna.rpcmethod;
 
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;

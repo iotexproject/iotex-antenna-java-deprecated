@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.iotexproject.antenna.grpc;
+package org.iotexproject.antenna.rpcmethod;
 
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -23,18 +23,18 @@ import org.pmw.tinylog.Logger;
  * @author Fabrizio Spataro <fabryprog@gmail.com>
  *
  */
-public class IoTeXDispatcher implements IoTeXGRPCInterface {
+public class Client implements IoTeXGRPCInterface {
 	private final static Integer REQUEST_TIMEOUT_SEC = 5;
 	
-	private static Browser instance;
+	private static ClientImpl instance;
 	private static Semaphore semaphore;
 	
-	public synchronized static Browser getInstance(final String host, final Integer port) {
+	public synchronized static ClientImpl getInstance(final String host, final Integer port) {
 		if(instance == null) {
 			assert host != null;
 			assert port != null;
 			
-			instance = new Browser(host, port);
+			instance = new ClientImpl(host, port);
 			
 			semaphore = new Semaphore(1);
 		}

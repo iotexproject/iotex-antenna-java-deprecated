@@ -12,6 +12,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
+import org.iotexproject.antenna.rpcmethod.ClientImpl;
 import org.junit.Assert;
 import org.junit.Test;
 import org.pmw.tinylog.Logger;
@@ -20,7 +21,7 @@ import org.pmw.tinylog.Logger;
  * 
  * @author Fabrizio Spataro <fabryprog@gmail.com>
  */
-public class BrowserTest {
+public class ClientImplTest {
 
 	private static final String HOST = "api.iotex.one";
 	private static final Integer PORT = 80;
@@ -28,7 +29,7 @@ public class BrowserTest {
 	@Test
 	public void getAccount() {
 		final String address = "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw";
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetAccountResponse response = browser.getAccount(address);
 		    Logger.info(response);
@@ -47,7 +48,7 @@ public class BrowserTest {
 	
 	@Test
 	public void getChainMeta() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetChainMetaResponse response = browser.getChainMeta();
 		    Logger.info(response);
@@ -61,7 +62,7 @@ public class BrowserTest {
 	@Test
 	public void GetEpochMeta() {
 		final long epoch = 1;
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetEpochMetaResponse response = browser.getEpochMeta(epoch);
 		    Logger.info(response);
@@ -76,7 +77,7 @@ public class BrowserTest {
 	
 	@Test
 	public void getServerMeta() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetServerMetaResponse response = browser.getServerMeta();
 		    Logger.info(response);
@@ -97,7 +98,7 @@ public class BrowserTest {
 	@Test
 	public void getBlockMetasByIndexLenghtOne() {
 		//INDEX
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
 		    Logger.info(response);
@@ -112,7 +113,7 @@ public class BrowserTest {
 	@Test
 	public void getBlockMetasByIndexLenghtTen() {
 		//INDEX
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 10L);
 		    Logger.info(response);
@@ -126,7 +127,7 @@ public class BrowserTest {
 	@Test
 	public void getBlockMetasByIndexLenghtZero() {
 		//INDEX
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 0L);
 		    Logger.info(response);
@@ -142,7 +143,7 @@ public class BrowserTest {
 	public void getBlockMetasByHash() {
 		String hash = null;
 		//Retrieve hash from blockchain
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
 			hash = response.getBlkMetas(0).getHash();
@@ -150,7 +151,7 @@ public class BrowserTest {
 			//force close stream
 			browser.close();
 			//reopen same stream
-			browser = new Browser(HOST, PORT);
+			browser = new ClientImpl(HOST, PORT);
 			response = browser.getBlockMetasByHash(hash);
 		    Logger.info(response);
 			
@@ -164,7 +165,7 @@ public class BrowserTest {
 	
 	@Test
 	public void getSuggestGasPrice() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			SuggestGasPriceResponse response = browser.getSuggestGasPrice();
 		    Logger.info(response);
@@ -178,7 +179,7 @@ public class BrowserTest {
 	
 	@Test
 	public void readContract() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			Long start = 0L;
 			Long count = 30L;
@@ -203,7 +204,7 @@ public class BrowserTest {
 
 	@Test
 	public void getActionsByIndexOne() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetActionsResponse response = browser.getActionsByIndex(10L, 1L);
 		    Logger.info(response);
@@ -217,7 +218,7 @@ public class BrowserTest {
 	}
 	@Test
 	public void getActionsByIndexTen() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetActionsResponse response = browser.getActionsByIndex(10L, 10L);
 		    Logger.info(response);
@@ -231,7 +232,7 @@ public class BrowserTest {
 	}
 	@Test
 	public void getActionsByIndexZero() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetActionsResponse response = browser.getActionsByIndex(10L, 0L);
 		    Logger.info(response);
@@ -245,7 +246,7 @@ public class BrowserTest {
 	}
 	@Test
 	public void getActionsByHash() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetActionsResponse response = browser.getActionsByHash("eb0bab335c3ab0d43020cbe3aa494933ee473394d75a52fd5112cff6af2a5d92", false);
 		    Logger.info(response);
@@ -259,7 +260,7 @@ public class BrowserTest {
 	}
 	@Test
 	public void getActionsByBlockHash() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
 		    Logger.info(response);
@@ -269,7 +270,7 @@ public class BrowserTest {
 			String hash = response.getBlkMetasList().get(0).getHash();
 			browser.close();
 			
-			browser = new Browser(HOST, PORT);
+			browser = new ClientImpl(HOST, PORT);
 			GetActionsResponse respAction = browser.getActionsByBlock(hash, 0L, 1L);
 		    
 			Assert.assertNotNull(respAction);
@@ -281,7 +282,7 @@ public class BrowserTest {
 	}
 	//TODO TEST
 	public void estimateGasForAction() {
-		Browser browser = new Browser(HOST, PORT);
+		ClientImpl browser = new ClientImpl(HOST, PORT);
 		try {
 			GetBlockMetasResponse respBlock = browser.getBlockMetasByIndex(10L, 1L);
 			Assert.assertNotNull(respBlock);
@@ -289,7 +290,7 @@ public class BrowserTest {
 			Assert.assertEquals(1, respBlock.getBlkMetasList().size());
 			
 			browser.close();
-			browser = new Browser(HOST, PORT);
+			browser = new ClientImpl(HOST, PORT);
 			
 			GetActionsResponse respAction = browser.getActionsByBlock(respBlock.getBlkMetasList().get(0).getHash(), 0L, 1L);
 			Assert.assertNotNull(respAction);
@@ -297,7 +298,7 @@ public class BrowserTest {
 			Assert.assertEquals(1, respAction.getActionInfoList().size());
 			
 			browser.close();
-			browser = new Browser(HOST, PORT);
+			browser = new ClientImpl(HOST, PORT);
 			
 			EstimateGasForActionResponse response = browser.estimateGasForAction(respAction.getActionInfoList().get(0).getAction());
 			
