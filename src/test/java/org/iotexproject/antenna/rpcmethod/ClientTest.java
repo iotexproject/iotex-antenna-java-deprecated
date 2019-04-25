@@ -12,6 +12,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
+import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Transfer;
 import org.iotexproject.antenna.rpcmethod.Client;
 import org.junit.Assert;
 import org.junit.Test;
@@ -239,5 +240,39 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getGas());
 		Assert.assertEquals(10400L, response.getGas());
+	}
+
+//	@Test TODO
+	public void getActionsByAddress() {
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getBlockMetasByIndex(10L, 1L);
+		Logger.info(response);
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getBlkMetasList());
+		Assert.assertEquals(1, response.getBlkMetasList().size());
+		String hash = response.getBlkMetasList().get(0).getHash();
+
+		GetActionsResponse respAction = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getActionsByBlock(hash, 0L, 15L);
+
+		Assert.assertNotNull(respAction);
+		Assert.assertNotNull(respAction.getActionInfoList());
+
+		Transfer t = null;
+
+		for (ActionInfo actionInfo : respAction.getActionInfoList()) {
+			t = actionInfo.getAction().getCore().getTransfer();
+			if (t != null) {
+
+				GetActionsResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+						.getActionsByAddress(t.getRecipient(), 0L, 1L);
+
+				Assert.assertNotNull(resp);
+				Assert.assertNotNull(respAction.getActionInfoList());
+				Assert.assertEquals(1, respAction.getActionInfoList().size());
+
+				break;
+			}
+		}
 	}
 }

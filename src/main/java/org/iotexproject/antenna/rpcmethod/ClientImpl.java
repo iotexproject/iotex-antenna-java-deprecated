@@ -10,6 +10,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionByHashRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByAddressRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByBlockRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByIndexRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsRequest;
@@ -36,11 +37,12 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
 /**
- *  Copyright (c) 2019 IoTeX
- *  This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
- *  warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
- *  permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
- *  License 2.0 that can be found in the LICENSE file.
+ * Copyright (c) 2019 IoTeX This is an alpha (internal) release and is not
+ * suitable for production. This source code is provided 'as is' and no
+ * warranties are given as to title or non-infringement, merchantability or
+ * fitness for purpose and, to the extent permitted by law, all liability for
+ * your use of the code is disclaimed. This source code is governed by Apache
+ * License 2.0 that can be found in the LICENSE file.
  * 
  * @author Fabrizio Spataro <fabryprog@gmail.com>
  *
@@ -48,7 +50,7 @@ import io.grpc.ManagedChannelBuilder;
 public class ClientImpl implements IoTeXGRPCInterface {
 	private final ManagedChannel channel;
 	private final APIServiceBlockingStub blockingStub;
-    
+
 	public ClientImpl(final String host, final Integer port) {
 		this(ManagedChannelBuilder.forAddress(host, port).usePlaintext());
 	}
@@ -57,31 +59,34 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		channel = channelBuilder.build();
 		blockingStub = APIServiceGrpc.newBlockingStub(channel);
 	}
-	
+
 	public GetChainMetaResponse getChainMeta() {
 		GetChainMetaRequest req = GetChainMetaRequest.newBuilder().build();
-	  	return blockingStub.getChainMeta(req);
+		return blockingStub.getChainMeta(req);
 	}
-	public GetEpochMetaResponse getEpochMeta(Long epoch) {
+
+	public GetEpochMetaResponse getEpochMeta(final Long epoch) {
 		GetEpochMetaRequest req = GetEpochMetaRequest.newBuilder().setEpochNumber(epoch).build();
-	  	return blockingStub.getEpochMeta(req);
+		return blockingStub.getEpochMeta(req);
 	}
+
 	public GetServerMetaResponse getServerMeta() {
 		GetServerMetaRequest req = GetServerMetaRequest.newBuilder().build();
-	  	return blockingStub.getServerMeta(req);
+		return blockingStub.getServerMeta(req);
 	}
-	
+
 	public GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count) {
-		GetBlockMetasByIndexRequest reqIdx = GetBlockMetasByIndexRequest.newBuilder().setStart(start).setCount(count).build();
+		GetBlockMetasByIndexRequest reqIdx = GetBlockMetasByIndexRequest.newBuilder().setStart(start).setCount(count)
+				.build();
 		GetBlockMetasRequest req = GetBlockMetasRequest.newBuilder().setByIndex(reqIdx).build();
-		
+
 		return blockingStub.getBlockMetas(req);
 	}
-	
+
 	public GetBlockMetasResponse getBlockMetasByHash(final String hash) {
 		GetBlockMetaByHashRequest reqHash = GetBlockMetaByHashRequest.newBuilder().setBlkHash(hash).build();
 		GetBlockMetasRequest req = GetBlockMetasRequest.newBuilder().setByHash(reqHash).build();
-		
+
 		return blockingStub.getBlockMetas(req);
 	}
 
@@ -89,53 +94,62 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		GetAccountRequest req = GetAccountRequest.newBuilder().setAddress(address).build();
 		return blockingStub.getAccount(req);
 	}
-	
+
 	public SuggestGasPriceResponse getSuggestGasPrice() {
 		SuggestGasPriceRequest req = SuggestGasPriceRequest.newBuilder().build();
 		return blockingStub.suggestGasPrice(req);
 	}
-	
+
 	public GetActionsResponse getActionsByIndex(final Long start, final Long count) {
 		GetActionsByIndexRequest reqIdx = GetActionsByIndexRequest.newBuilder().setStart(start).setCount(count).build();
-		
+
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByIndex(reqIdx).build();
 		return blockingStub.getActions(req);
 	}
-	
+
 	public GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending) {
-		GetActionByHashRequest reqHash = GetActionByHashRequest.newBuilder().setActionHash(hash).setCheckPending(checkPending).build();
-		
+		GetActionByHashRequest reqHash = GetActionByHashRequest.newBuilder().setActionHash(hash)
+				.setCheckPending(checkPending).build();
+
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByHash(reqHash).build();
 		return blockingStub.getActions(req);
 	}
-	
-	public GetActionsResponse getActionsByBlock(String hash, Long start, Long count) {
-		GetActionsByBlockRequest reqBlock = GetActionsByBlockRequest.newBuilder().setBlkHash(hash).setStart(start).setCount(count).build();
-		
+
+	public GetActionsResponse getActionsByBlock(final String hash, Long start, final Long count) {
+		GetActionsByBlockRequest reqBlock = GetActionsByBlockRequest.newBuilder().setBlkHash(hash).setStart(start)
+				.setCount(count).build();
+
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByBlk(reqBlock).build();
 		return blockingStub.getActions(req);
 	}
-	
-	public EstimateGasForActionResponse estimateGasForAction(Action action) {
+
+	public EstimateGasForActionResponse estimateGasForAction(final Action action) {
 		EstimateGasForActionRequest req = EstimateGasForActionRequest.newBuilder().setAction(action).build();
-		
+
 		return blockingStub.estimateGasForAction(req);
 	}
-	
-	public GetReceiptByActionResponse getReceiptByAction(String hash) {
+
+	public GetReceiptByActionResponse getReceiptByAction(final String hash) {
 		GetReceiptByActionRequest req = GetReceiptByActionRequest.newBuilder().setActionHash(hash).build();
-		
+
 		return blockingStub.getReceiptByAction(req);
 	}
-	
-	public ReadContractResponse readContract(Action action) {
+
+	public ReadContractResponse readContract(final Action action) {
 		ReadContractRequest req = ReadContractRequest.newBuilder().setAction(action).build();
-		
+
 		return blockingStub.readContract(req);
 	}
-	
+
+	public GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count) {
+		GetActionsByAddressRequest reqByAddr = GetActionsByAddressRequest.newBuilder().setAddress(address).setStart(start).setCount(count).build();
+
+		GetActionsRequest req = GetActionsRequest.newBuilder().setByAddr(reqByAddr).build();
+
+		return blockingStub.getActions(req);
+	}
+
 	public void close() {
-		channel.shutdownNow();		
+		channel.shutdownNow();
 	}
 }
-

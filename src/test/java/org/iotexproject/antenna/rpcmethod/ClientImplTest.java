@@ -12,7 +12,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
-import org.iotexproject.antenna.rpcmethod.ClientImpl;
+import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Transfer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.pmw.tinylog.Logger;
@@ -316,6 +316,48 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 			Assert.assertNotNull(response);
 			Assert.assertNotNull(response.getGas());
 			Assert.assertEquals(10400L, response.getGas());
+		} finally {
+			browser.close();
+		}
+	}
+
+//	@Test TODO
+	public void getActionsByAddress() {
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
+		try {
+			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
+			Logger.info(response);
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getBlkMetasList());
+			Assert.assertEquals(1, response.getBlkMetasList().size());
+			String hash = response.getBlkMetasList().get(0).getHash();
+			browser.close();
+
+			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
+			GetActionsResponse respAction = browser.getActionsByBlock(hash, 0L, 15L);
+
+			Assert.assertNotNull(respAction);
+			Assert.assertNotNull(respAction.getActionInfoList());
+
+			browser.close();
+
+			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
+
+			Transfer t = null;
+
+			for (ActionInfo actionInfo : respAction.getActionInfoList()) {
+				t = actionInfo.getAction().getCore().getTransfer();
+				if (t != null) {
+
+					GetActionsResponse resp = browser.getActionsByAddress(t.getRecipient(), 0L, 1L);
+
+					Assert.assertNotNull(resp);
+					Assert.assertNotNull(respAction.getActionInfoList());
+					Assert.assertEquals(1, respAction.getActionInfoList().size());
+
+					break;
+				}
+			}
 		} finally {
 			browser.close();
 		}

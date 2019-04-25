@@ -34,7 +34,6 @@ public interface IoTeXGRPCTestInterface {
 	public void estimateGasForAction();
 
 //	TODO
-//	RpcMethod enableSsl
 //	RpcMethod.getActionsByAddress
 //	RpcMethod.getUnconfirmedActionsByAddress
 //	RpcMethod.getActionsByBlock

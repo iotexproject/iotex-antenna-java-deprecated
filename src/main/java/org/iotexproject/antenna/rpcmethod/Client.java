@@ -67,7 +67,7 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetEpochMetaResponse getEpochMeta(Long epoch) throws RPCException {
+	public synchronized GetEpochMetaResponse getEpochMeta(final Long epoch) throws RPCException {
 		GetEpochMetaResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -169,7 +169,7 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetActionsResponse getActionsByIndex(Long start, Long count) throws RPCException {
+	public synchronized GetActionsResponse getActionsByIndex(final Long start, final Long count) throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -186,7 +186,7 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetActionsResponse getActionsByHash(String hash, Boolean checkPending) throws RPCException {
+	public synchronized GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending) throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -203,7 +203,7 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetActionsResponse getActionsByBlock(String hash, Long start, Long count) throws RPCException {
+	public synchronized GetActionsResponse getActionsByBlock(final String hash, final Long start, final Long count) throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -220,7 +220,7 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized EstimateGasForActionResponse estimateGasForAction(Action action) throws RPCException {
+	public synchronized EstimateGasForActionResponse estimateGasForAction(final Action action) throws RPCException {
 		EstimateGasForActionResponse result = null;
 
 		try {
@@ -237,7 +237,7 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized ReadContractResponse readContract(Action action) throws RPCException {
+	public synchronized ReadContractResponse readContract(final Action action) throws RPCException {
 		ReadContractResponse result = null;
 
 		try {
@@ -254,7 +254,7 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetReceiptByActionResponse getReceiptByAction(String hash) throws RPCException {
+	public synchronized GetReceiptByActionResponse getReceiptByAction(final String hash) throws RPCException {
 		GetReceiptByActionResponse result = null;
 
 		try {
@@ -269,6 +269,24 @@ public class Client implements IoTeXGRPCInterface {
 		}
 		return result;
 	}
+	
+	@Override
+	public synchronized GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count) throws RPCException {
+		GetActionsResponse result = null;
+
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+
+			result = instance.getActionsByAddress(address, start, count);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+			throw new RPCException(e);
+		} finally {
+			semaphore.release();
+		}
+		return result;
+	}
+	
 
 	public synchronized void close() {
 		if (instance != null) {
