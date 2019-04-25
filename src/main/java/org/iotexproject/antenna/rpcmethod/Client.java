@@ -38,11 +38,15 @@ public class Client implements IoTeXGRPCInterface {
 	private static Semaphore semaphore;
 
 	public synchronized static ClientImpl getInstance(final String host, final Integer port) {
+		return Client.getInstance(host, port, false);
+	}
+
+	public synchronized static ClientImpl getInstance(final String host, final Integer port, final Boolean ssl) {
 		if (instance == null) {
 			assert host != null;
 			assert port != null;
 
-			instance = new ClientImpl(host, port);
+			instance = new ClientImpl(host, port, ssl);
 
 			semaphore = new Semaphore(1);
 		}
@@ -101,7 +105,8 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count) throws RPCException {
+	public synchronized GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count)
+			throws RPCException {
 		GetBlockMetasResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
