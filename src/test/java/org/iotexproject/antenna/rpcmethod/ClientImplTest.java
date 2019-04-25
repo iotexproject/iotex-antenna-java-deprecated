@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.iotexproject.antenna.grpc;
+package org.iotexproject.antenna.rpcmethod;
 
 import org.iotexproject.antenna.grpc.iotexapi.Api.ActionInfo;
 import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
@@ -27,22 +27,18 @@ import org.pmw.tinylog.Logger;
  * 
  * @author Fabrizio Spataro <fabryprog@gmail.com>
  */
-public class ClientImplTest {
-
-	private static final String HOST = "api.iotex.one";
-	private static final Integer PORT = 80;
+public class ClientImplTest implements IoTeXGRPCTestInterface {
 
 	@Test
 	public void getAccount() {
-		final String address = "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw";
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
-			GetAccountResponse response = browser.getAccount(address);
+			GetAccountResponse response = browser.getAccount(TestConstants.ADDRESS);
 			Logger.info(response);
 
 			Assert.assertNotNull(response);
 			Assert.assertNotNull(response.getAccountMeta());
-			Assert.assertEquals(address, response.getAccountMeta().getAddress());
+			Assert.assertEquals(TestConstants.ADDRESS, response.getAccountMeta().getAddress());
 
 			Assert.assertNotNull(response.getAccountMeta().getBalance());
 			Assert.assertNotNull(response.getAccountMeta().getNonce());
@@ -54,7 +50,7 @@ public class ClientImplTest {
 
 	@Test
 	public void getChainMeta() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetChainMetaResponse response = browser.getChainMeta();
 			Logger.info(response);
@@ -68,7 +64,7 @@ public class ClientImplTest {
 	@Test
 	public void GetEpochMeta() {
 		final long epoch = 1;
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetEpochMetaResponse response = browser.getEpochMeta(epoch);
 			Logger.info(response);
@@ -83,7 +79,7 @@ public class ClientImplTest {
 
 	@Test
 	public void getServerMeta() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetServerMetaResponse response = browser.getServerMeta();
 			Logger.info(response);
@@ -104,7 +100,7 @@ public class ClientImplTest {
 	@Test
 	public void getBlockMetasByIndexLenghtOne() {
 		// INDEX
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
 			Logger.info(response);
@@ -119,7 +115,7 @@ public class ClientImplTest {
 	@Test
 	public void getBlockMetasByIndexLenghtTen() {
 		// INDEX
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 10L);
 			Logger.info(response);
@@ -133,7 +129,7 @@ public class ClientImplTest {
 	@Test
 	public void getBlockMetasByIndexLenghtZero() {
 		// INDEX
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 0L);
 			Logger.info(response);
@@ -149,7 +145,7 @@ public class ClientImplTest {
 	public void getBlockMetasByHash() {
 		String hash = null;
 		// Retrieve hash from blockchain
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
 			hash = response.getBlkMetas(0).getHash();
@@ -157,7 +153,7 @@ public class ClientImplTest {
 			// force close stream
 			browser.close();
 			// reopen same stream
-			browser = new ClientImpl(HOST, PORT);
+			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 			response = browser.getBlockMetasByHash(hash);
 			Logger.info(response);
 
@@ -171,7 +167,7 @@ public class ClientImplTest {
 
 	@Test
 	public void getSuggestGasPrice() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			SuggestGasPriceResponse response = browser.getSuggestGasPrice();
 			Logger.info(response);
@@ -185,7 +181,7 @@ public class ClientImplTest {
 
 	@Test
 	public void readContract() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			Long start = 0L;
 			Long count = 30L;
@@ -210,7 +206,7 @@ public class ClientImplTest {
 
 	@Test
 	public void getActionsByIndexOne() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetActionsResponse response = browser.getActionsByIndex(10L, 1L);
 			Logger.info(response);
@@ -225,7 +221,7 @@ public class ClientImplTest {
 
 	@Test
 	public void getActionsByIndexTen() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetActionsResponse response = browser.getActionsByIndex(10L, 10L);
 			Logger.info(response);
@@ -240,7 +236,7 @@ public class ClientImplTest {
 
 	@Test
 	public void getActionsByIndexZero() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetActionsResponse response = browser.getActionsByIndex(10L, 0L);
 			Logger.info(response);
@@ -255,10 +251,9 @@ public class ClientImplTest {
 
 	@Test
 	public void getActionsByHash() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
-			GetActionsResponse response = browser
-					.getActionsByHash("eb0bab335c3ab0d43020cbe3aa494933ee473394d75a52fd5112cff6af2a5d92", false);
+			GetActionsResponse response = browser.getActionsByHash(TestConstants.ACTION_HASH, false);
 			Logger.info(response);
 
 			Assert.assertNotNull(response);
@@ -271,7 +266,7 @@ public class ClientImplTest {
 
 	@Test
 	public void getActionsByBlockHash() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
 			Logger.info(response);
@@ -281,7 +276,7 @@ public class ClientImplTest {
 			String hash = response.getBlkMetasList().get(0).getHash();
 			browser.close();
 
-			browser = new ClientImpl(HOST, PORT);
+			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 			GetActionsResponse respAction = browser.getActionsByBlock(hash, 0L, 1L);
 
 			Assert.assertNotNull(respAction);
@@ -292,9 +287,9 @@ public class ClientImplTest {
 		}
 	}
 
-	// TODO TEST
+//	@Test TODO
 	public void estimateGasForAction() {
-		ClientImpl browser = new ClientImpl(HOST, PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 		try {
 			GetBlockMetasResponse respBlock = browser.getBlockMetasByIndex(10L, 1L);
 			Assert.assertNotNull(respBlock);
@@ -302,7 +297,7 @@ public class ClientImplTest {
 			Assert.assertEquals(1, respBlock.getBlkMetasList().size());
 
 			browser.close();
-			browser = new ClientImpl(HOST, PORT);
+			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 
 			GetActionsResponse respAction = browser.getActionsByBlock(respBlock.getBlkMetasList().get(0).getHash(), 0L,
 					1L);
@@ -311,7 +306,7 @@ public class ClientImplTest {
 			Assert.assertEquals(1, respAction.getActionInfoList().size());
 
 			browser.close();
-			browser = new ClientImpl(HOST, PORT);
+			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
 
 			EstimateGasForActionResponse response = browser
 					.estimateGasForAction(respAction.getActionInfoList().get(0).getAction());

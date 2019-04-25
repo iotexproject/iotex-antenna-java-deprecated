@@ -1,7 +1,7 @@
 /**
  * 
  */
-package org.iotexproject.antenna.grpc;
+package org.iotexproject.antenna.rpcmethod;
 
 import org.iotexproject.antenna.grpc.iotexapi.Api.ActionInfo;
 import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
@@ -27,21 +27,17 @@ import org.pmw.tinylog.Logger;
  * 
  * @author Fabrizio Spataro <fabryprog@gmail.com>
  */
-public class ClientTest {
-
-	private static final String HOST = "api.iotex.one";
-	private static final Integer PORT = 80;
+public class ClientTest implements IoTeXGRPCTestInterface {
 
 	@Test
 	public void getAccount() {
-		final String address = "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw";
-
-		GetAccountResponse response = Client.getInstance(HOST, PORT).getAccount(address);
+		GetAccountResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getAccount(TestConstants.ADDRESS);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getAccountMeta());
-		Assert.assertEquals(address, response.getAccountMeta().getAddress());
+		Assert.assertEquals(TestConstants.ADDRESS, response.getAccountMeta().getAddress());
 
 		Assert.assertNotNull(response.getAccountMeta().getBalance());
 		Assert.assertNotNull(response.getAccountMeta().getNonce());
@@ -50,7 +46,7 @@ public class ClientTest {
 
 	@Test
 	public void getChainMeta() {
-		GetChainMetaResponse response = Client.getInstance(HOST, PORT).getChainMeta();
+		GetChainMetaResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT).getChainMeta();
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -59,7 +55,7 @@ public class ClientTest {
 	@Test
 	public void GetEpochMeta() {
 		final long epoch = 1;
-		GetEpochMetaResponse response = Client.getInstance(HOST, PORT).getEpochMeta(epoch);
+		GetEpochMetaResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT).getEpochMeta(epoch);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -69,7 +65,7 @@ public class ClientTest {
 
 	@Test
 	public void getServerMeta() {
-		GetServerMetaResponse response = Client.getInstance(HOST, PORT).getServerMeta();
+		GetServerMetaResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT).getServerMeta();
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -84,7 +80,8 @@ public class ClientTest {
 	@Test
 	public void getBlockMetasByIndexLenghtOne() {
 		// INDEX
-		GetBlockMetasResponse response = Client.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 1L);
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getBlockMetasByIndex(10L, 1L);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -94,7 +91,8 @@ public class ClientTest {
 	@Test
 	public void getBlockMetasByIndexLenghtTen() {
 		// INDEX
-		GetBlockMetasResponse response = Client.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 10L);
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getBlockMetasByIndex(10L, 10L);
 		Logger.info(response);
 		Assert.assertNotNull(response);
 		Assert.assertEquals(10, response.getBlkMetasList().size());
@@ -103,7 +101,8 @@ public class ClientTest {
 	@Test
 	public void getBlockMetasByIndexLenghtZero() {
 		// INDEX
-		GetBlockMetasResponse response = Client.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 0L);
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getBlockMetasByIndex(10L, 0L);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -114,10 +113,11 @@ public class ClientTest {
 	public void getBlockMetasByHash() {
 		String hash = null;
 		// Retrieve hash from blockchain
-		GetBlockMetasResponse response = Client.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 1L);
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getBlockMetasByIndex(10L, 1L);
 		hash = response.getBlkMetas(0).getHash();
 
-		response = Client.getInstance(HOST, PORT).getBlockMetasByHash(hash);
+		response = Client.getInstance(TestConstants.HOST, TestConstants.PORT).getBlockMetasByHash(hash);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -127,7 +127,8 @@ public class ClientTest {
 
 	@Test
 	public void getSuggestGasPrice() {
-		SuggestGasPriceResponse response = Client.getInstance(HOST, PORT).getSuggestGasPrice();
+		SuggestGasPriceResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getSuggestGasPrice();
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -138,7 +139,8 @@ public class ClientTest {
 	public void readContract() {
 		Long start = 0L;
 		Long count = 30L;
-		GetActionsResponse response = Client.getInstance(HOST, PORT).getActionsByIndex(start, count);
+		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getActionsByIndex(start, count);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -156,7 +158,8 @@ public class ClientTest {
 
 	@Test
 	public void getActionsByIndexOne() {
-		GetActionsResponse response = Client.getInstance(HOST, PORT).getActionsByIndex(10L, 1L);
+		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT).getActionsByIndex(10L,
+				1L);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -166,7 +169,8 @@ public class ClientTest {
 
 	@Test
 	public void getActionsByIndexTen() {
-		GetActionsResponse response = Client.getInstance(HOST, PORT).getActionsByIndex(10L, 10L);
+		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT).getActionsByIndex(10L,
+				10L);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -176,7 +180,8 @@ public class ClientTest {
 
 	@Test
 	public void getActionsByIndexZero() {
-		GetActionsResponse response = Client.getInstance(HOST, PORT).getActionsByIndex(10L, 0L);
+		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT).getActionsByIndex(10L,
+				0L);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -186,8 +191,8 @@ public class ClientTest {
 
 	@Test
 	public void getActionsByHash() {
-		GetActionsResponse response = Client.getInstance(HOST, PORT)
-				.getActionsByHash("eb0bab335c3ab0d43020cbe3aa494933ee473394d75a52fd5112cff6af2a5d92", false);
+		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getActionsByHash(TestConstants.ACTION_HASH, false);
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
@@ -197,33 +202,36 @@ public class ClientTest {
 
 	@Test
 	public void getActionsByBlockHash() {
-		GetBlockMetasResponse response = Client.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 1L);
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getBlockMetasByIndex(10L, 1L);
 		Logger.info(response);
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getBlkMetasList());
 		Assert.assertEquals(1, response.getBlkMetasList().size());
 		String hash = response.getBlkMetasList().get(0).getHash();
-		GetActionsResponse respAction = Client.getInstance(HOST, PORT).getActionsByBlock(hash, 0L, 1L);
+		GetActionsResponse respAction = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getActionsByBlock(hash, 0L, 1L);
 
 		Assert.assertNotNull(respAction);
 		Assert.assertNotNull(respAction.getActionInfoList());
 		Assert.assertEquals(1, respAction.getActionInfoList().size());
 	}
 
-	// TODO TEST
+	// @Test TODO
 	public void estimateGasForAction() {
-		GetBlockMetasResponse respBlock = Client.getInstance(HOST, PORT).getBlockMetasByIndex(10L, 1L);
+		GetBlockMetasResponse respBlock = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getBlockMetasByIndex(10L, 1L);
 		Assert.assertNotNull(respBlock);
 		Assert.assertNotNull(respBlock.getBlkMetasList());
 		Assert.assertEquals(1, respBlock.getBlkMetasList().size());
 
-		GetActionsResponse respAction = Client.getInstance(HOST, PORT)
+		GetActionsResponse respAction = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
 				.getActionsByBlock(respBlock.getBlkMetasList().get(0).getHash(), 0L, 1L);
 		Assert.assertNotNull(respAction);
 		Assert.assertNotNull(respAction.getActionInfoList());
 		Assert.assertEquals(1, respAction.getActionInfoList().size());
 
-		EstimateGasForActionResponse response = Client.getInstance(HOST, PORT)
+		EstimateGasForActionResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
 				.estimateGasForAction(respAction.getActionInfoList().get(0).getAction());
 
 		Logger.info(response);

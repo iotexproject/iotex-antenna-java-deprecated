@@ -101,11 +101,3 @@ mvn clean test
 ```
   Client.getInstance(HOST, PORT).getServerMeta()
 ```
-
-## TODO
-
-* iotexapi.APIService.EstimateGasForAction (TODO test)
-* iotexapi.APIService.GetReceiptByAction (TODO test)
-* iotexapi.APIService.ReadContract (TODO test)
-* iotexapi.APIService.ReadState (TODO)
-* iotexapi.APIService.SendAction (TODO)
