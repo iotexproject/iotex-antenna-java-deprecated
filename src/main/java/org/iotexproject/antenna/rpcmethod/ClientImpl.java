@@ -52,11 +52,16 @@ public class ClientImpl implements IoTeXGRPCInterface {
 	private final APIServiceBlockingStub blockingStub;
 
 	public ClientImpl(final String host, final Integer port) {
-		this(ManagedChannelBuilder.forAddress(host, port).usePlaintext());
+		this(host, port, false);
 	}
 
-	public ClientImpl(ManagedChannelBuilder<?> channelBuilder) {
-		channel = channelBuilder.build();
+	public ClientImpl(final String host, final Integer port, final Boolean ssl) {
+		if (Boolean.TRUE.equals(ssl)) {
+			channel = ManagedChannelBuilder.forAddress(host, port).build();
+		} else {
+			channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+		}
+
 		blockingStub = APIServiceGrpc.newBlockingStub(channel);
 	}
 
