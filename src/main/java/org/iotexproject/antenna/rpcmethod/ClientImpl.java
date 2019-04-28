@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.iotexproject.antenna.rpcmethod;
 
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc;

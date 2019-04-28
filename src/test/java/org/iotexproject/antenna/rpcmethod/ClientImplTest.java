@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.iotexproject.antenna.rpcmethod;
 
 import org.iotexproject.antenna.grpc.iotexapi.Api.ActionInfo;
@@ -258,7 +255,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 
 			Assert.assertNotNull(response);
 			Assert.assertNotNull(response.getActionInfoList());
-			Assert.assertEquals(response.getActionInfoList().size(), 1);
+			Assert.assertEquals(1, response.getActionInfoList().size());
 		} finally {
 			browser.close();
 		}
