@@ -1,6 +1,3 @@
-/**
- * 
- */
 package org.iotexproject.antenna.rpcmethod;
 
 import org.iotexproject.antenna.grpc.iotexapi.APIServiceGrpc;
@@ -10,6 +7,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.EstimateGasForActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetAccountResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionByHashRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByAddressRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByBlockRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsByIndexRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsRequest;
@@ -69,7 +67,7 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		return blockingStub.getChainMeta(req);
 	}
 
-	public GetEpochMetaResponse getEpochMeta(Long epoch) {
+	public GetEpochMetaResponse getEpochMeta(final Long epoch) {
 		GetEpochMetaRequest req = GetEpochMetaRequest.newBuilder().setEpochNumber(epoch).build();
 		return blockingStub.getEpochMeta(req);
 	}
@@ -119,7 +117,7 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		return blockingStub.getActions(req);
 	}
 
-	public GetActionsResponse getActionsByBlock(String hash, Long start, Long count) {
+	public GetActionsResponse getActionsByBlock(final String hash, Long start, final Long count) {
 		GetActionsByBlockRequest reqBlock = GetActionsByBlockRequest.newBuilder().setBlkHash(hash).setStart(start)
 				.setCount(count).build();
 
@@ -127,22 +125,30 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		return blockingStub.getActions(req);
 	}
 
-	public EstimateGasForActionResponse estimateGasForAction(Action action) {
+	public EstimateGasForActionResponse estimateGasForAction(final Action action) {
 		EstimateGasForActionRequest req = EstimateGasForActionRequest.newBuilder().setAction(action).build();
 
 		return blockingStub.estimateGasForAction(req);
 	}
 
-	public GetReceiptByActionResponse getReceiptByAction(String hash) {
+	public GetReceiptByActionResponse getReceiptByAction(final String hash) {
 		GetReceiptByActionRequest req = GetReceiptByActionRequest.newBuilder().setActionHash(hash).build();
 
 		return blockingStub.getReceiptByAction(req);
 	}
 
-	public ReadContractResponse readContract(Action action) {
+	public ReadContractResponse readContract(final Action action) {
 		ReadContractRequest req = ReadContractRequest.newBuilder().setAction(action).build();
 
 		return blockingStub.readContract(req);
+	}
+
+	public GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count) {
+		GetActionsByAddressRequest reqByAddr = GetActionsByAddressRequest.newBuilder().setAddress(address).setStart(start).setCount(count).build();
+
+		GetActionsRequest req = GetActionsRequest.newBuilder().setByAddr(reqByAddr).build();
+
+		return blockingStub.getActions(req);
 	}
 
 	public void close() {

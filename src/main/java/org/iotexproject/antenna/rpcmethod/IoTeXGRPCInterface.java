@@ -27,7 +27,7 @@ import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
 public interface IoTeXGRPCInterface {
 	public GetChainMetaResponse getChainMeta() throws RPCException;
 
-	public GetEpochMetaResponse getEpochMeta(Long epoch) throws RPCException;
+	public GetEpochMetaResponse getEpochMeta(final Long epoch) throws RPCException;
 
 	public GetServerMetaResponse getServerMeta() throws RPCException;
 
@@ -39,17 +39,19 @@ public interface IoTeXGRPCInterface {
 
 	public SuggestGasPriceResponse getSuggestGasPrice() throws RPCException;
 
-	public GetActionsResponse getActionsByIndex(Long start, Long count) throws RPCException;
+	public GetActionsResponse getActionsByIndex(final Long start, final Long count) throws RPCException;
 
 	public GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending) throws RPCException;
 
-	public GetActionsResponse getActionsByBlock(String hash, Long start, Long count) throws RPCException;
+	public GetActionsResponse getActionsByBlock(final String hash, final Long start, final Long count) throws RPCException;
 
-	public EstimateGasForActionResponse estimateGasForAction(Action action) throws RPCException;
+	public EstimateGasForActionResponse estimateGasForAction(final Action action) throws RPCException;
 
-	public GetReceiptByActionResponse getReceiptByAction(String hash) throws RPCException;
+	public GetReceiptByActionResponse getReceiptByAction(final String hash) throws RPCException;
 
-	public ReadContractResponse readContract(Action action) throws RPCException;
+	public ReadContractResponse readContract(final Action action) throws RPCException;
+
+	public GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count) throws RPCException;
 
 	public void close() throws RPCException;
 }

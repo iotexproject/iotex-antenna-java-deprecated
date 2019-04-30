@@ -101,3 +101,9 @@ mvn clean test
 ```
   Client.getInstance(HOST, PORT).getServerMeta()
 ```
+
+### getActionsByAddress
+
+```
+  Client.getInstance(HOST, PORT).getActionsByAddress(String address)
+```

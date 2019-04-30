@@ -1,11 +1,14 @@
-/**
- * 
- */
 package org.iotexproject.antenna.rpcmethod;
 
 /**
- * @author fabryprog
- *
+ * Copyright (c) 2019 IoTeX This is an alpha (internal) release and is not
+ * suitable for production. This source code is provided 'as is' and no
+ * warranties are given as to title or non-infringement, merchantability or
+ * fitness for purpose and, to the extent permitted by law, all liability for
+ * your use of the code is disclaimed. This source code is governed by Apache
+ * License 2.0 that can be found in the LICENSE file.
+ * 
+ * @author Fabrizio Spataro <fabryprog@gmail.com>
  */
 public class TestConstants {
 	public static final String HOST = "api.testnet.iotex.one";
@@ -16,6 +19,6 @@ public class TestConstants {
 	public static final String ADDRESS = "io126xcrjhtp27end76ac9nmx6px2072c3vgz6suw";
 
 	// getActionsByHash()
-	public static final String ACTION_HASH = "5526eea2aac8f22afebb67058c45e55d1ddc9c4c1f8db055ec04c52edb8ed23f";
+	public static final String ACTION_HASH = "6f63cf29d818e8242dc06250d2522e90ada3c5744424f1dcc73afc760d2ec1cf";
 
 }
