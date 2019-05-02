@@ -150,7 +150,7 @@ public class ClientImpl implements IoTeXGRPCInterface {
 
 		return blockingStub.getActions(req);
 	}
-
+	
 	public void close() {
 		channel.shutdownNow();
 	}

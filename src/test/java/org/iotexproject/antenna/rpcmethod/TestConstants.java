@@ -21,4 +21,6 @@ public class TestConstants {
 	// getActionsByHash()
 	public static final String ACTION_HASH = "6f63cf29d818e8242dc06250d2522e90ada3c5744424f1dcc73afc760d2ec1cf";
 
+	//getReceiptByAction()
+	public static final String RECEIPT_ACTION_HASH = "01d5c895f3b066e695d516884bec9977404875aeb15216bc087dbc0a1ef9aed1";
 }

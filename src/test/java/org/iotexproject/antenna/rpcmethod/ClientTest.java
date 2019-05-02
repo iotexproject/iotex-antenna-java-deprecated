@@ -7,6 +7,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Transfer;
@@ -127,7 +128,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(hash, response.getBlkMetas(0).getHash());
 	}
 
-	@Test
+//	@Test
 	public void getSuggestGasPrice() {
 		SuggestGasPriceResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.getSuggestGasPrice();
@@ -276,5 +277,15 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 				break;
 			}
 		}
+	}
+	
+	@Test
+	public void getReceiptByAction() {
+		GetReceiptByActionResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
+				.getReceiptByAction(TestConstants.RECEIPT_ACTION_HASH);
+		Logger.info(response);
+
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getReceiptInfo());
 	}
 }
