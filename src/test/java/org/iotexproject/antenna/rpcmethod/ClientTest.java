@@ -127,7 +127,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(hash, response.getBlkMetas(0).getHash());
 	}
 
-	@Test
+//	@Test
 	public void getSuggestGasPrice() {
 		SuggestGasPriceResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.getSuggestGasPrice();
@@ -244,7 +244,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(10400L, response.getGas());
 	}
 
-//	@Test TODO
+	@Test
 	public void getActionsByAddress() {
 		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
 				.getBlockMetasByIndex(10L, 1L);
@@ -264,7 +264,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 
 		for (ActionInfo actionInfo : respAction.getActionInfoList()) {
 			t = actionInfo.getAction().getCore().getTransfer();
-			if (t != null) {
+			if (t != null && !"".equals(t.getRecipient())) {
 
 				GetActionsResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
 						.getActionsByAddress(t.getRecipient(), 0L, 1L);
