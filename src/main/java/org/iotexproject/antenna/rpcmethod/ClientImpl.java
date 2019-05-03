@@ -28,6 +28,8 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
@@ -183,6 +185,13 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		ReadStateRequest req = builder.build();
 
 		return blockingStub.readState(req);
+	}
+
+	@Override
+	public SendActionResponse sendAction(final Action action) {
+		SendActionRequest req = SendActionRequest.newBuilder().setAction(action).build();
+
+		return blockingStub.sendAction(req);
 	}
 
 	@Override

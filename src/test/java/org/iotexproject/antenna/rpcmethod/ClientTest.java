@@ -9,6 +9,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Transfer;
 import org.junit.Assert;
@@ -301,5 +302,34 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 				.readState(TestConstants.METHOD_NAME, TestConstants.PROTOCOL_ID, TestConstants.ARGS_0);
 		Assert.assertNotNull(resp);
 		Assert.assertNotNull(resp.getData());
+	}
+
+	@Test
+	public void sendAction() {
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getBlockMetasByIndex(10L, 1L);
+		Logger.info(response);
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getBlkMetasList());
+		Assert.assertEquals(response.getBlkMetasList().size(), 1);
+		String hash = response.getBlkMetasList().get(0).getHash();
+
+		GetActionsResponse respAction = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.getActionsByBlock(hash, 0L, 15L);
+
+		Assert.assertNotNull(respAction);
+		Assert.assertNotNull(respAction.getActionInfoList());
+
+		for (ActionInfo info : respAction.getActionInfoList()) {
+			if (info.getAction().getCore().getExecution() != null || info.getAction().getCore().getVote() != null) {
+
+				SendActionResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+						.sendAction(info.getAction());
+
+				Logger.info(resp);
+
+				Assert.assertNotNull(resp);
+			}
+		}
 	}
 }

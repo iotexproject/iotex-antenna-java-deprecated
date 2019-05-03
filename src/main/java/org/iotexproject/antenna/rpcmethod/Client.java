@@ -14,6 +14,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
 import org.pmw.tinylog.Logger;
@@ -302,6 +303,23 @@ public class Client implements IoTeXGRPCInterface {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
 
 			result = instance.readState(methodName, protocolID, args);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+			throw new RPCException(e);
+		} finally {
+			semaphore.release();
+		}
+		return result;
+	}
+
+	@Override
+	public synchronized SendActionResponse sendAction(final Action action) throws RPCException {
+		SendActionResponse result = null;
+
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+
+			result = instance.sendAction(action);
 		} catch (InterruptedException e) {
 			Logger.error(e);
 			throw new RPCException(e);

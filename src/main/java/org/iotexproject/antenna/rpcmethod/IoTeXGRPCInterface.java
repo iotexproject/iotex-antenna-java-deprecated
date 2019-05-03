@@ -11,6 +11,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
 
@@ -58,6 +59,8 @@ public interface IoTeXGRPCInterface {
 
 	public ReadStateResponse readState(final String methodName, final String protocolID, final String... args)
 			throws RPCException;
+
+	public SendActionResponse sendAction(final Action action) throws RPCException;
 
 	public void close() throws RPCException;
 }
