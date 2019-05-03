@@ -24,6 +24,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetUnconfirmedActionsByAddressRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceRequest;
@@ -150,7 +151,7 @@ public class ClientImpl implements IoTeXGRPCInterface {
 
 		return blockingStub.getActions(req);
 	}
-
+	
 	public void close() {
 		channel.shutdownNow();
 	}
