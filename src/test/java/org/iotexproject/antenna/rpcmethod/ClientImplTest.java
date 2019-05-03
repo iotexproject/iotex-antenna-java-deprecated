@@ -319,9 +319,9 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
-//	@Test TODO
+	@Test
 	public void getActionsByAddress() {
-		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
 		try {
 			GetBlockMetasResponse response = browser.getBlockMetasByIndex(10L, 1L);
 			Logger.info(response);
@@ -331,7 +331,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 			String hash = response.getBlkMetasList().get(0).getHash();
 			browser.close();
 
-			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
+			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
 			GetActionsResponse respAction = browser.getActionsByBlock(hash, 0L, 15L);
 
 			Assert.assertNotNull(respAction);
@@ -339,14 +339,18 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 
 			browser.close();
 
-			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT);
+			browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
 
 			Transfer t = null;
 
 			for (ActionInfo actionInfo : respAction.getActionInfoList()) {
 				t = actionInfo.getAction().getCore().getTransfer();
-				if (t != null) {
+				if (t != null && !"".equals(t.getRecipient())) {
+					
+					browser.close();
 
+					browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
+					Logger.info("recipient: " + t.getRecipient());
 					GetActionsResponse resp = browser.getActionsByAddress(t.getRecipient(), 0L, 1L);
 
 					Assert.assertNotNull(resp);
