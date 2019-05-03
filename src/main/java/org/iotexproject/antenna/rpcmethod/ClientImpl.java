@@ -24,7 +24,6 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
-import org.iotexproject.antenna.grpc.iotexapi.Api.GetUnconfirmedActionsByAddressRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateRequest;
@@ -32,7 +31,6 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
-import org.pmw.tinylog.Logger;
 
 import com.google.protobuf.ByteString;
 
@@ -68,21 +66,25 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		blockingStub = APIServiceGrpc.newBlockingStub(channel);
 	}
 
+	@Override
 	public GetChainMetaResponse getChainMeta() {
 		GetChainMetaRequest req = GetChainMetaRequest.newBuilder().build();
 		return blockingStub.getChainMeta(req);
 	}
 
+	@Override
 	public GetEpochMetaResponse getEpochMeta(final Long epoch) {
 		GetEpochMetaRequest req = GetEpochMetaRequest.newBuilder().setEpochNumber(epoch).build();
 		return blockingStub.getEpochMeta(req);
 	}
 
+	@Override
 	public GetServerMetaResponse getServerMeta() {
 		GetServerMetaRequest req = GetServerMetaRequest.newBuilder().build();
 		return blockingStub.getServerMeta(req);
 	}
 
+	@Override
 	public GetBlockMetasResponse getBlockMetasByIndex(final Long start, final Long count) {
 		GetBlockMetasByIndexRequest reqIdx = GetBlockMetasByIndexRequest.newBuilder().setStart(start).setCount(count)
 				.build();
@@ -91,6 +93,7 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		return blockingStub.getBlockMetas(req);
 	}
 
+	@Override
 	public GetBlockMetasResponse getBlockMetasByHash(final String hash) {
 		GetBlockMetaByHashRequest reqHash = GetBlockMetaByHashRequest.newBuilder().setBlkHash(hash).build();
 		GetBlockMetasRequest req = GetBlockMetasRequest.newBuilder().setByHash(reqHash).build();
@@ -98,16 +101,19 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		return blockingStub.getBlockMetas(req);
 	}
 
+	@Override
 	public GetAccountResponse getAccount(final String address) {
 		GetAccountRequest req = GetAccountRequest.newBuilder().setAddress(address).build();
 		return blockingStub.getAccount(req);
 	}
 
+	@Override
 	public SuggestGasPriceResponse getSuggestGasPrice() {
 		SuggestGasPriceRequest req = SuggestGasPriceRequest.newBuilder().build();
 		return blockingStub.suggestGasPrice(req);
 	}
 
+	@Override
 	public GetActionsResponse getActionsByIndex(final Long start, final Long count) {
 		GetActionsByIndexRequest reqIdx = GetActionsByIndexRequest.newBuilder().setStart(start).setCount(count).build();
 
@@ -115,6 +121,7 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		return blockingStub.getActions(req);
 	}
 
+	@Override
 	public GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending) {
 		GetActionByHashRequest reqHash = GetActionByHashRequest.newBuilder().setActionHash(hash)
 				.setCheckPending(checkPending).build();
@@ -123,6 +130,7 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		return blockingStub.getActions(req);
 	}
 
+	@Override
 	public GetActionsResponse getActionsByBlock(final String hash, Long start, final Long count) {
 		GetActionsByBlockRequest reqBlock = GetActionsByBlockRequest.newBuilder().setBlkHash(hash).setStart(start)
 				.setCount(count).build();
@@ -131,44 +139,53 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		return blockingStub.getActions(req);
 	}
 
+	@Override
 	public EstimateGasForActionResponse estimateGasForAction(final Action action) {
 		EstimateGasForActionRequest req = EstimateGasForActionRequest.newBuilder().setAction(action).build();
 
 		return blockingStub.estimateGasForAction(req);
 	}
 
+	@Override
 	public GetReceiptByActionResponse getReceiptByAction(final String hash) {
 		GetReceiptByActionRequest req = GetReceiptByActionRequest.newBuilder().setActionHash(hash).build();
 
 		return blockingStub.getReceiptByAction(req);
 	}
 
+	@Override
 	public ReadContractResponse readContract(final Action action) {
 		ReadContractRequest req = ReadContractRequest.newBuilder().setAction(action).build();
 
 		return blockingStub.readContract(req);
 	}
 
+	@Override
 	public GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count) {
-		GetActionsByAddressRequest reqByAddr = GetActionsByAddressRequest.newBuilder().setAddress(address).setStart(start).setCount(count).build();
+		GetActionsByAddressRequest reqByAddr = GetActionsByAddressRequest.newBuilder().setAddress(address)
+				.setStart(start).setCount(count).build();
 
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByAddr(reqByAddr).build();
 
 		return blockingStub.getActions(req);
 	}
 
+	@Override
 	public ReadStateResponse readState(final String methodName, final String protocolID, final String... args) {
-		ReadStateRequest.Builder builder = ReadStateRequest.newBuilder().setMethodName(ByteString.copyFrom(methodName.getBytes())).setProtocolID(ByteString.copyFrom(protocolID.getBytes()));
+		ReadStateRequest.Builder builder = ReadStateRequest.newBuilder()
+				.setMethodName(ByteString.copyFrom(methodName.getBytes()))
+				.setProtocolID(ByteString.copyFrom(protocolID.getBytes()));
 
-		for(String a: args) {
+		for (String a : args) {
 			builder.addArguments(ByteString.copyFrom(a.getBytes()));
 		}
-		
+
 		ReadStateRequest req = builder.build();
 
 		return blockingStub.readState(req);
 	}
-	
+
+	@Override
 	public void close() {
 		channel.shutdownNow();
 	}

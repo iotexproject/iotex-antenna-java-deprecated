@@ -11,7 +11,6 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Transfer;
-import org.iotexproject.antenna.rpcmethod.Client;
 import org.junit.Assert;
 import org.junit.Test;
 import org.pmw.tinylog.Logger;
@@ -28,6 +27,7 @@ import org.pmw.tinylog.Logger;
  */
 public class ClientTest implements IoTeXGRPCTestInterface {
 
+	@Override
 	@Test
 	public void getAccount() {
 		GetAccountResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -43,6 +43,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertNotNull(response.getAccountMeta().getPendingNonce());
 	}
 
+	@Override
 	@Test
 	public void getChainMeta() {
 		GetChainMetaResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -52,6 +53,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertNotNull(response);
 	}
 
+	@Override
 	@Test
 	public void GetEpochMeta() {
 		final long epoch = 1;
@@ -64,6 +66,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(epoch, response.getEpochData().getNum());
 	}
 
+	@Override
 	@Test
 	public void getServerMeta() {
 		GetServerMetaResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -79,6 +82,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertNotNull(response.getServerMeta().getBuildTime());
 	}
 
+	@Override
 	@Test
 	public void getBlockMetasByIndexLenghtOne() {
 		// INDEX
@@ -90,6 +94,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(1, response.getBlkMetasList().size());
 	}
 
+	@Override
 	@Test
 	public void getBlockMetasByIndexLenghtTen() {
 		// INDEX
@@ -100,6 +105,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(10, response.getBlkMetasList().size());
 	}
 
+	@Override
 	@Test
 	public void getBlockMetasByIndexLenghtZero() {
 		// INDEX
@@ -111,6 +117,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(0, response.getBlkMetasList().size());
 	}
 
+	@Override
 	@Test
 	public void getBlockMetasByHash() {
 		String hash = null;
@@ -129,6 +136,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 	}
 
 //	@Test
+	@Override
 	public void getSuggestGasPrice() {
 		SuggestGasPriceResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.getSuggestGasPrice();
@@ -138,6 +146,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(1L, response.getGasPrice());
 	}
 
+	@Override
 	@Test
 	public void readContract() {
 		Long start = 0L;
@@ -159,6 +168,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getActionsByIndexOne() {
 		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -170,6 +180,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(1, response.getActionInfoList().size());
 	}
 
+	@Override
 	@Test
 	public void getActionsByIndexTen() {
 		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -181,6 +192,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(10, response.getActionInfoList().size());
 	}
 
+	@Override
 	@Test
 	public void getActionsByIndexZero() {
 		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -192,6 +204,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(0, response.getActionInfoList().size());
 	}
 
+	@Override
 	@Test
 	public void getActionsByHash() {
 		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -203,6 +216,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(1, response.getActionInfoList().size());
 	}
 
+	@Override
 	@Test
 	public void getActionsByBlockHash() {
 		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -221,6 +235,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 	}
 
 	// @Test TODO
+	@Override
 	public void estimateGasForAction() {
 		GetBlockMetasResponse respBlock = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.getBlockMetasByIndex(10L, 1L);
@@ -278,7 +293,8 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 			}
 		}
 	}
-	
+
+	@Override
 	@Test
 	public void readState() {
 		ReadStateResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT)

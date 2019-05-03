@@ -44,13 +44,5 @@ public interface IoTeXGRPCTestInterface {
 	public void estimateGasForAction();
 
 	public void readState();
-//	TODO
-//	RpcMethod.getActionsByAddress
-//	RpcMethod.getUnconfirmedActionsByAddress
-//	RpcMethod.getActionsByBlock
-//	RpcMethod.getReceiptByAction
-//	RpcMethod.sendAction
-//	RpcMethod.readState
-//	RpcMethod.getDeadline
 
 }

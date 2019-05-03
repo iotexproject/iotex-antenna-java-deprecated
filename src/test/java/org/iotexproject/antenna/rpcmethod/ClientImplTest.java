@@ -27,6 +27,7 @@ import org.pmw.tinylog.Logger;
  */
 public class ClientImplTest implements IoTeXGRPCTestInterface {
 
+	@Override
 	@Test
 	public void getAccount() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -46,6 +47,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getChainMeta() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -59,6 +61,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void GetEpochMeta() {
 		final long epoch = 1;
@@ -75,6 +78,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getServerMeta() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -95,6 +99,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getBlockMetasByIndexLenghtOne() {
 		// INDEX
@@ -110,6 +115,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getBlockMetasByIndexLenghtTen() {
 		// INDEX
@@ -124,6 +130,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getBlockMetasByIndexLenghtZero() {
 		// INDEX
@@ -139,6 +146,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getBlockMetasByHash() {
 		String hash = null;
@@ -164,6 +172,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 	}
 
 //	@Test
+	@Override
 	public void getSuggestGasPrice() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
 		try {
@@ -177,6 +186,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void readContract() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -202,6 +212,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getActionsByIndexOne() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -217,6 +228,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getActionsByIndexTen() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -232,6 +244,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getActionsByIndexZero() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -247,6 +260,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getActionsByHash() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -262,6 +276,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void getActionsByBlockHash() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -286,6 +301,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 	}
 
 //	@Test TODO
+	@Override
 	public void estimateGasForAction() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
 		try {
@@ -346,7 +362,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 			for (ActionInfo actionInfo : respAction.getActionInfoList()) {
 				t = actionInfo.getAction().getCore().getTransfer();
 				if (t != null && !"".equals(t.getRecipient())) {
-					
+
 					browser.close();
 
 					browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -364,12 +380,14 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 			browser.close();
 		}
 	}
-	
+
+	@Override
 	@Test
 	public void readState() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
 		try {
-			ReadStateResponse resp = browser.readState(TestConstants.METHOD_NAME, TestConstants.PROTOCOL_ID, TestConstants.ARGS_0);
+			ReadStateResponse resp = browser.readState(TestConstants.METHOD_NAME, TestConstants.PROTOCOL_ID,
+					TestConstants.ARGS_0);
 			Assert.assertNotNull(resp);
 			Assert.assertNotNull(resp.getData());
 

@@ -189,7 +189,8 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending) throws RPCException {
+	public synchronized GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending)
+			throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -206,7 +207,8 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetActionsResponse getActionsByBlock(final String hash, final Long start, final Long count) throws RPCException {
+	public synchronized GetActionsResponse getActionsByBlock(final String hash, final Long start, final Long count)
+			throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -272,9 +274,10 @@ public class Client implements IoTeXGRPCInterface {
 		}
 		return result;
 	}
-	
+
 	@Override
-	public synchronized GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count) throws RPCException {
+	public synchronized GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count)
+			throws RPCException {
 		GetActionsResponse result = null;
 
 		try {
@@ -289,9 +292,10 @@ public class Client implements IoTeXGRPCInterface {
 		}
 		return result;
 	}
-	
+
 	@Override
-	public ReadStateResponse readState(final String methodName, final String protocolID, final String... args) throws RPCException {
+	public ReadStateResponse readState(final String methodName, final String protocolID, final String... args)
+			throws RPCException {
 		ReadStateResponse result = null;
 
 		try {
@@ -307,7 +311,7 @@ public class Client implements IoTeXGRPCInterface {
 		return result;
 	}
 
-
+	@Override
 	public synchronized void close() {
 		if (instance != null) {
 			instance.close();
