@@ -13,6 +13,8 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
 import org.pmw.tinylog.Logger;
@@ -188,7 +190,8 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending) throws RPCException {
+	public synchronized GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending)
+			throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -205,7 +208,8 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
-	public synchronized GetActionsResponse getActionsByBlock(final String hash, final Long start, final Long count) throws RPCException {
+	public synchronized GetActionsResponse getActionsByBlock(final String hash, final Long start, final Long count)
+			throws RPCException {
 		GetActionsResponse result = null;
 		try {
 			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
@@ -271,9 +275,10 @@ public class Client implements IoTeXGRPCInterface {
 		}
 		return result;
 	}
-	
+
 	@Override
-	public synchronized GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count) throws RPCException {
+	public synchronized GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count)
+			throws RPCException {
 		GetActionsResponse result = null;
 
 		try {
@@ -288,8 +293,43 @@ public class Client implements IoTeXGRPCInterface {
 		}
 		return result;
 	}
-	
 
+	@Override
+	public ReadStateResponse readState(final String methodName, final String protocolID, final String... args)
+			throws RPCException {
+		ReadStateResponse result = null;
+
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+
+			result = instance.readState(methodName, protocolID, args);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+			throw new RPCException(e);
+		} finally {
+			semaphore.release();
+		}
+		return result;
+	}
+
+	@Override
+	public synchronized SendActionResponse sendAction(final Action action) throws RPCException {
+		SendActionResponse result = null;
+
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+
+			result = instance.sendAction(action);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+			throw new RPCException(e);
+		} finally {
+			semaphore.release();
+		}
+		return result;
+	}
+
+	@Override
 	public synchronized void close() {
 		if (instance != null) {
 			instance.close();

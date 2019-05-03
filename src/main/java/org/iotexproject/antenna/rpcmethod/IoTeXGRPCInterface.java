@@ -10,6 +10,8 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
 
@@ -43,7 +45,8 @@ public interface IoTeXGRPCInterface {
 
 	public GetActionsResponse getActionsByHash(final String hash, final Boolean checkPending) throws RPCException;
 
-	public GetActionsResponse getActionsByBlock(final String hash, final Long start, final Long count) throws RPCException;
+	public GetActionsResponse getActionsByBlock(final String hash, final Long start, final Long count)
+			throws RPCException;
 
 	public EstimateGasForActionResponse estimateGasForAction(final Action action) throws RPCException;
 
@@ -51,7 +54,13 @@ public interface IoTeXGRPCInterface {
 
 	public ReadContractResponse readContract(final Action action) throws RPCException;
 
-	public GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count) throws RPCException;
+	public GetActionsResponse getActionsByAddress(final String address, final Long start, final Long count)
+			throws RPCException;
+
+	public ReadStateResponse readState(final String methodName, final String protocolID, final String... args)
+			throws RPCException;
+
+	public SendActionResponse sendAction(final Action action) throws RPCException;
 
 	public void close() throws RPCException;
 }
