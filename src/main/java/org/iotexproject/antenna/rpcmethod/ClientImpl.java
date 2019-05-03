@@ -27,9 +27,14 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetUnconfirmedActionsByAddressRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateRequest;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Action;
+import org.pmw.tinylog.Logger;
+
+import com.google.protobuf.ByteString;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -150,6 +155,18 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		GetActionsRequest req = GetActionsRequest.newBuilder().setByAddr(reqByAddr).build();
 
 		return blockingStub.getActions(req);
+	}
+
+	public ReadStateResponse readState(final String methodName, final String protocolID, final String... args) {
+		ReadStateRequest.Builder builder = ReadStateRequest.newBuilder().setMethodName(ByteString.copyFrom(methodName.getBytes())).setProtocolID(ByteString.copyFrom(protocolID.getBytes()));
+
+		for(String a: args) {
+			builder.addArguments(ByteString.copyFrom(a.getBytes()));
+		}
+		
+		ReadStateRequest req = builder.build();
+
+		return blockingStub.readState(req);
 	}
 	
 	public void close() {

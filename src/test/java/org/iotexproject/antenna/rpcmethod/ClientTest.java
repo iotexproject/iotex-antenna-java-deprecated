@@ -8,6 +8,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SuggestGasPriceResponse;
 import org.iotexproject.antenna.grpc.iotextypes.ActionOuterClass.Transfer;
 import org.iotexproject.antenna.rpcmethod.Client;
@@ -276,5 +277,13 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 				break;
 			}
 		}
+	}
+	
+	@Test
+	public void readState() {
+		ReadStateResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				.readState(TestConstants.METHOD_NAME, TestConstants.PROTOCOL_ID, TestConstants.ARGS_0);
+		Assert.assertNotNull(resp);
+		Assert.assertNotNull(resp.getData());
 	}
 }

@@ -21,4 +21,8 @@ public class TestConstants {
 	// getActionsByHash()
 	public static final String ACTION_HASH = "6f63cf29d818e8242dc06250d2522e90ada3c5744424f1dcc73afc760d2ec1cf";
 
+	// getState()
+	public static final String PROTOCOL_ID = "rewarding";
+	public static final String METHOD_NAME = "UnclaimedBalance";
+	public static final String ARGS_0 = "io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02";
 }
