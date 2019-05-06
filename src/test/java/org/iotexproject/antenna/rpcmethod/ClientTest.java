@@ -7,6 +7,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
@@ -263,7 +264,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 
 	@Test
 	public void getActionsByAddress() {
-		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.getBlockMetasByIndex(10L, 1L);
 		Logger.info(response);
 		Assert.assertNotNull(response);
@@ -271,7 +272,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(1, response.getBlkMetasList().size());
 		String hash = response.getBlkMetasList().get(0).getHash();
 
-		GetActionsResponse respAction = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+		GetActionsResponse respAction = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.getActionsByBlock(hash, 0L, 15L);
 
 		Assert.assertNotNull(respAction);
@@ -283,7 +284,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 			t = actionInfo.getAction().getCore().getTransfer();
 			if (t != null && !"".equals(t.getRecipient())) {
 
-				GetActionsResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				GetActionsResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 						.getActionsByAddress(t.getRecipient(), 0L, 1L);
 
 				Assert.assertNotNull(resp);
@@ -298,15 +299,16 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 	@Override
 	@Test
 	public void readState() {
-		ReadStateResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+		ReadStateResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.readState(TestConstants.METHOD_NAME, TestConstants.PROTOCOL_ID, TestConstants.ARGS_0);
 		Assert.assertNotNull(resp);
 		Assert.assertNotNull(resp.getData());
 	}
 
+	@Override
 	@Test
 	public void sendAction() {
-		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+		GetBlockMetasResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.getBlockMetasByIndex(10L, 1L);
 		Logger.info(response);
 		Assert.assertNotNull(response);
@@ -314,7 +316,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(response.getBlkMetasList().size(), 1);
 		String hash = response.getBlkMetasList().get(0).getHash();
 
-		GetActionsResponse respAction = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+		GetActionsResponse respAction = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 				.getActionsByBlock(hash, 0L, 15L);
 
 		Assert.assertNotNull(respAction);
@@ -323,7 +325,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		for (ActionInfo info : respAction.getActionInfoList()) {
 			if (info.getAction().getCore().getExecution() != null || info.getAction().getCore().getVote() != null) {
 
-				SendActionResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT)
+				SendActionResponse resp = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
 						.sendAction(info.getAction());
 
 				Logger.info(resp);
@@ -331,5 +333,16 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 				Assert.assertNotNull(resp);
 			}
 		}
+	}
+
+	@Test
+	public void getReceiptByAction() {
+		GetReceiptByActionResponse response = Client
+				.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
+				.getReceiptByAction(TestConstants.RECEIPT_ACTION_HASH);
+		Logger.info(response);
+
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getReceiptInfo());
 	}
 }

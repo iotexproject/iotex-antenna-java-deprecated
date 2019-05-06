@@ -7,6 +7,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetActionsResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetBlockMetasResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetChainMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetEpochMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.SendActionResponse;
@@ -397,6 +398,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Override
 	@Test
 	public void sendAction() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -427,6 +429,20 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 					Assert.assertNotNull(resp);
 				}
 			}
+		} finally {
+			browser.close();
+		}
+	}
+
+	@Test
+	public void getReceiptByAction() {
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
+		try {
+			GetReceiptByActionResponse response = browser.getReceiptByAction(TestConstants.RECEIPT_ACTION_HASH);
+			Logger.info(response);
+
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getReceiptInfo());
 		} finally {
 			browser.close();
 		}
