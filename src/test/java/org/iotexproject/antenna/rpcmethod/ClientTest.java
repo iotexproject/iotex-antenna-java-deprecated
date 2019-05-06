@@ -345,4 +345,16 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertNotNull(response);
 		Assert.assertNotNull(response.getReceiptInfo());
 	}
+
+	@Test
+	@Override
+	public void getUnconfirmedActionsByAddress() {
+		GetActionsResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
+				.getUnconfirmedActionsByAddress(TestConstants.UNCONFIRMED_ADDRESS, 0L, 1L);
+		Logger.info(response);
+
+		Assert.assertNotNull(response);
+		Assert.assertNotNull(response.getActionInfoList());
+		Assert.assertEquals(0, response.getActionInfoList().size());
+	}
 }

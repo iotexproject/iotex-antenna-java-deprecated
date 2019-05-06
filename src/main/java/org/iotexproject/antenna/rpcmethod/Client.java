@@ -330,6 +330,24 @@ public class Client implements IoTeXGRPCInterface {
 	}
 
 	@Override
+	public synchronized GetActionsResponse getUnconfirmedActionsByAddress(final String address, final Long start,
+			final Long count) throws RPCException {
+		GetActionsResponse result = null;
+
+		try {
+			semaphore.tryAcquire(REQUEST_TIMEOUT_SEC, TimeUnit.SECONDS);
+
+			result = instance.getUnconfirmedActionsByAddress(address, start, count);
+		} catch (InterruptedException e) {
+			Logger.error(e);
+			throw new RPCException(e);
+		} finally {
+			semaphore.release();
+		}
+		return result;
+	}
+
+	@Override
 	public synchronized void close() {
 		if (instance != null) {
 			instance.close();

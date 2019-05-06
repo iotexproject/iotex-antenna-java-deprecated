@@ -188,6 +188,23 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
+	@Test
+	@Override
+	public void getUnconfirmedActionsByAddress() {
+		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
+		try {
+			GetActionsResponse response = browser.getUnconfirmedActionsByAddress(TestConstants.UNCONFIRMED_ADDRESS, 0L,
+					1L);
+			Logger.info(response);
+
+			Assert.assertNotNull(response);
+			Assert.assertNotNull(response.getActionInfoList());
+			Assert.assertEquals(0, response.getActionInfoList().size());
+		} finally {
+			browser.close();
+		}
+	}
+
 	@Override
 	@Test
 	public void readContract() {

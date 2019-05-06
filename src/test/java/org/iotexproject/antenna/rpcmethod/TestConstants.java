@@ -31,4 +31,7 @@ public class TestConstants {
 
 	// getSuggestedGasPrice()
 	public static final long GAS_PRICE = 1000000000000L;
+
+	// getUnconfirmedActionsByAddress()
+	public static final String UNCONFIRMED_ADDRESS = "io1hc6ndjzm3frn5e7a83qhm7m3a9gxsyg9teg9j8";
 }

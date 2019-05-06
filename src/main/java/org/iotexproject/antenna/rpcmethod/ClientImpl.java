@@ -24,6 +24,7 @@ import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetReceiptByActionResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.GetServerMetaResponse;
+import org.iotexproject.antenna.grpc.iotexapi.Api.GetUnconfirmedActionsByAddressRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractRequest;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadContractResponse;
 import org.iotexproject.antenna.grpc.iotexapi.Api.ReadStateRequest;
@@ -192,6 +193,15 @@ public class ClientImpl implements IoTeXGRPCInterface {
 		SendActionRequest req = SendActionRequest.newBuilder().setAction(action).build();
 
 		return blockingStub.sendAction(req);
+	}
+
+	@Override
+	public GetActionsResponse getUnconfirmedActionsByAddress(final String address, final Long start, final Long count) {
+		GetUnconfirmedActionsByAddressRequest reqUnconfirm = GetUnconfirmedActionsByAddressRequest.newBuilder()
+				.setAddress(address).setStart(start).setCount(count).build();
+		GetActionsRequest req = GetActionsRequest.newBuilder().setUnconfirmedByAddr(reqUnconfirm).build();
+
+		return blockingStub.getActions(req);
 	}
 
 	@Override

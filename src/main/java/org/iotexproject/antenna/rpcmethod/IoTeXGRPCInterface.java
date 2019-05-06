@@ -62,5 +62,8 @@ public interface IoTeXGRPCInterface {
 
 	public SendActionResponse sendAction(final Action action) throws RPCException;
 
+	public GetActionsResponse getUnconfirmedActionsByAddress(final String address, final Long start, final Long count)
+			throws RPCException;
+
 	public void close() throws RPCException;
 }

@@ -46,4 +46,6 @@ public interface IoTeXGRPCTestInterface {
 	public void readState();
 
 	public void sendAction();
+
+	public void getUnconfirmedActionsByAddress();
 }
