@@ -2,16 +2,22 @@
 
 ## Usage
 
-Into this library it used blocking gRPC API. This means that at most **one** RPC can be in progress at a time from the client. 
+This library use blocking gRPC API. This means that at most **one** RPC can be in progress at a time from the client. 
 
-So you must use singleton class **Client** 
+To manage it you must use singleton class **Client** 
 
-The class syncronize the calls using a semaphore. Use this method to close the grpc connection:
+The class syncronize the calls using a semaphore. 
 
 ```
   Client.getInstance(HOST, PORT) (http mode)
   or
   Client.getInstance(HOST, PORT, true) (https mode)
+```
+
+Use this method to close the grpc connection:
+
+```
+Client.getInstance(HOST, PORT).close()
 ```
 
 ## Generate JAR (using maven)
