@@ -28,4 +28,7 @@ public class TestConstants {
 	public static final String PROTOCOL_ID = "rewarding";
 	public static final String METHOD_NAME = "UnclaimedBalance";
 	public static final String ARGS_0 = "io1ph0u2psnd7muq5xv9623rmxdsxc4uapxhzpg02";
+
+	// getSuggestedGasPrice()
+	public static final long GAS_PRICE = 1000000000000L;
 }

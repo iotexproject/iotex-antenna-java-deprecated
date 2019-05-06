@@ -173,7 +173,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 		}
 	}
 
-//	@Test
+	@Test
 	@Override
 	public void getSuggestGasPrice() {
 		ClientImpl browser = new ClientImpl(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL);
@@ -182,7 +182,7 @@ public class ClientImplTest implements IoTeXGRPCTestInterface {
 			Logger.info(response);
 
 			Assert.assertNotNull(response);
-			Assert.assertEquals(1L, response.getGasPrice());
+			Assert.assertEquals(TestConstants.GAS_PRICE, response.getGasPrice());
 		} finally {
 			browser.close();
 		}

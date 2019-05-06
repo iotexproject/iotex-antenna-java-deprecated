@@ -137,7 +137,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Assert.assertEquals(hash, response.getBlkMetas(0).getHash());
 	}
 
-//	@Test
+	@Test
 	@Override
 	public void getSuggestGasPrice() {
 		SuggestGasPriceResponse response = Client.getInstance(TestConstants.HOST, TestConstants.PORT, TestConstants.SSL)
@@ -145,7 +145,7 @@ public class ClientTest implements IoTeXGRPCTestInterface {
 		Logger.info(response);
 
 		Assert.assertNotNull(response);
-		Assert.assertEquals(1L, response.getGasPrice());
+		Assert.assertEquals(TestConstants.GAS_PRICE, response.getGasPrice());
 	}
 
 	@Override
