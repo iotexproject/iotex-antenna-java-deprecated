@@ -1,18 +1,9 @@
-// Copyright (c) 2018 IoTeX
-// This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
-// warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
-// permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
-// License 2.0 that can be found in the LICENSE file.
-
-// To compile the proto, run:
-//      protoc --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
-package iotextypes;
-option go_package = "github.com/iotexproject/iotex-core/protogen/iotextypes";
-option java_package = "org.iotexproject.antenna.grpc.iotextypes";
+package types;
+option java_package = "io.iotex.antennaj.types";
 
-import "action.proto";
-import "endorsement.proto";
+import "types/action.proto";
+import "types/endorsement.proto";
 import "google/protobuf/timestamp.proto";
 
 // header of a block
@@ -30,6 +21,7 @@ message BlockHeaderCore {
   bytes txRoot = 5;
   bytes deltaStateDigest = 6;
   bytes receiptRoot = 7;
+  bytes logsBloom = 8;
 }
 
 // footer of a block
@@ -66,7 +58,7 @@ message EpochData {
 message ChainMeta {
   uint64 height = 1;
   int64 numActions = 2;
-  int64 tps = 3;
+  float tps = 3;
   EpochData epoch = 4;
 }
 

@@ -1,23 +1,53 @@
+# Java Maven CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-java/ for more details
+#
 version: 2
 jobs:
   build:
     docker:
+      # specify the version you desire here
       - image: circleci/openjdk:8-jdk
 
-    working_directory: ~/repo
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/postgres:9.4
+
+    working_directory: ~/iotex-antenna-java
+
     environment:
-      JVM_OPTS: -Xmx3200m
-      TERM: dumb
+      # Customize the JVM maximum heap limit
+      MAVEN_OPTS: -Xmx3200m
+      CODECOV_TOKEN: 856a416d-b40f-4112-9bd1-bdaa3f0b7638
+
     steps:
       - checkout
-      # Download and cache dependencie
+
+      # Download and cache dependencies
       - restore_cache:
-          keys: 
-            - v1-dependencies-{{ checksum "pom.xml" }}
-            - v1-dependencies-
-      - run: mvn dependency:go-offline 
+          keys:
+            - iotex-antenna-java-dependencies-{{ checksum "pom.xml" }}
+            # fallback to using the latest cache if no exact match is found
+            - iotex-antenna-java-dependencies-
+
+      - run: mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
+
       - save_cache:
           paths:
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-      - run: mvn clean test
+          key: iotex-antenna-java-dependencies-{{ checksum "pom.xml" }}
+
+
+      # Install protoc
+      - run: >-
+          export PROTOC_ZIP=protoc-3.6.0-linux-x86_64.zip &&
+          curl -OL https://github.com/google/protobuf/releases/download/v3.6.0/$PROTOC_ZIP &&
+          sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc &&
+          rm -f $PROTOC_ZIP
+      # run tests!
+      - run: mvn package
+
+      # Generate test coverage reports
+      - run: bash <(curl -s https://codecov.io/bash)
+

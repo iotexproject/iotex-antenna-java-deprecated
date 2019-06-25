@@ -1,19 +1,10 @@
-// Copyright (c) 2019 IoTeX
-// This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
-// warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
-// permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
-// License 2.0 that can be found in the LICENSE file.
-
-// To compile the proto, run:
-//      protoc -I. -I ./../types --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
-package iotexapi;
-option go_package = "github.com/iotexproject/iotex-core/protogen/iotexapi";
-option java_package = "org.iotexproject.antenna.grpc.iotexapi";
+package api;
+option java_package = "io.iotex.antennaj.api";
 
-import "action.proto";
-import "blockchain.proto";
-import "node.proto";
+import "types/action.proto";
+import "types/blockchain.proto";
+import "types/node.proto";
 import "google/protobuf/timestamp.proto";
 
 service APIService {
@@ -59,6 +50,22 @@ service APIService {
 
   // get epoch metadata
   rpc GetEpochMeta(GetEpochMetaRequest) returns (GetEpochMetaResponse) {}
+
+  // get raw blocks data
+  rpc GetRawBlocks(GetRawBlocksRequest) returns (GetRawBlocksResponse) {}
+
+  // get logs filtered by contract address and topics
+  rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {}
+
+  /*
+   * below are streaming APIs
+   */
+
+  // get block info in stream
+  rpc StreamBlocks(StreamBlocksRequest) returns (stream StreamBlocksResponse) {}
+
+  // get logs filtered by contract address and topics in stream
+  rpc StreamLogs(StreamLogsRequest) returns (stream types.Log) {}
 }
 
 message GetAccountRequest {
@@ -66,7 +73,7 @@ message GetAccountRequest {
 }
 
 message GetAccountResponse {
-  iotextypes.AccountMeta accountMeta = 1;
+  types.AccountMeta accountMeta = 1;
 }
 
 message GetActionsRequest {
@@ -108,25 +115,34 @@ message GetActionsByBlockRequest {
 }
 
 message ActionInfo {
-  iotextypes.Action action = 1;
+  types.Action action = 1;
   string actHash = 2;
   string blkHash = 3;
+  uint64 blkHeight = 5;
+  string sender = 6;
+  string gasFee = 7;
   google.protobuf.Timestamp timestamp = 4;
 }
 
 message ReceiptInfo {
-  iotextypes.Receipt receipt = 1;
+  types.Receipt receipt = 1;
   string blkHash = 2;
 }
 
 message BlockProducerInfo {
-    string address = 1;
-    string votes = 2;
-    bool active = 3;
-    uint64 production = 4;
+  string address = 1;
+  string votes = 2;
+  bool active = 3;
+  uint64 production = 4;
+}
+
+message BlockInfo {
+  types.Block block = 1;
+  repeated types.Receipt receipts = 2;
 }
 
 message GetActionsResponse {
+  uint64 total = 2;
   repeated ActionInfo actionInfo = 1;
 }
 
@@ -147,27 +163,32 @@ message GetBlockMetaByHashRequest {
 }
 
 message GetBlockMetasResponse {
-  repeated iotextypes.BlockMeta blkMetas = 1;
+  uint64 total = 2;
+  repeated types.BlockMeta blkMetas = 1;
 }
 
 message GetChainMetaRequest {}
 
 message GetChainMetaResponse {
-  iotextypes.ChainMeta chainMeta = 1;
+  types.ChainMeta chainMeta = 1;
 }
 
 message GetServerMetaRequest  {}
 
 message GetServerMetaResponse  {
-  iotextypes.ServerMeta serverMeta = 1;
+  types.ServerMeta serverMeta = 1;
 }
 
 message SendActionRequest {
-  iotextypes.Action action = 1;
+  types.Action action = 1;
+}
+
+message SendSignedActionBytesRequest {
+  string signedActionBytes = 1;
 }
 
 message SendActionResponse {
-    string actionHash = 1;
+  string actionHash = 1;
 }
 
 message GetReceiptByActionRequest {
@@ -179,12 +200,13 @@ message GetReceiptByActionResponse {
 }
 
 message ReadContractRequest {
-  iotextypes.Action action = 1;
+  types.Execution execution = 1;
+  string callerAddress = 2;
 }
 
 message ReadContractResponse {
   string data = 1;
-  iotextypes.Receipt receipt = 2;
+  types.Receipt receipt = 2;
 }
 
 message SuggestGasPriceRequest {}
@@ -194,7 +216,7 @@ message SuggestGasPriceResponse {
 }
 
 message EstimateGasForActionRequest {
-  iotextypes.Action action = 1;
+  types.Action action = 1;
 }
 
 message EstimateGasForActionResponse {
@@ -212,11 +234,64 @@ message ReadStateResponse {
 }
 
 message GetEpochMetaRequest {
-    uint64 epochNumber = 1;
+  uint64 epochNumber = 1;
 }
 
 message GetEpochMetaResponse {
-    iotextypes.EpochData epochData = 1;
-    uint64 totalBlocks = 2;
-    repeated BlockProducerInfo blockProducersInfo = 3;
+  types.EpochData epochData = 1;
+  uint64 totalBlocks = 2;
+  repeated BlockProducerInfo blockProducersInfo = 3;
+}
+
+message GetRawBlocksRequest {
+  uint64 startHeight = 1;
+  uint64 count = 2;
+  bool withReceipts = 3;
+}
+
+message GetRawBlocksResponse {
+  repeated BlockInfo blocks = 1;
+}
+
+message GetLogsByBlock {
+  bytes blockHash = 1;
+}
+
+message GetLogsByRange {
+  uint64 fromBlock = 1;
+  uint64 count = 2;
+}
+
+message Topics {
+    repeated bytes topic = 1;
+}
+
+message LogsFilter {
+  repeated string address = 1;
+  repeated Topics topics = 2;
+}
+
+message GetLogsRequest {
+  LogsFilter filter = 1;
+  oneof lookup {
+    GetLogsByBlock byBlock = 2;
+    GetLogsByRange byRange = 3;
+  }
+}
+
+message GetLogsResponse {
+  repeated types.Log logs = 1;
+}
+
+/*
+ * below are streaming APIs
+ */
+message StreamBlocksRequest {}
+
+message StreamBlocksResponse {
+    BlockInfo block = 1;
+}
+
+message StreamLogsRequest {
+    LogsFilter filter = 1;
 }

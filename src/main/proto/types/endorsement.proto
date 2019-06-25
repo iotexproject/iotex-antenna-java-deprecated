@@ -1,0 +1,11 @@
+syntax = "proto3";
+package types;
+option java_package = "io.iotex.antennaj.types";
+
+import "google/protobuf/timestamp.proto";
+
+message Endorsement {
+    google.protobuf.Timestamp timestamp = 1;
+    bytes endorser = 2;
+    bytes signature = 3;
+}
