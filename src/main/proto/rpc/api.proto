@@ -1,10 +1,10 @@
 syntax = "proto3";
-package api;
-option java_package = "io.iotex.antennaj.api";
+package rpc;
+option java_package = "io.iotex.antennaj.rpc";
 
-import "types/action.proto";
-import "types/blockchain.proto";
-import "types/node.proto";
+import "type/action.proto";
+import "type/blockchain.proto";
+import "type/node.proto";
 import "google/protobuf/timestamp.proto";
 
 service APIService {
@@ -65,7 +65,7 @@ service APIService {
   rpc StreamBlocks(StreamBlocksRequest) returns (stream StreamBlocksResponse) {}
 
   // get logs filtered by contract address and topics in stream
-  rpc StreamLogs(StreamLogsRequest) returns (stream types.Log) {}
+  rpc StreamLogs(StreamLogsRequest) returns (stream type.Log) {}
 }
 
 message GetAccountRequest {
@@ -73,7 +73,7 @@ message GetAccountRequest {
 }
 
 message GetAccountResponse {
-  types.AccountMeta accountMeta = 1;
+  type.AccountMeta accountMeta = 1;
 }
 
 message GetActionsRequest {
@@ -115,7 +115,7 @@ message GetActionsByBlockRequest {
 }
 
 message ActionInfo {
-  types.Action action = 1;
+  type.Action action = 1;
   string actHash = 2;
   string blkHash = 3;
   uint64 blkHeight = 5;
@@ -125,7 +125,7 @@ message ActionInfo {
 }
 
 message ReceiptInfo {
-  types.Receipt receipt = 1;
+  type.Receipt receipt = 1;
   string blkHash = 2;
 }
 
@@ -137,8 +137,8 @@ message BlockProducerInfo {
 }
 
 message BlockInfo {
-  types.Block block = 1;
-  repeated types.Receipt receipts = 2;
+  type.Block block = 1;
+  repeated type.Receipt receipts = 2;
 }
 
 message GetActionsResponse {
@@ -164,23 +164,23 @@ message GetBlockMetaByHashRequest {
 
 message GetBlockMetasResponse {
   uint64 total = 2;
-  repeated types.BlockMeta blkMetas = 1;
+  repeated type.BlockMeta blkMetas = 1;
 }
 
 message GetChainMetaRequest {}
 
 message GetChainMetaResponse {
-  types.ChainMeta chainMeta = 1;
+  type.ChainMeta chainMeta = 1;
 }
 
 message GetServerMetaRequest  {}
 
 message GetServerMetaResponse  {
-  types.ServerMeta serverMeta = 1;
+  type.ServerMeta serverMeta = 1;
 }
 
 message SendActionRequest {
-  types.Action action = 1;
+  type.Action action = 1;
 }
 
 message SendSignedActionBytesRequest {
@@ -200,13 +200,13 @@ message GetReceiptByActionResponse {
 }
 
 message ReadContractRequest {
-  types.Execution execution = 1;
+  type.Execution execution = 1;
   string callerAddress = 2;
 }
 
 message ReadContractResponse {
   string data = 1;
-  types.Receipt receipt = 2;
+  type.Receipt receipt = 2;
 }
 
 message SuggestGasPriceRequest {}
@@ -216,7 +216,7 @@ message SuggestGasPriceResponse {
 }
 
 message EstimateGasForActionRequest {
-  types.Action action = 1;
+  type.Action action = 1;
 }
 
 message EstimateGasForActionResponse {
@@ -238,7 +238,7 @@ message GetEpochMetaRequest {
 }
 
 message GetEpochMetaResponse {
-  types.EpochData epochData = 1;
+  type.EpochData epochData = 1;
   uint64 totalBlocks = 2;
   repeated BlockProducerInfo blockProducersInfo = 3;
 }
@@ -280,7 +280,7 @@ message GetLogsRequest {
 }
 
 message GetLogsResponse {
-  repeated types.Log logs = 1;
+  repeated type.Log logs = 1;
 }
 
 /*

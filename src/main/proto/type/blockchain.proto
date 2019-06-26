@@ -1,9 +1,9 @@
 syntax = "proto3";
-package types;
-option java_package = "io.iotex.antennaj.types";
+package type;
+option java_package = "io.iotex.antennaj.type";
 
-import "types/action.proto";
-import "types/endorsement.proto";
+import "type/action.proto";
+import "type/endorsement.proto";
 import "google/protobuf/timestamp.proto";
 
 // header of a block

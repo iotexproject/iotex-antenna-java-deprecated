@@ -1,6 +1,6 @@
 package io.iotex.antennaj.rpc;
 
-public class ClientOption {
+public class CallOption {
 
   String endpoint;
 

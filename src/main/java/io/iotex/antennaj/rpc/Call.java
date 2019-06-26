@@ -2,26 +2,26 @@ package io.iotex.antennaj.rpc;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.iotex.antennaj.api.APIServiceGrpc;
-import io.iotex.antennaj.api.APIServiceGrpc.APIServiceBlockingStub;
-import io.iotex.antennaj.api.Api.*;
 import io.iotex.antennaj.exception.AntennaRuntimeException;
+import io.iotex.antennaj.rpc.APIServiceGrpc.APIServiceBlockingStub;
+import io.iotex.antennaj.rpc.Api.*;
+import io.iotex.antennaj.type.ActionOuterClass.Log;
 
-public class Client {
-
+public class Call implements AutoCloseable {
+  private ManagedChannel channel;
   private APIServiceBlockingStub blockingStub;
 
-  public Client(ClientOption opt) {
+  public Call(CallOption opt) {
     ManagedChannelBuilder<?> channelBuilder = ManagedChannelBuilder.forTarget(opt.getEndpoint());
     if (opt.isSecure()) {
       channelBuilder = channelBuilder.useTransportSecurity();
     } else {
       channelBuilder = channelBuilder.usePlaintext();
     }
-    ManagedChannel channel = channelBuilder.build();
+    channel = channelBuilder.build();
     if (opt.isAsync()) {
       // TODO: support async stub
-      throw new AntennaRuntimeException("");
+      throw new AntennaRuntimeException("Async grpc call isn't supported yet");
     } else {
       blockingStub = APIServiceGrpc.newBlockingStub(channel);
     }
@@ -87,8 +87,12 @@ public class Client {
     return blockingStub.streamBlocks(request);
   }
 
-  public java.util.Iterator<io.iotex.antennaj.types.ActionOuterClass.Log> streamLogs(
-      StreamLogsRequest request) {
+  public java.util.Iterator<Log> streamLogs(StreamLogsRequest request) {
     return blockingStub.streamLogs(request);
+  }
+
+  @Override
+  public void close() {
+    channel.shutdown();
   }
 }

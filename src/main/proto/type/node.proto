@@ -1,6 +1,6 @@
 syntax = "proto3";
-package types;
-option java_package = "io.iotex.antennaj.types";
+package type;
+option java_package = "io.iotex.antennaj.type";
 
  // Server Metadata
 message ServerMeta {
