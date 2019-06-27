@@ -51,4 +51,21 @@ public class Address {
     byte[] data = Bech32.convertBits(payload, 0, payload.length, 8, 5, true);
     return Bech32.encode(AddressPrefix, data);
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Address address = (Address) o;
+    return Arrays.equals(payload, address.payload);
+  }
+
+  @Override
+  public int hashCode() {
+    return Arrays.hashCode(payload);
+  }
 }

@@ -6,14 +6,14 @@ import io.iotex.antennaj.rpc.Api.GetAccountResponse;
 import io.iotex.antennaj.rpc.Call;
 import io.iotex.antennaj.rpc.CallOption;
 
-public class AccountMethod extends ReadMethod<GetAccountRequest, GetAccountResponse> {
+public class AccountQueryMethod extends ReadMethod<GetAccountRequest, GetAccountResponse> {
   private GetAccountRequest.Builder builder = GetAccountRequest.newBuilder();
 
-  public AccountMethod(CallOption opt) {
+  public AccountQueryMethod(CallOption opt) {
     super(opt);
   }
 
-  public AccountMethod setAddress(Address address) {
+  public AccountQueryMethod setAddress(Address address) {
     builder.setAddress(address.toString());
     return this;
   }

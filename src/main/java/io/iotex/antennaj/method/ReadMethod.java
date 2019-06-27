@@ -17,6 +17,10 @@ abstract class ReadMethod<Request, Response> {
     }
   }
 
+  protected CallOption getOpt() {
+    return opt;
+  }
+
   protected abstract Request composeRequest();
 
   protected abstract Response executeInternal(Call call, Request req);

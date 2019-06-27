@@ -38,7 +38,7 @@ abstract class WriteMethod {
 
   public PreparedWriteMethod build() {
     if (coreBuilder.getNonce() == 0) {
-      AccountMethod method = new AccountMethod(opt);
+      AccountQueryMethod method = new AccountQueryMethod(opt);
       GetAccountResponse res = method.setAddress(caller.getAddress()).execute();
       coreBuilder.setNonce(res.getAccountMeta().getPendingNonce());
     }
