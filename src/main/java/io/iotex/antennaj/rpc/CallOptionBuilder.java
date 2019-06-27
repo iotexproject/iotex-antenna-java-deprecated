@@ -32,4 +32,8 @@ public class CallOptionBuilder {
     opt.async = async;
     return this;
   }
+
+  public CallOption build() {
+    return opt;
+  }
 }

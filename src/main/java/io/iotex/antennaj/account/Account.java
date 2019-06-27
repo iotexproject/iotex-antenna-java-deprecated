@@ -48,7 +48,11 @@ public class Account {
   }
 
   public byte[] getPublicKey() {
-    return keyPair.getPublicKey().toByteArray();
+    byte[] pkBytes = keyPair.getPublicKey().toByteArray();
+    byte[] fixedPkBytes = new byte[pkBytes.length + 1];
+    fixedPkBytes[0] = 0x04;
+    System.arraycopy(pkBytes, 0, fixedPkBytes, 1, pkBytes.length);
+    return fixedPkBytes;
   }
 
   public byte[] getPrivateKey() {
@@ -56,7 +60,7 @@ public class Account {
   }
 
   public Address getAddress() {
-    return Address.fromPublicKey(keyPair.getPublicKey().toByteArray());
+    return Address.fromPublicKey(getPublicKey());
   }
 
   public byte[] sign(byte[] msgHash) {
@@ -64,7 +68,7 @@ public class Account {
     byte[] result = new byte[65];
     System.arraycopy(sigData.getR(), 0, result, 0, 32);
     System.arraycopy(sigData.getS(), 0, result, 32, 32);
-    System.arraycopy(sigData.getV(), 0, result, 64, 1);
+    result[64] = (byte) (sigData.getV()[0] - 27);
     return result;
   }
 

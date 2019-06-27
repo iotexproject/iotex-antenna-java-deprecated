@@ -6,4 +6,5 @@ import java.math.BigInteger;
 
 public final class DefaultSetting {
   public static final BigInteger GAS_PRICE = UnitConverter.toRau("1", Unit.QEV);
+  public static final int VERSION = 1;
 }

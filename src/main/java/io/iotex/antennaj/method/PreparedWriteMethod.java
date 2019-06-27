@@ -1,6 +1,5 @@
 package io.iotex.antennaj.method;
 
-import io.iotex.antennaj.rpc.Api.GetReceiptByActionRequest;
 import io.iotex.antennaj.rpc.Api.GetReceiptByActionResponse;
 import io.iotex.antennaj.rpc.Api.SendActionRequest;
 import io.iotex.antennaj.rpc.Api.SendActionResponse;
@@ -37,10 +36,7 @@ public class PreparedWriteMethod {
                 for (int i = 0; i < callbackOpt.getNumPolls(); i++) {
                   try {
                     GetReceiptByActionResponse res =
-                        call.getReceiptByAction(
-                            GetReceiptByActionRequest.newBuilder()
-                                .setActionHash(actionHash)
-                                .build());
+                        new ReceiptMethod(opt).set(actionHash).execute();
                     handler.onReceipt(res.getReceiptInfo());
                     return;
                   } catch (RuntimeException e) {
@@ -55,6 +51,7 @@ public class PreparedWriteMethod {
                 }
                 handler.onException(lastException);
               });
+      callbackThread.setDaemon(true);
       callbackThread.start();
     }
   }

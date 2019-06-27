@@ -2,6 +2,7 @@ package io.iotex.antennaj.method;
 
 import com.google.protobuf.ByteString;
 import io.iotex.antennaj.account.Account;
+import io.iotex.antennaj.account.Address;
 import io.iotex.antennaj.rpc.CallOption;
 import io.iotex.antennaj.type.ActionOuterClass;
 import io.iotex.antennaj.type.ActionOuterClass.ActionCore;
@@ -23,8 +24,8 @@ public class TransferMethod extends WriteMethod {
     return this;
   }
 
-  public TransferMethod setRecipient(String recipient) {
-    tsfBuilder.setRecipient(recipient);
+  public TransferMethod setRecipient(Address recipient) {
+    tsfBuilder.setRecipient(recipient.toString());
     return this;
   }
 

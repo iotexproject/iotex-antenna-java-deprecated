@@ -1,5 +1,5 @@
 syntax = "proto3";
-package type;
+package iotextypes;
 option java_package = "io.iotex.antennaj.type";
 
 message Transfer {

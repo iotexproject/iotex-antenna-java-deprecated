@@ -7,7 +7,6 @@ import io.iotex.antennaj.rpc.CallOption;
 import io.iotex.antennaj.type.ActionOuterClass.Action;
 import io.iotex.antennaj.type.ActionOuterClass.ActionCore;
 import java.math.BigInteger;
-import org.web3j.crypto.Hash;
 
 abstract class WriteMethod {
 
@@ -39,16 +38,17 @@ abstract class WriteMethod {
 
   public PreparedWriteMethod build() {
     if (coreBuilder.getNonce() == 0) {
-      AccountMetaMethod method = new AccountMetaMethod(opt);
+      AccountMethod method = new AccountMethod(opt);
       GetAccountResponse res = method.setAddress(caller.getAddress()).execute();
       coreBuilder.setNonce(res.getAccountMeta().getPendingNonce());
     }
-    if (coreBuilder.getGasPrice() == null) {
+    if (coreBuilder.getGasPrice() == null || coreBuilder.getGasPrice() == "") {
       coreBuilder.setGasPrice(DefaultSetting.GAS_PRICE.toString());
     }
+    coreBuilder.setVersion(DefaultSetting.VERSION);
     overrideCoreBuilder(coreBuilder);
     ActionCore actionCore = coreBuilder.build();
-    byte[] sig = caller.sign(Hash.sha3(actionCore.toByteArray()));
+    byte[] sig = caller.sign(actionCore.toByteArray());
     Action action =
         Action.newBuilder()
             .setCore(actionCore)

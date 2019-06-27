@@ -3,9 +3,9 @@ package io.iotex.antennaj.method;
 public class CallbackOptionBuilder {
   private CallbackOption opt = new CallbackOption();
 
-  public CallbackOptionBuilder forDefault() {
+  public static CallbackOptionBuilder forDefault() {
     CallbackOptionBuilder builder = new CallbackOptionBuilder();
-    builder.opt.numPolls = 30;
+    builder.opt.numPolls = 10;
     builder.opt.intervalMillis = 2000;
     return builder;
   }

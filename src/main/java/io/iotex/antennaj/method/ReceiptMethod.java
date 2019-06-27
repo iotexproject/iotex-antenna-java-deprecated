@@ -20,7 +20,7 @@ public class ReceiptMethod
 
   @Override
   protected GetReceiptByActionRequest composeRequest() {
-    return null;
+    return builder.build();
   }
 
   @Override
