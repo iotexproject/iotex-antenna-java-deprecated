@@ -1,9 +1,9 @@
 package io.iotex.antennaj.method;
 
-import io.iotex.antennaj.rpc.Api.GetBlockMetasRequest;
-import io.iotex.antennaj.rpc.Api.GetBlockMetasResponse;
 import io.iotex.antennaj.rpc.Call;
 import io.iotex.antennaj.rpc.CallOption;
+import io.iotex.antennaj.rpc.api.Api.GetBlockMetasRequest;
+import io.iotex.antennaj.rpc.api.Api.GetBlockMetasResponse;
 
 public class BlockMetaQueryMethod extends ReadMethod<GetBlockMetasRequest, GetBlockMetasResponse> {
   protected GetBlockMetasRequest.Builder builder = GetBlockMetasRequest.newBuilder();

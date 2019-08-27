@@ -2,8 +2,8 @@ package io.iotex.antennaj.example;
 
 import io.iotex.antennaj.account.Address;
 import io.iotex.antennaj.method.AccountQueryMethod;
-import io.iotex.antennaj.rpc.Api.GetAccountResponse;
 import io.iotex.antennaj.rpc.CallOptionBuilder;
+import io.iotex.antennaj.rpc.api.Api.GetAccountResponse;
 
 public class AccountQuery {
   public static void main(String[] argv) {

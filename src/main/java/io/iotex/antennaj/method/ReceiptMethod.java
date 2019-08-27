@@ -1,9 +1,9 @@
 package io.iotex.antennaj.method;
 
-import io.iotex.antennaj.rpc.Api.GetReceiptByActionRequest;
-import io.iotex.antennaj.rpc.Api.GetReceiptByActionResponse;
 import io.iotex.antennaj.rpc.Call;
 import io.iotex.antennaj.rpc.CallOption;
+import io.iotex.antennaj.rpc.api.Api.GetReceiptByActionRequest;
+import io.iotex.antennaj.rpc.api.Api.GetReceiptByActionResponse;
 
 public class ReceiptMethod
     extends ReadMethod<GetReceiptByActionRequest, GetReceiptByActionResponse> {

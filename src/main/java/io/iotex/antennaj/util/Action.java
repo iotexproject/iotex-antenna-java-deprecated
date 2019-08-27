@@ -1,7 +1,7 @@
 package io.iotex.antennaj.util;
 
 import io.iotex.antennaj.account.Address;
-import io.iotex.antennaj.type.ActionOuterClass;
+import io.iotex.antennaj.rpc.type.ActionOuterClass;
 
 public class Action {
 

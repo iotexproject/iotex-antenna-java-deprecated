@@ -1,8 +1,8 @@
 package io.iotex.antennaj.method;
 
-import io.iotex.antennaj.rpc.Api.GetActionsByBlockRequest;
-import io.iotex.antennaj.rpc.Api.GetActionsRequest;
 import io.iotex.antennaj.rpc.CallOption;
+import io.iotex.antennaj.rpc.api.Api.GetActionsByBlockRequest;
+import io.iotex.antennaj.rpc.api.Api.GetActionsRequest;
 
 public class ActionQueryByBlockMethod extends ActionQueryMethod {
   GetActionsByBlockRequest.Builder byBlockBuilder = GetActionsByBlockRequest.newBuilder();

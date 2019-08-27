@@ -1,11 +1,11 @@
 package io.iotex.antennaj.method;
 
-import io.iotex.antennaj.rpc.Api.GetReceiptByActionResponse;
-import io.iotex.antennaj.rpc.Api.SendActionRequest;
-import io.iotex.antennaj.rpc.Api.SendActionResponse;
 import io.iotex.antennaj.rpc.Call;
 import io.iotex.antennaj.rpc.CallOption;
-import io.iotex.antennaj.type.ActionOuterClass.Action;
+import io.iotex.antennaj.rpc.api.Api.GetReceiptByActionResponse;
+import io.iotex.antennaj.rpc.api.Api.SendActionRequest;
+import io.iotex.antennaj.rpc.api.Api.SendActionResponse;
+import io.iotex.antennaj.rpc.type.ActionOuterClass.Action;
 
 public class PreparedWriteMethod {
   private Action action;

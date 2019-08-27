@@ -1,8 +1,8 @@
 package io.iotex.antennaj.method;
 
-import io.iotex.antennaj.rpc.Api.GetActionByHashRequest;
-import io.iotex.antennaj.rpc.Api.GetActionsRequest;
 import io.iotex.antennaj.rpc.CallOption;
+import io.iotex.antennaj.rpc.api.Api.GetActionByHashRequest;
+import io.iotex.antennaj.rpc.api.Api.GetActionsRequest;
 
 public class ActionQueryByHashMethod extends ActionQueryMethod {
   private GetActionByHashRequest.Builder byHashBuilder = GetActionByHashRequest.newBuilder();
