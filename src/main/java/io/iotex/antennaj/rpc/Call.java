@@ -3,9 +3,8 @@ package io.iotex.antennaj.rpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.iotex.antennaj.exception.AntennaRuntimeException;
-import io.iotex.antennaj.rpc.APIServiceGrpc.APIServiceBlockingStub;
-import io.iotex.antennaj.rpc.Api.*;
-import io.iotex.antennaj.type.ActionOuterClass.Log;
+import io.iotex.antennaj.rpc.api.APIServiceGrpc.APIServiceBlockingStub;
+import io.iotex.antennaj.rpc.api.Api.*;
 
 public class Call implements AutoCloseable {
   private ManagedChannel channel;
@@ -23,7 +22,7 @@ public class Call implements AutoCloseable {
       // TODO: support async stub
       throw new AntennaRuntimeException("Async grpc call isn't supported yet");
     } else {
-      blockingStub = APIServiceGrpc.newBlockingStub(channel);
+      blockingStub = io.iotex.antennaj.rpc.api.APIServiceGrpc.newBlockingStub(channel);
     }
   }
 
@@ -87,7 +86,7 @@ public class Call implements AutoCloseable {
     return blockingStub.streamBlocks(request);
   }
 
-  public java.util.Iterator<Log> streamLogs(StreamLogsRequest request) {
+  public java.util.Iterator<StreamLogsResponse> streamLogs(StreamLogsRequest request) {
     return blockingStub.streamLogs(request);
   }
 

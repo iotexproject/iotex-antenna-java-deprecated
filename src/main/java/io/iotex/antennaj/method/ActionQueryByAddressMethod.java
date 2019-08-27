@@ -1,9 +1,9 @@
 package io.iotex.antennaj.method;
 
 import io.iotex.antennaj.account.Address;
-import io.iotex.antennaj.rpc.Api.GetActionsByAddressRequest;
-import io.iotex.antennaj.rpc.Api.GetActionsRequest;
 import io.iotex.antennaj.rpc.CallOption;
+import io.iotex.antennaj.rpc.api.Api.GetActionsByAddressRequest;
+import io.iotex.antennaj.rpc.api.Api.GetActionsRequest;
 
 public class ActionQueryByAddressMethod extends ActionQueryMethod {
   GetActionsByAddressRequest.Builder byAddressBulder = GetActionsByAddressRequest.newBuilder();

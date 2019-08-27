@@ -1,8 +1,8 @@
 package io.iotex.antennaj.example;
 
 import io.iotex.antennaj.method.BlockMetaQueryMethod;
-import io.iotex.antennaj.rpc.Api.GetBlockMetasResponse;
 import io.iotex.antennaj.rpc.CallOptionBuilder;
+import io.iotex.antennaj.rpc.api.Api.GetBlockMetasResponse;
 
 public class BlockMetaQuery {
   public static void main(String[] argv) {

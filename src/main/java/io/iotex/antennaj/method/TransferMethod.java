@@ -4,9 +4,9 @@ import com.google.protobuf.ByteString;
 import io.iotex.antennaj.account.Account;
 import io.iotex.antennaj.account.Address;
 import io.iotex.antennaj.rpc.CallOption;
-import io.iotex.antennaj.type.ActionOuterClass;
-import io.iotex.antennaj.type.ActionOuterClass.ActionCore;
-import io.iotex.antennaj.type.ActionOuterClass.Transfer.Builder;
+import io.iotex.antennaj.rpc.type.ActionOuterClass;
+import io.iotex.antennaj.rpc.type.ActionOuterClass.ActionCore;
+import io.iotex.antennaj.rpc.type.ActionOuterClass.Transfer.Builder;
 import java.math.BigInteger;
 
 public class TransferMethod extends WriteMethod {

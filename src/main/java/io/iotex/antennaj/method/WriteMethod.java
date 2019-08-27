@@ -2,10 +2,10 @@ package io.iotex.antennaj.method;
 
 import com.google.protobuf.ByteString;
 import io.iotex.antennaj.account.Account;
-import io.iotex.antennaj.rpc.Api.GetAccountResponse;
 import io.iotex.antennaj.rpc.CallOption;
-import io.iotex.antennaj.type.ActionOuterClass.Action;
-import io.iotex.antennaj.type.ActionOuterClass.ActionCore;
+import io.iotex.antennaj.rpc.api.Api.GetAccountResponse;
+import io.iotex.antennaj.rpc.type.ActionOuterClass.Action;
+import io.iotex.antennaj.rpc.type.ActionOuterClass.ActionCore;
 import java.math.BigInteger;
 
 abstract class WriteMethod {

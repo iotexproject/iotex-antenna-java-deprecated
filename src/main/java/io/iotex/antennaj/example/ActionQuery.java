@@ -3,11 +3,11 @@ package io.iotex.antennaj.example;
 import io.iotex.antennaj.account.Address;
 import io.iotex.antennaj.method.ActionQueryMethod;
 import io.iotex.antennaj.method.BlockMetaQueryMethod;
-import io.iotex.antennaj.rpc.Api.ActionInfo;
-import io.iotex.antennaj.rpc.Api.GetActionsResponse;
-import io.iotex.antennaj.rpc.Api.GetBlockMetasResponse;
 import io.iotex.antennaj.rpc.CallOption;
 import io.iotex.antennaj.rpc.CallOptionBuilder;
+import io.iotex.antennaj.rpc.api.Api.ActionInfo;
+import io.iotex.antennaj.rpc.api.Api.GetActionsResponse;
+import io.iotex.antennaj.rpc.api.Api.GetBlockMetasResponse;
 import io.iotex.antennaj.util.Action;
 
 public class ActionQuery {

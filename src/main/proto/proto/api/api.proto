@@ -1,10 +1,20 @@
+// Copyright (c) 2019 IoTeX
+// This is an alpha (internal) release and is not suitable for production. This source code is provided 'as is' and no
+// warranties are given as to title or non-infringement, merchantability or fitness for purpose and, to the extent
+// permitted by law, all liability for your use of the code is disclaimed. This source code is governed by Apache
+// License 2.0 that can be found in the LICENSE file.
+
+// To compile the proto, run:
+//      protoc -I. -I ./../types --go_out=plugins=grpc:$GOPATH/src *.proto
 syntax = "proto3";
 package iotexapi;
-option java_package = "io.iotex.antennaj.rpc";
+option java_package = "io.iotex.antennaj.rpc.api";
 
-import "types/action.proto";
-import "types/blockchain.proto";
-import "types/node.proto";
+option go_package = "github.com/iotexproject/iotex-proto/golang/iotexapi";
+
+import "proto/types/action.proto";
+import "proto/types/blockchain.proto";
+import "proto/types/node.proto";
 import "google/protobuf/timestamp.proto";
 
 service APIService {
@@ -42,8 +52,11 @@ service APIService {
   // suggest gas price
   rpc SuggestGasPrice(SuggestGasPriceRequest) returns (SuggestGasPriceResponse) {}
 
-  // estimate gas for action
+  // estimate gas for action, to be deprecated
   rpc EstimateGasForAction(EstimateGasForActionRequest) returns (EstimateGasForActionResponse) {}
+
+  // estimate gas for action and transfer not sealed
+  rpc EstimateActionGasConsumption(EstimateActionGasConsumptionRequest) returns (EstimateActionGasConsumptionResponse) {}
 
   // read state from blockchain
   rpc ReadState(ReadStateRequest) returns (ReadStateResponse) {}
@@ -57,6 +70,9 @@ service APIService {
   // get logs filtered by contract address and topics
   rpc GetLogs(GetLogsRequest) returns (GetLogsResponse) {}
 
+  // GetVotes get a single address' votes
+  rpc GetVotes(GetVotesRequest) returns (GetVotesResponse) {}
+
   /*
    * below are streaming APIs
    */
@@ -65,7 +81,27 @@ service APIService {
   rpc StreamBlocks(StreamBlocksRequest) returns (stream StreamBlocksResponse) {}
 
   // get logs filtered by contract address and topics in stream
-  rpc StreamLogs(StreamLogsRequest) returns (stream iotextypes.Log) {}
+  rpc StreamLogs(StreamLogsRequest) returns (stream StreamLogsResponse) {}
+}
+
+message GetVotesRequest {
+  string votee = 1;
+  string height = 2;
+  uint32 offset = 3;
+  uint32 limit = 4;
+}
+
+message GetVotesResponse {
+  repeated Bucket buckets = 1;
+}
+
+message Bucket {
+  // hex string
+  string voter = 1;
+  string votes = 2;
+  string weightedVotes = 3;
+  // human readable duration
+  string remainingDuration = 4;
 }
 
 message GetAccountRequest {
@@ -215,8 +251,21 @@ message SuggestGasPriceResponse {
   uint64 gasPrice = 1;
 }
 
+// To be deprecated
 message EstimateGasForActionRequest {
   iotextypes.Action action = 1;
+}
+
+message EstimateActionGasConsumptionRequest {
+  oneof action {
+    iotextypes.Transfer transfer = 1;
+    iotextypes.Execution execution = 2;
+  }
+  string callerAddress = 100;
+}
+
+message EstimateActionGasConsumptionResponse {
+  uint64 gas = 1;
 }
 
 message EstimateGasForActionResponse {
@@ -294,4 +343,8 @@ message StreamBlocksResponse {
 
 message StreamLogsRequest {
     LogsFilter filter = 1;
+}
+
+message StreamLogsResponse {
+    iotextypes.Log log = 1;
 }

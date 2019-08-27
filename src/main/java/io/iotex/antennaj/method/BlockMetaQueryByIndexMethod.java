@@ -1,8 +1,8 @@
 package io.iotex.antennaj.method;
 
-import io.iotex.antennaj.rpc.Api.GetBlockMetasByIndexRequest;
-import io.iotex.antennaj.rpc.Api.GetBlockMetasRequest;
 import io.iotex.antennaj.rpc.CallOption;
+import io.iotex.antennaj.rpc.api.Api.GetBlockMetasByIndexRequest;
+import io.iotex.antennaj.rpc.api.Api.GetBlockMetasRequest;
 
 public class BlockMetaQueryByIndexMethod extends BlockMetaQueryMethod {
   GetBlockMetasByIndexRequest.Builder byIndexBuilder = GetBlockMetasByIndexRequest.newBuilder();

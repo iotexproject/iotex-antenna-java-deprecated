@@ -1,10 +1,10 @@
 package io.iotex.antennaj.method;
 
 import io.iotex.antennaj.account.Address;
-import io.iotex.antennaj.rpc.Api.GetAccountRequest;
-import io.iotex.antennaj.rpc.Api.GetAccountResponse;
 import io.iotex.antennaj.rpc.Call;
 import io.iotex.antennaj.rpc.CallOption;
+import io.iotex.antennaj.rpc.api.Api.GetAccountRequest;
+import io.iotex.antennaj.rpc.api.Api.GetAccountResponse;
 
 public class AccountQueryMethod extends ReadMethod<GetAccountRequest, GetAccountResponse> {
   private GetAccountRequest.Builder builder = GetAccountRequest.newBuilder();
